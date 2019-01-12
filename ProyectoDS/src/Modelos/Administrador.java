@@ -5,6 +5,8 @@
  */
 package Modelos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author User-PC
