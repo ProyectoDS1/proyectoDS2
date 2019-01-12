@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Comprador extends Usuario{
     
-    ArrayList<Pedido> misPedidos;
-    ArrayList<Calificacion> misCalificaciones;
+    protected ArrayList<Pedido> misPedidos;
+    protected ArrayList<Calificacion> misCalificaciones;
     
     public Pedido comprar(Producto articulo){
      

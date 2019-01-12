@@ -5,10 +5,24 @@
  */
 package Modelos;
 
+import java.util.Date;
 /**
  *
  * @author User-PC
  */
 public class Producto {
+    private String nombreArticulo;
+    private String categoria;
+    private float precio;
+    private Date tiempoEntrega;
+    private CalificacionProducto calificacion;
+    private boolean disponible;
+    private boolean eliminado;
+    private Vendedor vendedor;
+    private int numVistas;
+    private Date fechaCreacion;
     
+    private void agregarRating(int rate){
+    
+    }
 }

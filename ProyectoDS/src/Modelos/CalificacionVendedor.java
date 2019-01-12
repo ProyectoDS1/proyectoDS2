@@ -9,7 +9,8 @@ package Modelos;
  *
  * @author User-PC
  */
-public abstract class Calificacion {
-    protected int estrellas;
-    protected Comprador autor;
+public class CalificacionVendedor {
+    
+    private Vendedor vendedor;
+    
 }

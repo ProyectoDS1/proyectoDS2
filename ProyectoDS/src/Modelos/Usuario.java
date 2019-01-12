@@ -22,6 +22,7 @@ public abstract class Usuario {
     private Usuario usuarioActual;
     
     public void iniciarSesion(){
+        
     }
     
     public void cerrarSesion(){
