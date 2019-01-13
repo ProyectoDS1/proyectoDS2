@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import java.io.IOError;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,9 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -23,14 +22,12 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaIniciarSesionController implements Initializable, CanGoBack {
+public class VentanaBusquedaSencillaController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
     @FXML
-    private TextField email;
-    @FXML
-    private TextField password;
+    private TextField texto;
 
     /**
      * Initializes the controller class.
@@ -46,23 +43,18 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     }
 
     @FXML
-    public void iniciarSesion(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
+    public void buscar(ActionEvent e) throws IOException {
+        System.out.println("Buscando " + texto.getText());
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaProductosMasBuscados.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(root);
+        stage.setScene(new Scene(loader.load()));
 
-        stage.setScene(scene);
+        VentanaProductosMasBuscadosController controller = loader.<VentanaProductosMasBuscadosController>getController();
+
+        controller.setReturnController(this);
         stage.show();
-
-        ((Stage) email.getScene().getWindow()).close();
-    }
-    
-    @FXML
-    public void crearCuenta(ActionEvent e) throws IOException {
-        System.out.println("Crear cuenta");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
-        a.showAndWait();
+        texto.getScene().getWindow().hide();
     }
 
 }

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
  * @author reyes
  */
 public class VentanaPrincipalController implements Initializable, CanGoBack {
+
     @FXML
     private Label usuarioLabel;
 
@@ -48,28 +50,57 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void verRecientes(ActionEvent event) {
+    public void verRecientes(ActionEvent event) throws IOException {
         System.out.println("Ver productos recientes");
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setContentText("No implementado!");
+        a.showAndWait();
     }
 
     @FXML
-    public void verMasBuscados(ActionEvent event) {
-        System.out.println("Ver productos más buscados");
+    public void verMasBuscados(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaProductosMasBuscados.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaProductosMasBuscadosController controller = loader.<VentanaProductosMasBuscadosController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
     }
 
     @FXML
-    public void busquedaSencilla(ActionEvent event) {
-        System.out.println("Búsqueda sencilla");
+    public void busquedaSencilla(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaBusquedaSencilla.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaBusquedaSencillaController controller = loader.<VentanaBusquedaSencillaController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
     }
 
     @FXML
     public void busquedaAvanzada(ActionEvent event) {
-        System.out.println("Búsqueda avanzada");
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setContentText("No implementado!");
+        a.showAndWait();
     }
 
     @FXML
-    public void misPedidos(ActionEvent event) {
-        System.out.println("Mis pedidos");
+    public void misPedidos(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisPedidos.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaMisPedidosController controller = loader.<VentanaMisPedidosController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
     }
 
     @FXML

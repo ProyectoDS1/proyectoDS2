@@ -11,21 +11,26 @@ import java.util.ArrayList;
  *
  * @author User-PC
  */
-public class Comprador extends Usuario{
-    
+public class Comprador extends Usuario {
+
     protected ArrayList<Pedido> misPedidos;
     protected ArrayList<Calificacion> misCalificaciones;
-    
-    public Pedido comprar(Producto articulo){
+
+    public Pedido comprar(Producto articulo) {
         return null;
     }
-    
-    public ArrayList<Pedido> mostrarPedidos(){
-      return misPedidos;
+
+    public ArrayList<Pedido> mostrarPedidos() {
+        return misPedidos;
     }
-    
-    public ArrayList<Pedido> mostrarHistorialPedidos(){
-      return misPedidos;
+
+    public ArrayList<Pedido> mostrarHistorialPedidos() {
+        return misPedidos;
     }
-    
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellido + " (Comprador)";
+    }
+
 }

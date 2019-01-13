@@ -11,26 +11,31 @@ import java.util.ArrayList;
  *
  * @author User-PC
  */
-public class Administrador {
-    
-    public void administrarUsuario(Usuario user){
-    
+public class Administrador extends Usuario {
+
+    public void administrarUsuario(Usuario user) {
+
     }
-    
-    public void administrarProducto(Producto articulo){
-       
+
+    public void administrarProducto(Producto articulo) {
+
     }
-    
-    public ArrayList<Pedido> verComprasPendientes(){
+
+    public ArrayList<Pedido> verComprasPendientes() {
         return null;
     }
-    
-    public ArrayList<Pedido> verComprasCompletadas(){
+
+    public ArrayList<Pedido> verComprasCompletadas() {
         return null;
     }
-    
-    public ArrayList<Pedido> verComprasAnuladas(){
+
+    public ArrayList<Pedido> verComprasAnuladas() {
         return null;
     }
-    
+
+    @Override
+    public String toString() {
+        return nombre + " " + apellido + " (Administrador)";
+    }
+
 }

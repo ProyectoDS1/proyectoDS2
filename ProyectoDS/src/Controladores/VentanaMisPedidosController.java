@@ -12,10 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -23,14 +22,12 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaIniciarSesionController implements Initializable, CanGoBack {
+public class VentanaMisPedidosController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
     @FXML
-    private TextField email;
-    @FXML
-    private TextField password;
+    private Label titulo;
 
     /**
      * Initializes the controller class.
@@ -46,20 +43,20 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     }
 
     @FXML
-    public void iniciarSesion(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
+    public void verPendientes(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaComprasPendientes.fxml"));
         Stage stage = new Stage();
-        Scene scene = new Scene(root);
+        stage.setScene(new Scene(loader.load()));
 
-        stage.setScene(scene);
+        VentanaComprasPendientesController controller = loader.<VentanaComprasPendientesController>getController();
+
+        controller.setReturnController(this);
         stage.show();
-
-        ((Stage) email.getScene().getWindow()).close();
+        titulo.getScene().getWindow().hide();
     }
-    
+
     @FXML
-    public void crearCuenta(ActionEvent e) throws IOException {
-        System.out.println("Crear cuenta");
+    public void verHistorial(ActionEvent e) {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setContentText("No implementado!");
         a.showAndWait();
