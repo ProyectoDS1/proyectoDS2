@@ -5,11 +5,28 @@
  */
 package Vistas;
 
+import static Ejecucion.Run.ventanaInicio;
+import static java.awt.image.ImageObserver.WIDTH;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User-PC
  */
 public class VentanaIniciarSesion extends javax.swing.JFrame {
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jTextField2;
+    private java.awt.Label label1;
+    private VentanaBusqueda ventanaBusqueda;
+    // End of variables declaration  
 
     /**
      * Creates new form VentanaIniciarSesion
@@ -30,7 +47,7 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JPasswordField ();
         label1 = new java.awt.Label();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -58,6 +75,12 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
 
         jButton1.setText("Iniciar");
         jButton1.setName("btIniciar"); // NOI18N
+        
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bIngresarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.setName("btCancelar"); // NOI18N
@@ -145,16 +168,23 @@ public class VentanaIniciarSesion extends javax.swing.JFrame {
             }
         });
     }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private java.awt.Label label1;
-    // End of variables declaration                   
+    
+    private void bIngresarActionPerformed(java.awt.event.ActionEvent evt) {                                          
+         try {
+                    //con=new ConexionSQL(this.textUser.getText(),this.textPassword.getText());
+                    //op=new Registrar_Consultar();
+                    ventanaBusqueda=new VentanaBusqueda();
+                    ventanaInicio.setContentPane(ventanaBusqueda.getContentPane());
+                    ventanaInicio.setSize(ventanaBusqueda.getSize());
+                    ventanaInicio.setTitle("Registre o Consulte");
+                    ventanaInicio.setLocationRelativeTo(null); 
+                    
+            } catch (Exception ex) {
+                 System.out.println("Exception: "+ex);
+                 JOptionPane.showInternalMessageDialog(this.getContentPane(),"Usuario Incorrecto","Problema", WIDTH);
+            }
+        
+         
+    }
+                     
 }
