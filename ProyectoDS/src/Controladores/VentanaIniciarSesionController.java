@@ -12,10 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +23,7 @@ import javafx.stage.Stage;
  */
 public class VentanaIniciarSesionController implements Initializable, CanGoBack {
 
+    @FXML
     private CanGoBack returnController;
 
     @FXML
@@ -44,25 +43,18 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     public void setReturnController(CanGoBack c) {
         returnController = c;
     }
-
-    @FXML
-    public void iniciarSesion(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-
-        ((Stage) email.getScene().getWindow()).close();
-    }
     
-    @FXML
-    public void crearCuenta(ActionEvent e) throws IOException {
-        System.out.println("Crear cuenta");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
-        a.showAndWait();
+     @FXML
+    public void newUser(ActionEvent event) throws IOException {
+        System.out.println("Registrar nuevo Usuario");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaRegistro.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaRegistroController controller = loader.<VentanaRegistroController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
     }
 
 }
