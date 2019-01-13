@@ -71,7 +71,7 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void busquedaSencilla(ActionEvent event) throws IOException{
+    public void busquedaSencilla(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaBusquedaSencilla.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -104,13 +104,29 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void misVentas(ActionEvent event) {
-        System.out.println("Mis ventas");
+    public void misVentas(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisVentas.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaMisVentasController controller = loader.<VentanaMisVentasController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
     }
 
     @FXML
-    public void misProductos(ActionEvent event) {
-        System.out.println("Mis productos");
+    public void misProductos(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisProductos.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaMisProductosController controller = loader.<VentanaMisProductosController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
     }
 
     @Override

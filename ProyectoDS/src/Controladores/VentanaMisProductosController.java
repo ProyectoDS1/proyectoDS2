@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaComprasPendientesController implements Initializable, CanGoBack {
+public class VentanaMisProductosController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
@@ -43,13 +43,14 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
     }
 
     @FXML
-    public void calificarProducto(ActionEvent e) throws IOException {
-        System.out.println("Calificar producto");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCalificarProducto.fxml"));
+    public void crear(ActionEvent e) throws IOException {
+        System.out.println("Crear nuevo producto");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
 
-        VentanaCalificarProductoController controller = loader.<VentanaCalificarProductoController>getController();
+        VentanaCrearNuevoProductoController controller = loader.<VentanaCrearNuevoProductoController>getController();
 
         controller.setReturnController(this);
         stage.show();
@@ -57,13 +58,14 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
     }
 
     @FXML
-    public void calificarVendedor(ActionEvent e) throws IOException {
-        System.out.println("Calificar vendedor");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCalificarVendedor.fxml"));
+    public void editar(ActionEvent e) throws IOException {
+        System.out.println("Editar producto");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaEditarProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
 
-        VentanaCalificarVendedorController controller = loader.<VentanaCalificarVendedorController>getController();
+        VentanaEditarProductoController controller = loader.<VentanaEditarProductoController>getController();
 
         controller.setReturnController(this);
         stage.show();
@@ -71,18 +73,10 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
     }
 
     @FXML
-    public void indicarRecibido(ActionEvent e) throws IOException {
-        System.out.println("Indicar producto recibido");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
-        a.showAndWait();
-    }
-
-    @FXML
-    public void anularPedido(ActionEvent e) throws IOException {
-        System.out.println("Anular pedido");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
+    public void eliminar(ActionEvent e) throws IOException {
+        System.out.println("Eliminar producto");
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setContentText("Producto eliminado!");
         a.showAndWait();
     }
 

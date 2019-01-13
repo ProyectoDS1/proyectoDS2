@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaComprasPendientesController implements Initializable, CanGoBack {
+public class VentanaVentasPendientesController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
@@ -43,36 +43,8 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
     }
 
     @FXML
-    public void calificarProducto(ActionEvent e) throws IOException {
-        System.out.println("Calificar producto");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCalificarProducto.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
-
-        VentanaCalificarProductoController controller = loader.<VentanaCalificarProductoController>getController();
-
-        controller.setReturnController(this);
-        stage.show();
-        titulo.getScene().getWindow().hide();
-    }
-
-    @FXML
-    public void calificarVendedor(ActionEvent e) throws IOException {
-        System.out.println("Calificar vendedor");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCalificarVendedor.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
-
-        VentanaCalificarVendedorController controller = loader.<VentanaCalificarVendedorController>getController();
-
-        controller.setReturnController(this);
-        stage.show();
-        titulo.getScene().getWindow().hide();
-    }
-
-    @FXML
-    public void indicarRecibido(ActionEvent e) throws IOException {
-        System.out.println("Indicar producto recibido");
+    public void verMapa(ActionEvent e) throws IOException {
+        System.out.println("Ver mapa de producto");
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setContentText("No implementado!");
         a.showAndWait();

@@ -12,10 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -23,15 +22,12 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaIniciarSesionController implements Initializable, CanGoBack {
+public class VentanaMisVentasController implements Initializable, CanGoBack {
 
-    @FXML
     private CanGoBack returnController;
 
     @FXML
-    private TextField email;
-    @FXML
-    private TextField password;
+    private Label titulo;
 
     /**
      * Initializes the controller class.
@@ -47,29 +43,23 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     }
 
     @FXML
-    public void newUser(ActionEvent event) throws IOException {
-        System.out.println("Registrar nuevo Usuario");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaRegistro.fxml"));
+    public void verPendientes(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaVentasPendientes.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
 
-        VentanaRegistroController controller = loader.<VentanaRegistroController>getController();
+        VentanaVentasPendientesController controller = loader.<VentanaVentasPendientesController>getController();
 
         controller.setReturnController(this);
         stage.show();
-        email.getScene().getWindow().hide();
+        titulo.getScene().getWindow().hide();
     }
 
     @FXML
-    public void iniciarSesion(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.show();
-
-        ((Stage) email.getScene().getWindow()).close();
+    public void verResumen(ActionEvent e) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setContentText("No implementado!");
+        a.showAndWait();
     }
 
 }
