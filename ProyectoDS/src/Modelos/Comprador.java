@@ -17,7 +17,7 @@ public class Comprador extends Usuario{
     protected ArrayList<Calificacion> misCalificaciones;
     
     public Pedido comprar(Producto articulo){
-     
+        return null;
     }
     
     public ArrayList<Pedido> mostrarPedidos(){

@@ -22,15 +22,15 @@ public class Administrador {
     }
     
     public ArrayList<Pedido> verComprasPendientes(){
-        
+        return null;
     }
     
     public ArrayList<Pedido> verComprasCompletadas(){
-        
+        return null;
     }
     
     public ArrayList<Pedido> verComprasAnuladas(){
-        
+        return null;
     }
     
 }
