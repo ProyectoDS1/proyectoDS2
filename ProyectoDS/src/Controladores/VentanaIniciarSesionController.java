@@ -5,9 +5,16 @@
  */
 package Controladores;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,6 +23,7 @@ import javafx.fxml.Initializable;
  */
 public class VentanaIniciarSesionController implements Initializable, CanGoBack {
 
+    @FXML
     private CanGoBack returnController;
 
     /**
@@ -29,6 +37,19 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     @Override
     public void setReturnController(CanGoBack c) {
         returnController = c;
+    }
+    
+     @FXML
+    public void newUser(ActionEvent event) throws IOException {
+        System.out.println("Registrar nuevo Usuario");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaRegistro.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaRegistroController controller = loader.<VentanaRegistroController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
     }
 
 }
