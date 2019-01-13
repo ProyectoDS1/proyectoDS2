@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,16 +15,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controladores.VentanaAdministracionEditarUsuarioController">
-    <top>
-        <Label text="Editar usuario">
-            <font>
-                <Font size="18.0" />
-            </font>
-            <padding>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-            </padding>
-        </Label>
-    </top>
     <center>
         <GridPane hgap="10.0" prefHeight="224.0" prefWidth="600.0" vgap="10.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -76,4 +67,19 @@
             </padding>
         </GridPane>
     </center>
+   <top>
+      <AnchorPane prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+              <Label text="Editar usuario" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <font>
+                      <Font size="18.0" />
+                  </font>
+              </Label>
+            <Button layoutX="538.0" layoutY="8.0" mnemonicParsing="false" onAction="#volver" text="&lt; Volver" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </AnchorPane>
+   </top>
 </BorderPane>

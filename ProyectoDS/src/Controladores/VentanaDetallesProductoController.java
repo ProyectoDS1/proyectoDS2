@@ -58,4 +58,10 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         stage.show();
         titulo.getScene().getWindow().hide();
     }
+
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 }

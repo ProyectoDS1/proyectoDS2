@@ -53,4 +53,10 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         ((Stage) nombre.getScene().getWindow()).close();
     }
 
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) nombre.getScene().getWindow()).close();
+        returnController.show();
+    }
+
 }

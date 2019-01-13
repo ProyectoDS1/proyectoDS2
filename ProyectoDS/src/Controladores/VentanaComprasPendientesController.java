@@ -85,7 +85,14 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
         a.setContentText("No implementado!");
         a.showAndWait();
     }
+    
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 
+    @Override
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
     }

@@ -13,7 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaVentasPendientesController implements Initializable, CanGoBack {
+public class VentanaResultadosBusquedaController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
@@ -37,25 +37,17 @@ public class VentanaVentasPendientesController implements Initializable, CanGoBa
         // TODO
     }
 
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
-    }
-
     @FXML
-    public void verMapa(ActionEvent e) throws IOException {
-        System.out.println("Ver mapa de producto");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
-        a.showAndWait();
-    }
+    public void productoElegido(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaDetallesProducto.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
 
-    @FXML
-    public void anularPedido(ActionEvent e) throws IOException {
-        System.out.println("Anular pedido");
-        Alert a = new Alert(Alert.AlertType.ERROR);
-        a.setContentText("No implementado!");
-        a.showAndWait();
+        VentanaDetallesProductoController controller = loader.<VentanaDetallesProductoController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        titulo.getScene().getWindow().hide();
     }
 
     @FXML
@@ -64,7 +56,14 @@ public class VentanaVentasPendientesController implements Initializable, CanGoBa
         returnController.show();
     }
 
+    @Override
+    public void setReturnController(CanGoBack c) {
+        returnController = c;
+    }
+
+    @Override
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
     }
+
 }

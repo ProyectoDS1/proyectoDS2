@@ -53,4 +53,10 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
         ((Stage) titulo.getScene().getWindow()).close();
     }
 
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
+
 }

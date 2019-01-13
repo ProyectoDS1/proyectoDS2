@@ -66,5 +66,11 @@ public class VentanaMisPedidosController implements Initializable, CanGoBack {
         a.setContentText("No implementado!");
         a.showAndWait();
     }
+    
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 
 }

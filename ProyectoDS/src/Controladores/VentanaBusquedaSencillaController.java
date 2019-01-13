@@ -51,15 +51,21 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
     public void buscar(ActionEvent e) throws IOException {
         System.out.println("Buscando " + texto.getText());
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaProductosMasBuscados.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaResultadosBusqueda.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
 
-        VentanaProductosMasBuscadosController controller = loader.<VentanaProductosMasBuscadosController>getController();
+        VentanaResultadosBusquedaController controller = loader.<VentanaResultadosBusquedaController>getController();
 
         controller.setReturnController(this);
         stage.show();
         texto.getScene().getWindow().hide();
+    }
+
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) texto.getScene().getWindow()).close();
+        returnController.show();
     }
 
 }

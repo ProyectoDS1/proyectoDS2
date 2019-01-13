@@ -45,7 +45,7 @@ public class VentanaMisProductosController implements Initializable, CanGoBack {
     @FXML
     public void crear(ActionEvent e) throws IOException {
         System.out.println("Crear nuevo producto");
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -60,7 +60,7 @@ public class VentanaMisProductosController implements Initializable, CanGoBack {
     @FXML
     public void editar(ActionEvent e) throws IOException {
         System.out.println("Editar producto");
-        
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaEditarProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -80,6 +80,13 @@ public class VentanaMisProductosController implements Initializable, CanGoBack {
         a.showAndWait();
     }
 
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
+
+    @Override
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
     }

@@ -50,5 +50,11 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack {
 
         ((Stage) nombreEfectivo.getScene().getWindow()).close();
     }
+    
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) nombreEfectivo.getScene().getWindow()).close();
+        returnController.show();
+    }
 
 }

@@ -67,4 +67,9 @@ public class VentanaMisVentasController implements Initializable, CanGoBack {
         a.showAndWait();
     }
 
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 }

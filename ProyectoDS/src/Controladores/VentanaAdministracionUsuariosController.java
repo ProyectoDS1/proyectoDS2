@@ -79,6 +79,12 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
         a.setContentText("Usuario eliminado!");
         a.showAndWait();
     }
+    
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 
     @Override
     public void show() {

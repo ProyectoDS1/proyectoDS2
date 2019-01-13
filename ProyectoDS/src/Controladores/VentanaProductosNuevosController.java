@@ -39,6 +39,12 @@ public class VentanaProductosNuevosController implements Initializable, CanGoBac
         System.out.println(((Hyperlink) e.getSource()).getText());
     }
 
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
+
     @Override
     public void setReturnController(CanGoBack c) {
         returnController = c;
