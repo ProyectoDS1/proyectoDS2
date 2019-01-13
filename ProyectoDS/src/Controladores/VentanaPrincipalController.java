@@ -129,6 +129,25 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
         usuarioLabel.getScene().getWindow().hide();
     }
 
+    @FXML
+    public void administrar(ActionEvent e) throws IOException {
+        System.out.println("Ventana de administración");
+
+        Alert a = new Alert(Alert.AlertType.WARNING);
+        a.setContentText("Sólo los administradores pueden acceder!");
+        a.showAndWait();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracion.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene(loader.load()));
+
+        VentanaAdministracionController controller = loader.<VentanaAdministracionController>getController();
+
+        controller.setReturnController(this);
+        stage.show();
+        usuarioLabel.getScene().getWindow().hide();
+    }
+
     @Override
     public void setReturnController(CanGoBack c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
