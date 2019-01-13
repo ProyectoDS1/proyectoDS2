@@ -39,6 +39,11 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
     @FXML
     public void calificar(ActionEvent e) {
         System.out.println("Calificando producto: " + ((Button) e.getSource()).getText() + " estrellas");

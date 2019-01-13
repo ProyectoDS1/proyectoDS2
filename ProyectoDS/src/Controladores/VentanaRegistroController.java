@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -22,16 +23,33 @@ import javafx.stage.Stage;
  * @author User-PC
  */
 public class VentanaRegistroController implements Initializable, CanGoBack {
+
     private CanGoBack returnController;
+
+    @FXML
+    private TextField nombre;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
+
     }
 
     @Override
     public void setReturnController(CanGoBack c) {
-        
+        returnController = c;
     }
-    
+
+    @Override
+    public void show() {
+        ((Stage) nombre.getScene().getWindow()).show();
+    }
+
+    @FXML
+    public void registrar(ActionEvent e) {
+        System.out.println("Registrar usuario");
+
+        returnController.show();
+        ((Stage) nombre.getScene().getWindow()).close();
+    }
+
 }

@@ -42,6 +42,11 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) texto.getScene().getWindow()).show();
+    }
+
     @FXML
     public void buscar(ActionEvent e) throws IOException {
         System.out.println("Buscando " + texto.getText());

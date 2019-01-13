@@ -12,4 +12,6 @@ package Controladores;
 public interface CanGoBack {
 
     public void setReturnController(CanGoBack c);
+    
+    public void show();
 }

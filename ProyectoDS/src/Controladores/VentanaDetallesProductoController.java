@@ -41,6 +41,11 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
     @FXML
     public void comprarProducto(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaFormaPago.fxml"));
@@ -52,9 +57,5 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         controller.setReturnController(this);
         stage.show();
         titulo.getScene().getWindow().hide();
-    }
-
-    void show() {
-        ((Stage) titulo.getScene().getWindow()).show();
     }
 }

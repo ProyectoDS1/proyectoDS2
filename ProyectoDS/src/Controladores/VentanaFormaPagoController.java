@@ -39,6 +39,11 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack {
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) nombreEfectivo.getScene().getWindow()).show();
+    }
+
     @FXML
     public void comprar(ActionEvent e) throws IOException {
         ((VentanaDetallesProductoController) returnController).show();

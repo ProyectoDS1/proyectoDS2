@@ -39,11 +39,16 @@ public class VentanaEditarProductoController implements Initializable, CanGoBack
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) nombre.getScene().getWindow()).show();
+    }
+
     @FXML
     public void guardar(ActionEvent e) {
         System.out.println("Guardar producto");
 
-        ((VentanaMisProductosController) returnController).show();
+        returnController.show();
 
         ((Stage) nombre.getScene().getWindow()).close();
     }

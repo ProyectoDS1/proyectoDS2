@@ -42,6 +42,11 @@ public class VentanaMisVentasController implements Initializable, CanGoBack {
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
     @FXML
     public void verPendientes(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaVentasPendientes.fxml"));

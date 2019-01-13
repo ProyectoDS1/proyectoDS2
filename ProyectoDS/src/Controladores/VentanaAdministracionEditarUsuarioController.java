@@ -41,6 +41,11 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) nombre.getScene().getWindow()).show();
+    }
+
     @FXML
     public void guardar(ActionEvent e) {
         System.out.println("Guardar usuario");

@@ -41,6 +41,11 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) nombre.getScene().getWindow()).show();
+    }
+
     @FXML
     public void crear(ActionEvent e) {
         System.out.println("Crear usuario");

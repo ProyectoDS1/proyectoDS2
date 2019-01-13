@@ -46,6 +46,11 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) email.getScene().getWindow()).show();
+    }
+
     @FXML
     public void newUser(ActionEvent event) throws IOException {
         System.out.println("Registrar nuevo Usuario");

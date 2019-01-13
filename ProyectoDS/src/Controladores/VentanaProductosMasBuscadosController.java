@@ -55,4 +55,9 @@ public class VentanaProductosMasBuscadosController implements Initializable, Can
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
 }

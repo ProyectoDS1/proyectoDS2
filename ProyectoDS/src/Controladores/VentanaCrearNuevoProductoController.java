@@ -39,6 +39,11 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         returnController = c;
     }
 
+    @Override
+    public void show() {
+        ((Stage) nombre.getScene().getWindow()).show();
+    }
+
     @FXML
     public void crear(ActionEvent e) {
         System.out.println("Crear producto");

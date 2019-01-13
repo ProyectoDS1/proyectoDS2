@@ -80,6 +80,7 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
         a.showAndWait();
     }
 
+    @Override
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
     }

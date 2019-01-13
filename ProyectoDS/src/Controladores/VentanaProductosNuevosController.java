@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -41,6 +42,11 @@ public class VentanaProductosNuevosController implements Initializable, CanGoBac
     @Override
     public void setReturnController(CanGoBack c) {
         returnController = c;
+    }
+
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
     }
 
 }
