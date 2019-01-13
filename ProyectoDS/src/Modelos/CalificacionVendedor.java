@@ -9,7 +9,7 @@ package Modelos;
  *
  * @author User-PC
  */
-public class CalificacionVendedor {
+public class CalificacionVendedor extends Calificacion{
     
     private Vendedor vendedor;
     

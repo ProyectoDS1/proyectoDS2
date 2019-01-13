@@ -9,6 +9,6 @@ package Modelos;
  *
  * @author User-PC
  */
-public class CalificacionProducto {
+public class CalificacionProducto extends Calificacion{
     
 }
