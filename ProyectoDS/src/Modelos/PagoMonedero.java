@@ -9,7 +9,15 @@ package Modelos;
  *
  * @author User-PC
  */
-public class PagoMonedero extends MetodoPago{
-    private String nombreCliente;
-    private String celular;
+public class PagoMonedero extends MetodoPago {
+
+    protected String nombreCliente;
+    protected String celular;
+
+    public PagoMonedero(String nombreCliente, String celular, Pedido pedido) {
+        super(pedido);
+        this.nombreCliente = nombreCliente;
+        this.celular = celular;
+    }
+
 }

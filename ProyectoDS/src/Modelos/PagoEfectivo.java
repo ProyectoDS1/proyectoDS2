@@ -9,6 +9,13 @@ package Modelos;
  *
  * @author User-PC
  */
-public class PagoEfectivo extends MetodoPago{
-  private String nombreCliente;   
+public class PagoEfectivo extends MetodoPago {
+
+    protected String nombreCliente;
+
+    public PagoEfectivo(String nombreCliente, Pedido pedido) {
+        super(pedido);
+        this.nombreCliente = nombreCliente;
+    }
+
 }

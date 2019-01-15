@@ -18,6 +18,7 @@ public abstract class Usuario {
     protected String telefono;
     protected boolean whatsapp;
     protected String direccion;
+    protected String cedula;
     protected String matricula;
     protected boolean activo;
     private static Usuario usuarioActual;
@@ -27,6 +28,7 @@ public abstract class Usuario {
     }
 
     public void cerrarSesion() {
+
     }
 
     public String getEmail() {
@@ -91,6 +93,14 @@ public abstract class Usuario {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public boolean isActivo() {

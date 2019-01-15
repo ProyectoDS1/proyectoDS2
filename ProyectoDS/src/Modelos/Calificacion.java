@@ -10,6 +10,13 @@ package Modelos;
  * @author User-PC
  */
 public abstract class Calificacion {
+
     protected int estrellas;
     protected Comprador autor;
+
+    public Calificacion(int estrellas, Comprador autor) {
+        this.estrellas = estrellas;
+        this.autor = autor;
+    }
+
 }

@@ -9,8 +9,13 @@ package Modelos;
  *
  * @author User-PC
  */
-public class CalificacionVendedor extends Calificacion{
-    
-    private Vendedor vendedor;
-    
+public class CalificacionVendedor extends Calificacion {
+
+    protected Vendedor vendedor;
+
+    public CalificacionVendedor(Vendedor vendedor, int estrellas, Comprador autor) {
+        super(estrellas, autor);
+        this.vendedor = vendedor;
+    }
+
 }

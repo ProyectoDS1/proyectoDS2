@@ -9,6 +9,13 @@ package Modelos;
  *
  * @author User-PC
  */
-public class CalificacionProducto extends Calificacion{
-    
+public class CalificacionProducto extends Calificacion {
+
+    protected Producto producto;
+
+    public CalificacionProducto(Producto producto, int estrellas, Comprador autor) {
+        super(estrellas, autor);
+        this.producto = producto;
+    }
+
 }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Vendedor extends Comprador {
 
-    private ArrayList<Producto> misArticulos;
-    private ArrayList<CalificacionVendedor> calificacion;
+    protected ArrayList<Producto> misArticulos;
+    protected ArrayList<CalificacionVendedor> calificaciones;
 
     public ArrayList<Producto> mostrarArticulos() {
         return this.misArticulos;

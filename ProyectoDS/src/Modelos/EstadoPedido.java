@@ -7,18 +7,8 @@ package Modelos;
 
 /**
  *
- * @author User-PC
+ * @author reyes
  */
-public class MetodoPago {
-
-    protected Pedido pedido;
-
-    public MetodoPago(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public boolean confirmar() {
-        return true;
-    }
-
+public enum EstadoPedido {
+    PENDIENTE, ENTREGADO, ANULADO, ELIMINADO
 }
