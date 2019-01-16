@@ -29,4 +29,12 @@ public class CalificacionProducto extends Calificacion {
         this.producto = producto;
     }
 
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
 }

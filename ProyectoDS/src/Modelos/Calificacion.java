@@ -48,4 +48,20 @@ public abstract class Calificacion implements Serializable {
         this.id = id;
     }
 
+    public int getEstrellas() {
+        return estrellas;
+    }
+
+    public void setEstrellas(int estrellas) {
+        this.estrellas = estrellas;
+    }
+
+    public Comprador getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Comprador autor) {
+        this.autor = autor;
+    }
+
 }

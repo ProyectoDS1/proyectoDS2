@@ -28,4 +28,12 @@ public class CalificacionVendedor extends Calificacion {
         this.vendedor = vendedor;
     }
 
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
 }
