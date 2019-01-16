@@ -5,6 +5,8 @@
  */
 package Controladores;
 
+import Modelos.Usuario;
+import Utils.ConexionSql;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,9 +16,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -67,14 +73,28 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
 
     @FXML
     public void iniciarSesion(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        TypedQuery<Usuario> q = em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.contrasenia=:pass", Usuario.class);
+        q.setParameter("email", email.getText());
+        q.setParameter("pass", password.getText());
 
-        stage.setScene(scene);
-        stage.show();
+        try {
+            Usuario.setUsuarioActual(q.getSingleResult());
 
-        ((Stage) email.getScene().getWindow()).close();
+            Parent root = FXMLLoader.load(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+
+            ((Stage) email.getScene().getWindow()).close();
+        } catch (NoResultException ex) {
+            Alert a = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("Usuario o contraseña erróneo!");
+            a.showAndWait();
+        }
+        ConexionSql.getConexion().endTransaction();
     }
 
 }

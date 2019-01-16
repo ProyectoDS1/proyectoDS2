@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Modelos.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -27,26 +29,47 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
 
     @FXML
     private Label usuarioLabel;
+    @FXML
+    private Button iniciarCerrarSesion;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        if (Usuario.getUsuarioActual() == null) {
+            usuarioLabel.setText("Invitado");
+            iniciarCerrarSesion.setText("Iniciar sesión");
+        } else {
+            usuarioLabel.setText(Usuario.getUsuarioActual().toString());
+            iniciarCerrarSesion.setText("Cerrar sesión");
+        }
     }
 
     @FXML
     public void logIn(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaIniciarSesion.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+        if (Usuario.getUsuarioActual() == null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaIniciarSesion.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaIniciarSesionController controller = loader.<VentanaIniciarSesionController>getController();
+            VentanaIniciarSesionController controller = loader.<VentanaIniciarSesionController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } else {
+            Usuario.setUsuarioActual(null);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaPrincipal.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+
+            VentanaPrincipalController controller = loader.<VentanaPrincipalController>getController();
+
+            stage.show();
+            ((Stage) usuarioLabel.getScene().getWindow()).close();
+        }
     }
 
     @FXML
@@ -84,7 +107,8 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void busquedaAvanzada(ActionEvent event) {
+    public void busquedaAvanzada(ActionEvent event
+    ) {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setContentText("No implementado!");
         a.showAndWait();
@@ -149,8 +173,9 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @Override
-    public void setReturnController(CanGoBack c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setReturnController(CanGoBack c
+    ) {
+        throw new UnsupportedOperationException("Not supported!");
     }
 
     @Override
