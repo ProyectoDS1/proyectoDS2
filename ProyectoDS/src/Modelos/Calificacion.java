@@ -5,18 +5,47 @@
  */
 package Modelos;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author User-PC
  */
-public abstract class Calificacion {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Calificacion implements Serializable {
 
     protected int estrellas;
+    @ManyToOne
+    @JoinColumn(name = "COMPRADOR_ID")
     protected Comprador autor;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    public Calificacion() {
+    }
 
     public Calificacion(int estrellas, Comprador autor) {
         this.estrellas = estrellas;
         this.autor = autor;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

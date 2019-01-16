@@ -5,11 +5,25 @@
  */
 package Modelos;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 /**
  *
  * @author User-PC
  */
-public abstract class Usuario {
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Usuario implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     protected String email;
     protected String contrasenia;
@@ -117,6 +131,14 @@ public abstract class Usuario {
 
     public static void setUsuarioActual(Usuario user) {
         usuarioActual = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

@@ -5,20 +5,46 @@
  */
 package Modelos;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author User-PC
  */
-public class Pedido {
+@Entity
+public class Pedido implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected long id;
+
+    @Enumerated(EnumType.ORDINAL)
     protected EstadoPedido estado;
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date fechaDePedido;
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date fechaDeEntrega;
+    @ManyToOne
+    @JoinColumn(name = "PRODUCTO_ID")
     protected Producto articulo;
     protected int numeroItems;
+    @ManyToOne
+    @JoinColumn(name = "COMPRADOR_ID")
     protected Comprador comprador;
+    @OneToOne
+    @JoinColumn(name = "METODOPAGO_ID")
     protected MetodoPago metpago;
 
     public void anular() {

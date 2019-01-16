@@ -5,13 +5,23 @@
  */
 package Modelos;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author User-PC
  */
+@Entity
 public class CalificacionVendedor extends Calificacion {
 
+    @ManyToOne
+    @JoinColumn(name = "VENDEDOR_ID")
     protected Vendedor vendedor;
+
+    public CalificacionVendedor() {
+    }
 
     public CalificacionVendedor(Vendedor vendedor, int estrellas, Comprador autor) {
         super(estrellas, autor);

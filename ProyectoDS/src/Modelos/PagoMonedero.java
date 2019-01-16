@@ -5,14 +5,20 @@
  */
 package Modelos;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author User-PC
  */
+@Entity
 public class PagoMonedero extends MetodoPago {
 
     protected String nombreCliente;
     protected String celular;
+
+    public PagoMonedero() {
+    }
 
     public PagoMonedero(String nombreCliente, String celular, Pedido pedido) {
         super(pedido);

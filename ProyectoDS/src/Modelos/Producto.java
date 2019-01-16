@@ -5,24 +5,46 @@
  */
 package Modelos;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author User-PC
  */
-public class Producto {
+@Entity
+public class Producto implements Serializable {
+
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     protected String nombreArticulo;
     protected String categoria;
     protected float precio;
+    @Temporal(value = TemporalType.TIME)
     protected Date tiempoEntrega;
+    @OneToMany(mappedBy = "producto")
     protected List<CalificacionProducto> calificaciones;
     protected boolean disponible;
     protected boolean eliminado;
+    @ManyToOne
+    @JoinColumn(name = "VENDEDOR_ID")
     protected Vendedor vendedor;
     protected int numVistas;
+    @Temporal(value = TemporalType.TIMESTAMP)
     protected Date fechaCreacion;
     protected int stock;
 
@@ -116,5 +138,13 @@ public class Producto {
 
     private void agregarRating(int rate) {
 
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

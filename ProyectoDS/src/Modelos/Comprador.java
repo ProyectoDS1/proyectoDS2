@@ -6,25 +6,32 @@
 package Modelos;
 
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  *
  * @author User-PC
  */
+@Entity
 public class Comprador extends Usuario {
 
-    protected ArrayList<Pedido> misPedidos;
-    protected ArrayList<Calificacion> misCalificaciones;
+    @Transient
+    protected List<Pedido> misPedidos;
+    @OneToMany(mappedBy = "autor")
+    protected List<Calificacion> misCalificaciones;
 
     public Pedido comprar(Producto articulo) {
         return null;
     }
 
-    public ArrayList<Pedido> mostrarPedidos() {
+    public List<Pedido> mostrarPedidos() {
         return misPedidos;
     }
 
-    public ArrayList<Pedido> mostrarHistorialPedidos() {
+    public List<Pedido> mostrarHistorialPedidos() {
         return misPedidos;
     }
 

@@ -6,11 +6,13 @@
 package Modelos;
 
 import java.util.ArrayList;
+import javax.persistence.Entity;
 
 /**
  *
  * @author User-PC
  */
+@Entity
 public class Administrador extends Usuario {
 
     public void administrarUsuario(Usuario user) {

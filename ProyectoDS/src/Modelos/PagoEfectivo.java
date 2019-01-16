@@ -5,13 +5,19 @@
  */
 package Modelos;
 
+import javax.persistence.Entity;
+
 /**
  *
  * @author User-PC
  */
+@Entity
 public class PagoEfectivo extends MetodoPago {
 
     protected String nombreCliente;
+
+    public PagoEfectivo() {
+    }
 
     public PagoEfectivo(String nombreCliente, Pedido pedido) {
         super(pedido);
