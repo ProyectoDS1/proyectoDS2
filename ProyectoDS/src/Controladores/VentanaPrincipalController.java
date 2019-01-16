@@ -5,19 +5,28 @@
  */
 package Controladores;
 
+import Modelos.Administrador;
+import Modelos.Comprador;
 import Modelos.Usuario;
+import Modelos.Vendedor;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -31,6 +40,8 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     private Label usuarioLabel;
     @FXML
     private Button iniciarCerrarSesion;
+    @FXML
+    private VBox buttonContainer;
 
     /**
      * Initializes the controller class.
@@ -44,6 +55,8 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
             usuarioLabel.setText(Usuario.getUsuarioActual().toString());
             iniciarCerrarSesion.setText("Cerrar sesión");
         }
+        agregarBotones();
+
     }
 
     @FXML
@@ -73,7 +86,7 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void verRecientes(ActionEvent event) throws IOException {
+    public void verRecientes(ActionEvent event) {
         System.out.println("Ver productos recientes");
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setContentText("No implementado!");
@@ -81,29 +94,37 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void verMasBuscados(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaProductosMasBuscados.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void verMasBuscados(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaProductosMasBuscados.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaProductosMasBuscadosController controller = loader.<VentanaProductosMasBuscadosController>getController();
+            VentanaProductosMasBuscadosController controller = loader.<VentanaProductosMasBuscadosController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    public void busquedaSencilla(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaBusquedaSencilla.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void busquedaSencilla(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaBusquedaSencilla.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaBusquedaSencillaController controller = loader.<VentanaBusquedaSencillaController>getController();
+            VentanaBusquedaSencillaController controller = loader.<VentanaBusquedaSencillaController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -115,61 +136,71 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     }
 
     @FXML
-    public void misPedidos(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisPedidos.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void misPedidos(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisPedidos.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaMisPedidosController controller = loader.<VentanaMisPedidosController>getController();
+            VentanaMisPedidosController controller = loader.<VentanaMisPedidosController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    public void misVentas(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisVentas.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void misVentas(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisVentas.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaMisVentasController controller = loader.<VentanaMisVentasController>getController();
+            VentanaMisVentasController controller = loader.<VentanaMisVentasController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    public void misProductos(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisProductos.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void misProductos(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaMisProductos.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaMisProductosController controller = loader.<VentanaMisProductosController>getController();
+            VentanaMisProductosController controller = loader.<VentanaMisProductosController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    public void administrar(ActionEvent e) throws IOException {
-        System.out.println("Ventana de administración");
+    public void administrar(ActionEvent e) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracion.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        Alert a = new Alert(Alert.AlertType.WARNING);
-        a.setContentText("Sólo los administradores pueden acceder!");
-        a.showAndWait();
+            VentanaAdministracionController controller = loader.<VentanaAdministracionController>getController();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracion.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
-
-        VentanaAdministracionController controller = loader.<VentanaAdministracionController>getController();
-
-        controller.setReturnController(this);
-        stage.show();
-        usuarioLabel.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            stage.show();
+            usuarioLabel.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -181,6 +212,95 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     @Override
     public void show() {
         ((Stage) usuarioLabel.getScene().getWindow()).show();
+    }
+
+    private void agregarBotones() {
+        if (Usuario.getUsuarioActual() == null || Usuario.getUsuarioActual() instanceof Comprador) {
+            agregarBotonesInvitado();
+        }
+        if (Usuario.getUsuarioActual() instanceof Comprador) {
+            agregarBotonesComprador();
+        }
+        if (Usuario.getUsuarioActual() instanceof Vendedor) {
+            agregarBotonesVendedor();
+        }
+        if (Usuario.getUsuarioActual() instanceof Administrador) {
+            agregarBotonesAdministrador();
+        }
+    }
+
+    private void agregarBotonesInvitado() {
+        VBox container = new VBox();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(10);
+        container.setPadding(new Insets(10));
+
+        Button prodsNuevos = new Button("Productos nuevos");
+        prodsNuevos.setOnAction(e -> verRecientes(e));
+        container.getChildren().add(prodsNuevos);
+
+        Button prodsMasBuscados = new Button("Productos más buscados");
+        prodsMasBuscados.setOnAction(e -> verMasBuscados(e));
+        container.getChildren().add(prodsMasBuscados);
+
+        buttonContainer.getChildren().add(container);
+    }
+
+    private void agregarBotonesComprador() {
+        VBox container = new VBox();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(10);
+        container.setPadding(new Insets(10));
+
+        agregarBotonesBusqueda(container);
+
+        Button misPedidos = new Button("Mis pedidos");
+        misPedidos.setOnAction(e -> misPedidos(e));
+        container.getChildren().add(misPedidos);
+
+        buttonContainer.getChildren().add(container);
+    }
+
+    private void agregarBotonesBusqueda(VBox container) {
+        Button busqSencilla = new Button("Búsqueda sencilla");
+        busqSencilla.setOnAction(e -> busquedaSencilla(e));
+        container.getChildren().add(busqSencilla);
+
+        Button busqAvanzada = new Button("Búsqueda avanzada");
+        busqAvanzada.setOnAction(e -> busquedaAvanzada(e));
+        container.getChildren().add(busqAvanzada);
+    }
+
+    private void agregarBotonesVendedor() {
+        VBox container = new VBox();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(10);
+        container.setPadding(new Insets(10));
+
+        Button misVentas = new Button("Mis ventas");
+        misVentas.setOnAction(e -> misVentas(e));
+        container.getChildren().add(misVentas);
+
+        Button misProductos = new Button("Mis productos");
+        misProductos.setOnAction(e -> misProductos(e));
+        container.getChildren().add(misProductos);
+
+        buttonContainer.getChildren().add(container);
+    }
+
+    private void agregarBotonesAdministrador() {
+        VBox container = new VBox();
+        container.setAlignment(Pos.CENTER);
+        container.setSpacing(10);
+        container.setPadding(new Insets(10));
+
+        agregarBotonesBusqueda(container);
+
+        Button administrar = new Button("Administración");
+        administrar.setOnAction(e -> administrar(e));
+        container.getChildren().add(administrar);
+
+        buttonContainer.getChildren().add(container);
     }
 
 }
