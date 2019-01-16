@@ -11,21 +11,29 @@ import Modelos.Pedido;
  *
  * @author User-PC
  */
-public class NotificadorCelular implements Notificador{
-    
-    private NotificadorCelular notificador;
-    
-    private void notificarCelular(){
-    
+public class NotificadorCelular implements Notificador {
+
+    private static NotificadorCelular notificador;
+
+    private NotificadorCelular() {
     }
-    
-    public NotificadorCelular getNotificador(){
-      return this;
+
+    public NotificadorCelular getNotificador() {
+        if (notificador == null) {
+            notificador = new NotificadorCelular();
+        }
+        return notificador;
     }
 
     @Override
     public void notificarPedido(Pedido pedido) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("***SMS***");
+        System.out.println("To: " + pedido.getArticulo().getVendedor().getTelefono());
+        System.out.println("Contenido: El cliente "
+                + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
+                + " ha pedido " + pedido.getNumeroItems()
+                + "unidades del producto " + pedido.getArticulo().getNombreArticulo());
+        System.out.println("***END SMS***");
     }
-    
+
 }
