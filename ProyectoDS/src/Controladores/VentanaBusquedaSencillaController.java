@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -54,9 +55,16 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
 
     @FXML
     public void buscar(ActionEvent e) throws IOException {
+        if (texto.getText().trim().length() < 3) {
+            Alert a = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("Ingrese al menos 3 caracteres!");
+            a.showAndWait();
+            return;
+        }
+
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         TypedQuery<Producto> q = em.createQuery("SELECT p FROM Producto p WHERE p.nombreArticulo LIKE :text OR p.descripcion LIKE :text", Producto.class);
-        q.setParameter("text", "%" + texto.getText() + "%");
+        q.setParameter("text", "%" + texto.getText().trim() + "%");
         List<Producto> productos = q.getResultList();
         ConexionSql.getConexion().endTransaction();
 

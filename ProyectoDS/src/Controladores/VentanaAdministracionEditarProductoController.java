@@ -46,6 +46,8 @@ public class VentanaAdministracionEditarProductoController implements Initializa
     @FXML
     private TextField pkVendedor;
     @FXML
+    private TextField numVistas;
+    @FXML
     private CheckBox eliminado;
 
     /**
@@ -67,6 +69,7 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         tiempoEntrega.setText(target.getTiempoEntrega() != null ? target.getTiempoEntrega().toString() : "");
         stock.setText(Integer.toString(target.getStock()));
         pkVendedor.setText(Long.toString(target.getVendedor().getId()));
+        numVistas.setText(Integer.toString(target.getNumVistas()));
         eliminado.setSelected(target.isEliminado());
     }
 
@@ -92,7 +95,7 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         Vendedor v = em.find(Vendedor.class, Long.valueOf(pkVendedor.getText()));
         target.setVendedor(v);
         target.setFechaCreacion(new Date());
-        target.setNumVistas(0);
+        target.setNumVistas(Integer.valueOf(numVistas.getText()));
         target.setDisponible(true);
         target.setEliminado(eliminado.isSelected());
         ConexionSql.getConexion().endTransaction();
