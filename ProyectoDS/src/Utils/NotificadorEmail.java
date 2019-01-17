@@ -18,7 +18,7 @@ public class NotificadorEmail implements Notificador {
     private NotificadorEmail() {
     }
 
-    public NotificadorEmail getNotificador() {
+    public static NotificadorEmail getNotificador() {
         if (notificador == null) {
             notificador = new NotificadorEmail();
         }
@@ -33,7 +33,7 @@ public class NotificadorEmail implements Notificador {
         System.out.println("Contenido: El cliente "
                 + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
                 + " ha pedido " + pedido.getNumeroItems()
-                + "unidades del producto " + pedido.getArticulo().getNombreArticulo());
+                + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
         System.out.println("***END EMAIL***");
     }
 

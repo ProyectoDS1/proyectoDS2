@@ -5,9 +5,12 @@
  */
 package Controladores;
 
+import Modelos.Producto;
+import Utils.ConexionSql;
 import java.io.IOError;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 /**
  * FXML Controller class
@@ -49,7 +54,11 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
 
     @FXML
     public void buscar(ActionEvent e) throws IOException {
-        System.out.println("Buscando " + texto.getText());
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        TypedQuery<Producto> q = em.createQuery("SELECT p FROM Producto p WHERE p.nombreArticulo LIKE :text OR p.descripcion LIKE :text", Producto.class);
+        q.setParameter("text", "%" + texto.getText() + "%");
+        List<Producto> productos = q.getResultList();
+        ConexionSql.getConexion().endTransaction();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaResultadosBusqueda.fxml"));
         Stage stage = new Stage();
@@ -58,6 +67,7 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
         VentanaResultadosBusquedaController controller = loader.<VentanaResultadosBusquedaController>getController();
 
         controller.setReturnController(this);
+        controller.setData(productos);
         stage.show();
         texto.getScene().getWindow().hide();
     }

@@ -32,12 +32,13 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
          <children>
+            <Label fx:id="resumenCompra" />
             <TitledPane animated="false" expanded="false" text="Pago con efectivo">
                <content>
                   <VBox prefWidth="100.0" spacing="10.0">
                      <children>
                         <TextField fx:id="nombreEfectivo" promptText="nombre del pagador" />
-                        <Button mnemonicParsing="false" onAction="#comprar" text="Comprar" />
+                        <Button mnemonicParsing="false" onAction="#comprarEfect" text="Comprar" />
                      </children>
                   </VBox>
                </content>
@@ -48,7 +49,7 @@
                      <children>
                         <TextField fx:id="nombreDE" promptText="nombre del pagador" />
                         <TextField fx:id="telfDE" promptText="teléfono" />
-                        <Button mnemonicParsing="false" onAction="#comprar" text="Comprar" />
+                        <Button mnemonicParsing="false" onAction="#comprarDE" text="Comprar" />
                      </children>
                   </VBox>
                </content>

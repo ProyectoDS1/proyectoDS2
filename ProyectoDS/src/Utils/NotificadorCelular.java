@@ -18,7 +18,7 @@ public class NotificadorCelular implements Notificador {
     private NotificadorCelular() {
     }
 
-    public NotificadorCelular getNotificador() {
+    public static NotificadorCelular getNotificador() {
         if (notificador == null) {
             notificador = new NotificadorCelular();
         }
@@ -32,7 +32,7 @@ public class NotificadorCelular implements Notificador {
         System.out.println("Contenido: El cliente "
                 + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
                 + " ha pedido " + pedido.getNumeroItems()
-                + "unidades del producto " + pedido.getArticulo().getNombreArticulo());
+                + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
         System.out.println("***END SMS***");
     }
 

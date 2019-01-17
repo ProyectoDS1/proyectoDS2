@@ -5,9 +5,13 @@
  */
 package Controladores;
 
+import Modelos.Producto;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -22,12 +27,15 @@ import javafx.stage.Stage;
  *
  * @author reyes
  */
-public class VentanaResultadosBusquedaController implements Initializable, CanGoBack {
+public class VentanaResultadosBusquedaController implements Initializable, CanGoBack, CanGetData {
 
     private CanGoBack returnController;
+    private List<Producto> productos;
 
     @FXML
     private Label titulo;
+    @FXML
+    private VBox container;
 
     /**
      * Initializes the controller class.
@@ -38,16 +46,22 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
     }
 
     @FXML
-    public void productoElegido(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaDetallesProducto.fxml"));
-        Stage stage = new Stage();
-        stage.setScene(new Scene(loader.load()));
+    public void productoElegido(ActionEvent e, Producto p) {
+        try {
+            System.out.println("Se ha elegido " + p.getNombreArticulo());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaDetallesProducto.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
 
-        VentanaDetallesProductoController controller = loader.<VentanaDetallesProductoController>getController();
+            VentanaDetallesProductoController controller = loader.<VentanaDetallesProductoController>getController();
 
-        controller.setReturnController(this);
-        stage.show();
-        titulo.getScene().getWindow().hide();
+            controller.setReturnController(this);
+            controller.setData(p);
+            stage.show();
+            titulo.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaResultadosBusquedaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -62,8 +76,22 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
     }
 
     @Override
+    public void setData(Object... data) {
+        productos = (List<Producto>) data[0];
+
+        show();
+    }
+
+    @Override
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
+
+        container.getChildren().clear();
+        for (Producto p : productos) {
+            Hyperlink h = new Hyperlink(p.getNombreArticulo());
+            h.setOnAction(e -> productoElegido(e, p));
+            container.getChildren().add(h);
+        }
     }
 
 }

@@ -5,6 +5,8 @@
  */
 package Modelos;
 
+import Utils.NotificadorCelular;
+import Utils.NotificadorEmail;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -52,7 +54,12 @@ public class Pedido implements Serializable {
     }
 
     public void notificarVendedor() {
-
+        if (articulo.getVendedor().getTelefono() != null) {
+            NotificadorCelular.getNotificador().notificarPedido(this);
+        }
+        if (articulo.getVendedor().getEmail() != null) {
+            NotificadorEmail.getNotificador().notificarPedido(this);
+        }
     }
 
     public boolean recibido() {
