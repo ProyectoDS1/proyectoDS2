@@ -26,8 +26,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Producto A" GridPane.columnSpan="3" />
-            <Label text="Calificación promedio actual: 3.5/5" GridPane.columnIndex="2" GridPane.columnSpan="2" />
+            <Label fx:id="nombre" text="Producto A" GridPane.columnSpan="3" />
+            <Label fx:id="calificacion" text="Calificación promedio actual: 3.5/5" GridPane.columnIndex="2" GridPane.columnSpan="2" />
             <Button mnemonicParsing="false" onAction="#calificar" text="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#calificar" text="2" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#calificar" text="3" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />

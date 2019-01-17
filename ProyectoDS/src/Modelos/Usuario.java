@@ -23,7 +23,7 @@ public abstract class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    protected Long id;
 
     protected String email;
     protected String contrasenia;

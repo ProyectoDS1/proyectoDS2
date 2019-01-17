@@ -31,6 +31,19 @@ public class Vendedor extends Comprador {
 
     }
 
+    public float getPromedioCalificaciones() {
+        if (calificaciones.isEmpty()) {
+            return -1;
+        }
+
+        float promedio = 0;
+        for (CalificacionVendedor c : calificaciones) {
+            promedio += c.getEstrellas();
+        }
+
+        return promedio / this.calificaciones.size();
+    }
+
     @Override
     public String toString() {
         return nombre + " " + apellido + " (Vendedor)";

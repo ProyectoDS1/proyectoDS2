@@ -5,6 +5,11 @@
  */
 package Controladores;
 
+import Modelos.CalificacionProducto;
+import Modelos.Comprador;
+import Modelos.Producto;
+import Modelos.Usuario;
+import Utils.ConexionSql;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,18 +18,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaCalificarProductoController implements Initializable, CanGoBack {
+public class VentanaCalificarProductoController implements Initializable, CanGoBack, CanGetData {
 
     private CanGoBack returnController;
+    private Producto target;
 
     @FXML
     private Label titulo;
+    @FXML
+    private Label nombre;
+    @FXML
+    private Label calificacion;
 
     /**
      * Initializes the controller class.
@@ -40,13 +51,35 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
     }
 
     @Override
+    public void setData(Object... data) {
+        target = (Producto) data[0];
+
+        show();
+    }
+
+    @Override
     public void show() {
+        nombre.setText(target.getNombreArticulo());
+        float promedio = target.getPromedioCalificaciones();
+        if (promedio == -1) {
+            calificacion.setText("El producto aún no ha sido calificado");
+        } else {
+            calificacion.setText("Calificación promedio actual: " + target.getPromedioCalificaciones() + "/5");
+        }
+
         ((Stage) titulo.getScene().getWindow()).show();
     }
 
     @FXML
     public void calificar(ActionEvent e) {
-        System.out.println("Calificando producto: " + ((Button) e.getSource()).getText() + " estrellas");
+        int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
+        System.out.println("Calificando producto: " + estrellas + " estrellas");
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        CalificacionProducto c = new CalificacionProducto(target, estrellas, (Comprador) Usuario.getUsuarioActual());
+        em.persist(c);
+        target.getCalificaciones().add(c);
+        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(c);
+        ConexionSql.getConexion().endTransaction();
 
         ((VentanaComprasPendientesController) returnController).show();
 

@@ -7,6 +7,7 @@ package Modelos;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -160,6 +161,19 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return nombreArticulo + (eliminado ? " (eliminado)" : "");
+    }
+
+    public float getPromedioCalificaciones() {
+        if (calificaciones.isEmpty()) {
+            return -1;
+        }
+
+        float promedio = 0;
+        for (CalificacionProducto c : calificaciones) {
+            promedio += c.getEstrellas();
+        }
+
+        return promedio / this.calificaciones.size();
     }
 
 }

@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 @Entity
 public class Comprador extends Usuario {
 
-    @Transient
+    @OneToMany(mappedBy = "comprador")
     protected List<Pedido> misPedidos;
     @OneToMany(mappedBy = "autor")
     protected List<Calificacion> misCalificaciones;
@@ -33,6 +33,44 @@ public class Comprador extends Usuario {
 
     public List<Pedido> mostrarHistorialPedidos() {
         return misPedidos;
+    }
+
+    public boolean haCalificado(Producto p) {
+        if (misCalificaciones == null) {
+            return false;
+        }
+        for (Calificacion calif : misCalificaciones) {
+            if (calif instanceof CalificacionProducto) {
+                CalificacionProducto cp = (CalificacionProducto) calif;
+                if (cp.getProducto() == p) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean haCalificado(Vendedor v) {
+        if (misCalificaciones == null) {
+            return false;
+        }
+        for (Calificacion calif : misCalificaciones) {
+            if (calif instanceof CalificacionVendedor) {
+                CalificacionVendedor cp = (CalificacionVendedor) calif;
+                if (cp.getVendedor() == v) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public List<Calificacion> getCalificaciones() {
+        return misCalificaciones;
+    }
+
+    public void setMisCalificaciones(List<Calificacion> misCalificaciones) {
+        this.misCalificaciones = misCalificaciones;
     }
 
     @Override
