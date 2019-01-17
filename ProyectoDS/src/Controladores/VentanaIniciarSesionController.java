@@ -74,7 +74,7 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     @FXML
     public void iniciarSesion(ActionEvent e) throws IOException {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        TypedQuery<Usuario> q = em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.contrasenia=:pass", Usuario.class);
+        TypedQuery<Usuario> q = em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.contrasenia=:pass AND u.activo=true", Usuario.class);
         q.setParameter("email", email.getText());
         q.setParameter("pass", password.getText());
 

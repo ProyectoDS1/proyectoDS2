@@ -5,7 +5,9 @@
  */
 package Controladores;
 
+import Modelos.Administrador;
 import Modelos.Producto;
+import Modelos.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,9 +21,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -54,6 +58,10 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
     private Label stock;
     @FXML
     private TextField numItems;
+    @FXML
+    private Button btnComprar;
+    @FXML
+    private Label btnComprarWrapper;
 
     /**
      * Initializes the controller class.
@@ -90,11 +98,21 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         calificacionVendedor.setText("TODO");
         stock.setText(Integer.toString(producto.getStock()));
 
+        if (Usuario.getUsuarioActual() == null) {
+            btnComprar.setDisable(true);
+            btnComprarWrapper.setTooltip(new Tooltip("Los usuarios anónimos no pueden comprar!"));
+        }
+        if (Usuario.getUsuarioActual() instanceof Administrador) {
+            btnComprar.setDisable(true);
+            btnComprarWrapper.setTooltip(new Tooltip("Los administradores no pueden comprar!"));
+        }
+
         ((Stage) titulo.getScene().getWindow()).show();
     }
 
     @FXML
-    public void comprarProducto(ActionEvent e) {
+    public void comprarProducto(ActionEvent e
+    ) {
         if (!validarNumItems()) {
             return;
         }
@@ -116,7 +134,8 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
     }
 
     @FXML
-    public void volver(ActionEvent e) {
+    public void volver(ActionEvent e
+    ) {
         ((Stage) titulo.getScene().getWindow()).close();
         returnController.show();
     }
