@@ -15,10 +15,10 @@
     <class>Modelos.Pedido</class>
     <class>Modelos.Administrador</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db4free.net:3306/proyds2_cp9tfg?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="fmzrpeff9gcpuxt7"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://proyds2-cp9tfg.cq0jvqyd57ap.sa-east-1.rds.amazonaws.com:3306/proyds2_cp9tfg?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="masteruser"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="j@fg0rNL4o4@KQTmN6VxjXBBpaOPENkjAGn"/>
+      <property name="javax.persistence.jdbc.password" value="cgBtIyXxJVVdTimSdCG8qyBlGb6uAhwxrVLE49vkn"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
