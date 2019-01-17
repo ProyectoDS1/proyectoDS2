@@ -7,6 +7,7 @@ package Controladores;
 
 import Modelos.Producto;
 import Modelos.Usuario;
+import Modelos.Vendedor;
 import Utils.ConexionSql;
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +33,7 @@ import javax.persistence.EntityManager;
  *
  * @author reyes
  */
-public class VentanaAdministracionUsuariosController implements Initializable, CanGoBack {
+public class VentanaAdministracionProductosController implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
@@ -46,7 +47,7 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        refreshUserList();
+        refreshProductList();
     }
 
     @Override
@@ -56,13 +57,13 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        System.out.println("Crear nuevo usuario");
+        System.out.println("Crear nuevo producto");
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracionCrearNuevoUsuario.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracionCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
 
-        VentanaAdministracionCrearNuevoUsuarioController controller = loader.<VentanaAdministracionCrearNuevoUsuarioController>getController();
+        VentanaAdministracionCrearNuevoProductoController controller = loader.<VentanaAdministracionCrearNuevoProductoController>getController();
 
         controller.setReturnController(this);
         stage.show();
@@ -70,38 +71,37 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
     }
 
     @FXML
-    public void editar(ActionEvent e, Usuario u) {
+    public void editar(ActionEvent e, Producto p) {
         try {
-            System.out.println("Editar usuario");
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracionEditarUsuario.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracionEditarProducto.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
 
-            VentanaAdministracionEditarUsuarioController controller = loader.<VentanaAdministracionEditarUsuarioController>getController();
+            VentanaAdministracionEditarProductoController controller = loader.<VentanaAdministracionEditarProductoController>getController();
 
             controller.setReturnController(this);
-            controller.setData(u);
+            controller.setData(p);
+            controller.initialize(null, null);
+
             stage.show();
             titulo.getScene().getWindow().hide();
         } catch (IOException ex) {
-            Logger.getLogger(VentanaAdministracionUsuariosController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VentanaAdministracionProductosController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    public void eliminar(ActionEvent e, Usuario u) {
-
+    public void eliminar(ActionEvent e, Producto p) {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        u.setActivo(false);
+        p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();
 
-        System.out.println("Eliminar usuario");
+        System.out.println("Eliminar producto");
         Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setContentText("Usuario eliminado!");
+        a.setContentText("Producto eliminado!");
         a.showAndWait();
 
-        refreshUserList();
+        refreshProductList();
     }
 
     @FXML
@@ -112,39 +112,40 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
 
     @Override
     public void show() {
-        ((Stage) titulo.getScene().getWindow()).show();
-        refreshUserList();
+        ((Stage) container.getScene().getWindow()).show();
+        refreshProductList();
     }
 
-    private void refreshUserList() {
+    private void refreshProductList() {
         container.getChildren().clear();
 
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        List<Usuario> usuarios = em.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+        List<Producto> productos = em.createQuery("SELECT p FROM Producto p", Producto.class).getResultList();
         ConexionSql.getConexion().endTransaction();
 
-        for (Usuario u : usuarios) {
+        for (Producto p : productos) {
             HBox product = new HBox();
             product.setPrefWidth(Double.MAX_VALUE);
             product.setSpacing(10);
 
-            Label nombre = new Label(u.toString());
+            Label nombre = new Label(p.toString());
             nombre.setPrefWidth(300);
             product.getChildren().add(nombre);
 
             Button editar = new Button("Editar");
             editar.setPrefWidth(100);
-            editar.setOnAction(e -> editar(e, u));
+            editar.setOnAction(e -> editar(e, p));
             product.getChildren().add(editar);
 
-            if (u.isActivo()) {
+            if (!p.isEliminado()) {
                 Button eliminar = new Button("Eliminar");
                 eliminar.setPrefWidth(100);
-                eliminar.setOnAction(e -> eliminar(e, u));
+                eliminar.setOnAction(e -> eliminar(e, p));
                 product.getChildren().add(eliminar);
             }
 
             container.getChildren().add(product);
         }
     }
+
 }

@@ -17,6 +17,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#administrarUsuarios" text="Administrar usuarios" />
             <Button mnemonicParsing="false" onAction="#administrarProductos" text="Administrar productos" />
+            <Button mnemonicParsing="false" onAction="#verCompras" text="Ver compras" />
          </children>
       </VBox>
    </center>

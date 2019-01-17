@@ -5,14 +5,20 @@
  */
 package Controladores;
 
+import Modelos.Administrador;
+import Modelos.Comprador;
+import Modelos.Usuario;
+import Modelos.Vendedor;
+import Utils.ConexionSql;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 /**
  * FXML Controller class
@@ -27,6 +33,20 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
     private TextField nombre;
     @FXML
     private TextField apellido;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField telefono;
+    @FXML
+    private TextField direccion;
+    @FXML
+    private TextField contrasenia;
+    @FXML
+    private TextField cedula;
+    @FXML
+    private TextField matricula;
+    @FXML
+    private TextField categoria;
 
     /**
      * Initializes the controller class.
@@ -48,11 +68,38 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
 
     @FXML
     public void crear(ActionEvent e) {
-        System.out.println("Crear usuario");
 
-        ((VentanaAdministracionUsuariosController) returnController).show();
+        Usuario u;
+        switch (categoria.getText()) {
+            case "Comprador":
+                u = new Comprador();
+                break;
+            case "Vendedor":
+                u = new Vendedor();
+                break;
+            case "Administrador":
+                u = new Administrador();
+                break;
+            default:
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("ERROR: Categoría inválida!");
+                a.showAndWait();
+                return;
+        }
+        u.setNombre(nombre.getText());
+        u.setApellido(apellido.getText());
+        u.setEmail(email.getText());
+        u.setCedula(cedula.getText());
+        u.setMatricula(matricula.getText());
+        u.setTelefono(telefono.getText());
+        u.setContrasenia(contrasenia.getText());
+        u.setDireccion(direccion.getText());
+        u.setActivo(true);
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        em.persist(u);
+        ConexionSql.getConexion().endTransaction();
 
-        ((Stage) nombre.getScene().getWindow()).close();
+        volver(e);
     }
 
     @FXML

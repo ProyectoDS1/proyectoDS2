@@ -8,6 +8,8 @@ package Controladores;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,11 +64,28 @@ public class VentanaAdministracionController implements Initializable, CanGoBack
 
     @FXML
     public void administrarProductos(ActionEvent e) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Vistas/VentanaAdministracionProductos.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loader.load()));
+
+            VentanaAdministracionProductosController controller = loader.<VentanaAdministracionProductosController>getController();
+
+            controller.setReturnController(this);
+            stage.show();
+            titulo.getScene().getWindow().hide();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaAdministracionController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void verCompras(ActionEvent e) {
         Alert a = new Alert(Alert.AlertType.ERROR);
         a.setContentText("No implementado!");
         a.showAndWait();
     }
-    
+
     @FXML
     public void volver(ActionEvent e) {
         ((Stage) titulo.getScene().getWindow()).close();

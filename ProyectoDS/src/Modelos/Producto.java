@@ -32,6 +32,7 @@ public class Producto implements Serializable {
     private Long id;
 
     protected String nombreArticulo;
+    protected String descripcion;
     protected String categoria;
     protected float precio;
     @Temporal(value = TemporalType.TIME)
@@ -54,6 +55,14 @@ public class Producto implements Serializable {
 
     public void setNombreArticulo(String nombreArticulo) {
         this.nombreArticulo = nombreArticulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getCategoria() {
@@ -147,4 +156,10 @@ public class Producto implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return nombreArticulo + (eliminado ? " (eliminado)" : "");
+    }
+
 }
