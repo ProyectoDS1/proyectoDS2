@@ -5,9 +5,12 @@
  */
 package Modelos;
 
+import Utils.ConexionSql;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
@@ -18,9 +21,9 @@ import javax.persistence.Transient;
 @Entity
 public class Comprador extends Usuario {
 
-    @OneToMany(mappedBy = "comprador")
+    @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
     protected List<Pedido> misPedidos;
-    @OneToMany(mappedBy = "autor")
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     protected List<Calificacion> misCalificaciones;
 
     public Pedido comprar(Producto articulo) {
@@ -29,6 +32,10 @@ public class Comprador extends Usuario {
 
     public List<Pedido> mostrarPedidos() {
         return misPedidos;
+    }
+
+    public void setPedidos(List<Pedido> misPedidos) {
+        this.misPedidos = misPedidos;
     }
 
     public List<Pedido> mostrarHistorialPedidos() {
@@ -78,4 +85,45 @@ public class Comprador extends Usuario {
         return nombre + " " + apellido + " (Comprador)";
     }
 
+    public static Comprador transferir(Usuario u) {
+        if (u instanceof Comprador && !(u instanceof Vendedor)) {
+            // Usuario ya es comprador y no es vendedor, retornarlo directamente
+            return (Comprador) u;
+        }
+
+        // Si no, no era un Comprador
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        em.remove(u); // Eliminar de la base de datos
+        ConexionSql.getConexion().endTransaction();
+
+        // Crear nuevo comprador y pasarle todos los datos del usuario eliminado
+        Comprador nuevo = new Comprador();
+        nuevo.setNombre(u.getNombre());
+        nuevo.setApellido(u.getApellido());
+        nuevo.setEmail(u.getEmail());
+        nuevo.setCedula(u.getCedula());
+        nuevo.setMatricula(u.getMatricula());
+        nuevo.setTelefono(u.getTelefono());
+        nuevo.setContrasenia(u.getContrasenia());
+        nuevo.setDireccion(u.getDireccion());
+        nuevo.setActivo(u.isActivo());
+        em = ConexionSql.getConexion().beginTransaction();
+        if (u instanceof Vendedor) { // Si el antiguo era un vendedor, preservar sus pedidos y sus calificaciones
+            nuevo.setMisCalificaciones(((Vendedor) u).getCalificaciones());
+            for (Calificacion c : nuevo.getCalificaciones()) {
+                c.setAutor(nuevo);
+                em.persist(c);
+            }
+            nuevo.setPedidos(((Vendedor) u).mostrarPedidos());
+            for (Pedido p : nuevo.mostrarPedidos()) {
+                p.setComprador(nuevo);
+                em.persist(p);
+            }
+        }
+
+        em.persist(nuevo);
+        ConexionSql.getConexion().endTransaction();
+
+        return nuevo;
+    }
 }

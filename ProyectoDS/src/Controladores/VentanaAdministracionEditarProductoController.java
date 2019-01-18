@@ -10,11 +10,13 @@ import Modelos.Vendedor;
 import Utils.ConexionSql;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -44,7 +46,7 @@ public class VentanaAdministracionEditarProductoController implements Initializa
     @FXML
     private TextField stock;
     @FXML
-    private TextField pkVendedor;
+    private ComboBox vendedor;
     @FXML
     private TextField numVistas;
     @FXML
@@ -68,7 +70,15 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         precio.setText(Float.toString(target.getPrecio()));
         tiempoEntrega.setText(target.getTiempoEntrega() != null ? target.getTiempoEntrega().toString() : "");
         stock.setText(Integer.toString(target.getStock()));
-        pkVendedor.setText(Long.toString(target.getVendedor().getId()));
+
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        List<Vendedor> vendedores = em.createQuery("SELECT v FROM Vendedor v", Vendedor.class).getResultList();
+        ConexionSql.getConexion().endTransaction();
+        assert vendedores.contains(target.getVendedor());
+        for (Vendedor v : vendedores) {
+            vendedor.getItems().add(v);
+        }
+        vendedor.setValue(target.getVendedor());
         numVistas.setText(Integer.toString(target.getNumVistas()));
         eliminado.setSelected(target.isEliminado());
     }
@@ -92,8 +102,7 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         target.setPrecio(Float.valueOf(precio.getText()));
         target.setTiempoEntrega(null);
         target.setStock(Integer.valueOf(stock.getText()));
-        Vendedor v = em.find(Vendedor.class, Long.valueOf(pkVendedor.getText()));
-        target.setVendedor(v);
+        target.setVendedor((Vendedor) vendedor.getValue());
         target.setNumVistas(Integer.valueOf(numVistas.getText()));
         target.setDisponible(true);
         target.setEliminado(eliminado.isSelected());

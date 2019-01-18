@@ -15,7 +15,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -48,7 +50,7 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
     @FXML
     private TextField matricula;
     @FXML
-    private TextField categoria;
+    private ComboBox categoria;
     @FXML
     private CheckBox activo;
 
@@ -78,14 +80,16 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         matricula.setText(target.getMatricula());
         cedula.setText(target.getCedula());
         activo.setSelected(target.isActivo());
+
+        categoria.getItems().addAll("Comprador", "Vendedor", "Administrador");
         if (target instanceof Comprador) {
-            categoria.setText("Comprador");
+            categoria.setValue("Comprador");
         }
         if (target instanceof Vendedor) {
-            categoria.setText("Vendedor");
+            categoria.setValue("Vendedor");
         }
         if (target instanceof Administrador) {
-            categoria.setText("Administrador");
+            categoria.setValue("Administrador");
         }
     }
 
@@ -96,7 +100,7 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
 
     @FXML
     public void guardar(ActionEvent e) {
-        EntityManager em=ConexionSql.getConexion().beginTransaction();
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
         target.setNombre(nombre.getText());
         target.setApellido(apellido.getText());
         target.setEmail(email.getText());
@@ -106,9 +110,24 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         target.setCedula(cedula.getText());
         target.setMatricula(matricula.getText());
         target.setActivo(activo.isSelected());
-        // TODO: Migrar de categoria a categoria?
         ConexionSql.getConexion().endTransaction();
-        
+        switch ((String) categoria.getValue()) {
+            case "Comprador":
+                Comprador.transferir(target);
+                break;
+            case "Vendedor":
+                Vendedor.transferir(target);
+                break;
+            case "Administrador":
+                Administrador.transferir(target);
+                break;
+            default:
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText("ERROR: Categoría inválida!");
+                a.showAndWait();
+                return;
+        }
+
         volver(e);
     }
 

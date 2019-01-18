@@ -5,6 +5,9 @@
  */
 package Controladores;
 
+import Modelos.Comprador;
+import Modelos.Usuario;
+import Utils.ConexionSql;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,9 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -28,6 +36,22 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
 
     @FXML
     private TextField nombre;
+    @FXML
+    private TextField apellido;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField telefono;
+    @FXML
+    private TextField direccion;
+    @FXML
+    private TextField contrasenia;
+    @FXML
+    private TextField cedula;
+    @FXML
+    private TextField matricula;
+    @FXML
+    private CheckBox whatsapp;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,10 +70,40 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
 
     @FXML
     public void registrar(ActionEvent e) {
-        System.out.println("Registrar usuario");
+        if (!validarDatosMinimos()) {
+            return;
+        }
+
+        Usuario u = new Comprador();
+        u.setNombre(nombre.getText());
+        u.setApellido(apellido.getText());
+        u.setEmail(email.getText());
+        u.setCedula(cedula.getText());
+        u.setMatricula(matricula.getText());
+        u.setTelefono(telefono.getText());
+        u.setContrasenia(contrasenia.getText());
+        u.setDireccion(direccion.getText());
+        u.setWhatsapp(whatsapp.isSelected());
+        u.setActivo(true);
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        em.persist(u);
+        ConexionSql.getConexion().endTransaction();
 
         returnController.show();
         ((Stage) nombre.getScene().getWindow()).close();
+    }
+
+    private boolean validarDatosMinimos() {
+        if (nombre.getText().trim().length() == 0
+                || email.getText().trim().length() == 0
+                || contrasenia.getText().trim().length() == 0
+                || matricula.getText().trim().length() == 0) {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Al menos el nombre, el email, la contraseña y la matrícula deben contener datos!", ButtonType.OK);
+            a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            a.showAndWait();
+            return false;
+        }
+        return true;
     }
 
 }

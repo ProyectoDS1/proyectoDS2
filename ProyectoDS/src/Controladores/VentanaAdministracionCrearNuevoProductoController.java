@@ -10,10 +10,12 @@ import Modelos.Vendedor;
 import Utils.ConexionSql;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -42,14 +44,21 @@ public class VentanaAdministracionCrearNuevoProductoController implements Initia
     @FXML
     private TextField stock;
     @FXML
-    private TextField pkVendedor;
+    private ComboBox vendedor;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        List<Vendedor> vendedores = em.createQuery("SELECT v FROM Vendedor v",Vendedor.class).getResultList();
+        ConexionSql.getConexion().endTransaction();
+
+        for (Vendedor v : vendedores) {
+            vendedor.getItems().add(v);
+        }
+        vendedor.setValue(vendedores.get(0));
     }
 
     @Override
@@ -72,8 +81,7 @@ public class VentanaAdministracionCrearNuevoProductoController implements Initia
         p.setPrecio(Float.valueOf(precio.getText()));
         p.setTiempoEntrega(null);
         p.setStock(Integer.valueOf(stock.getText()));
-        Vendedor v = em.find(Vendedor.class, Long.valueOf(pkVendedor.getText()));
-        p.setVendedor(v);
+        p.setVendedor((Vendedor) vendedor.getValue());
         p.setFechaCreacion(new Date());
         p.setNumVistas(0);
         p.setDisponible(true);

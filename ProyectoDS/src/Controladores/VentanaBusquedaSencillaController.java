@@ -63,7 +63,7 @@ public class VentanaBusquedaSencillaController implements Initializable, CanGoBa
         }
 
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        TypedQuery<Producto> q = em.createQuery("SELECT p FROM Producto p WHERE p.nombreArticulo LIKE :text OR p.descripcion LIKE :text", Producto.class);
+        TypedQuery<Producto> q = em.createQuery("SELECT p FROM Producto p WHERE p.eliminado=false AND (p.nombreArticulo LIKE :text OR p.descripcion LIKE :text)", Producto.class);
         q.setParameter("text", "%" + texto.getText().trim() + "%");
         List<Producto> productos = q.getResultList();
         ConexionSql.getConexion().endTransaction();

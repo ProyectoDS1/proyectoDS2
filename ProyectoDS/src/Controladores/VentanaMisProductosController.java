@@ -123,7 +123,7 @@ public class VentanaMisProductosController implements Initializable, CanGoBack {
         for (Producto p : vendedor.mostrarArticulos()) {
             if (!p.isEliminado()) {
                 Label nombre = new Label(p.getNombreArticulo());
-                nombre.setPrefWidth(200);
+                nombre.setMinWidth(300);
                 container.add(nombre, 0, i);
 
                 agregarBotonEditar(p, i);

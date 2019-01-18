@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -46,14 +47,15 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
     @FXML
     private TextField matricula;
     @FXML
-    private TextField categoria;
+    private ComboBox categoria;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        categoria.getItems().addAll("Comprador", "Vendedor", "Administrador");
+        categoria.setValue("Comprador");
     }
 
     @Override
@@ -70,7 +72,7 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
     public void crear(ActionEvent e) {
 
         Usuario u;
-        switch (categoria.getText()) {
+        switch ((String) categoria.getValue()) {
             case "Comprador":
                 u = new Comprador();
                 break;

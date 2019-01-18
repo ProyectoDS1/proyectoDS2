@@ -109,6 +109,7 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
         em.persist(p);
         target.setStock(target.getStock() - numItems);
         p.notificarVendedor();
+        ((Comprador) Usuario.getUsuarioActual()).mostrarPedidos().add(p);
         ConexionSql.getConexion().endTransaction();
 
         volver(e);

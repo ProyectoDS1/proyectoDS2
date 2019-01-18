@@ -6,6 +6,7 @@
 package Controladores;
 
 import Modelos.Producto;
+import Utils.ConexionSql;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -21,6 +22,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 /**
  * FXML Controller class
@@ -87,11 +89,14 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
         ((Stage) titulo.getScene().getWindow()).show();
 
         container.getChildren().clear();
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
         for (Producto p : productos) {
+            p.setNumVistas(p.getNumVistas() + 1);
             Hyperlink h = new Hyperlink(p.getNombreArticulo());
             h.setOnAction(e -> productoElegido(e, p));
             container.getChildren().add(h);
         }
+        ConexionSql.getConexion().endTransaction();
     }
 
 }
