@@ -94,7 +94,6 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         target.setStock(Integer.valueOf(stock.getText()));
         Vendedor v = em.find(Vendedor.class, Long.valueOf(pkVendedor.getText()));
         target.setVendedor(v);
-        target.setFechaCreacion(new Date());
         target.setNumVistas(Integer.valueOf(numVistas.getText()));
         target.setDisponible(true);
         target.setEliminado(eliminado.isSelected());

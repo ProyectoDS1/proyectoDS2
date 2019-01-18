@@ -94,8 +94,7 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         precio.setText("$" + Float.toString(producto.getPrecio()));
         categoria.setText(producto.getCategoria());
         tiempoEntrega.setText(producto.getTiempoEntrega() != null ? producto.getTiempoEntrega().toString() : "");
-        calificacionProducto.setText("TODO");
-        calificacionVendedor.setText("TODO");
+        llenarCalificaciones();
         stock.setText(Integer.toString(producto.getStock()));
 
         if (Usuario.getUsuarioActual() == null) {
@@ -108,6 +107,21 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         }
 
         ((Stage) titulo.getScene().getWindow()).show();
+    }
+
+    private void llenarCalificaciones() {
+        float califProducto = producto.getPromedioCalificaciones();
+        if (califProducto == -1) {
+            calificacionProducto.setText("Este producto no tiene calificaciones");
+        } else {
+            calificacionProducto.setText(califProducto + "/5");
+        }
+        float califVendedor = producto.getVendedor().getPromedioCalificaciones();
+        if (califVendedor == -1) {
+            calificacionVendedor.setText("Este vendedor no tiene calificaciones");
+        } else {
+            calificacionVendedor.setText(califVendedor + "/5");
+        }
     }
 
     @FXML

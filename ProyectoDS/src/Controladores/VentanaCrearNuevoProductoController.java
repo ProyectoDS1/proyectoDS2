@@ -5,14 +5,21 @@
  */
 package Controladores;
 
+import Modelos.Producto;
+import Modelos.Usuario;
+import Modelos.Vendedor;
+import Utils.ConexionSql;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
 
 /**
  * FXML Controller class
@@ -25,6 +32,16 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
 
     @FXML
     private TextField nombre;
+    @FXML
+    private TextArea descripcion;
+    @FXML
+    private TextField categoria;
+    @FXML
+    private TextField precio;
+    @FXML
+    private TextField tiempoEntrega;
+    @FXML
+    private TextField stock;
 
     /**
      * Initializes the controller class.
@@ -46,11 +63,26 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
 
     @FXML
     public void crear(ActionEvent e) {
-        System.out.println("Crear producto");
+        assert Usuario.getUsuarioActual() instanceof Vendedor;
 
-        ((VentanaMisProductosController) returnController).show();
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        Producto p = new Producto();
+        p.setNombreArticulo(nombre.getText());
+        p.setDescripcion(descripcion.getText());
+        p.setCategoria(categoria.getText());
+        p.setPrecio(Float.valueOf(precio.getText()));
+        p.setTiempoEntrega(null);
+        p.setStock(Integer.valueOf(stock.getText()));
+        p.setVendedor((Vendedor) Usuario.getUsuarioActual());
+        p.setFechaCreacion(new Date());
+        p.setNumVistas(0);
+        p.setDisponible(true);
+        p.setEliminado(false);
+        em.persist(p);
+        ((Vendedor) Usuario.getUsuarioActual()).mostrarArticulos().add(p);
+        ConexionSql.getConexion().endTransaction();
 
-        ((Stage) nombre.getScene().getWindow()).close();
+        volver(e);
     }
 
     @FXML
