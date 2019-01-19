@@ -93,7 +93,7 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         vendedor.setText(producto.getVendedor().getNombre() + " " + producto.getVendedor().getApellido());
         precio.setText("$" + Float.toString(producto.getPrecio()));
         categoria.setText(producto.getCategoria());
-        tiempoEntrega.setText(producto.getTiempoEntrega() != null ? producto.getTiempoEntrega().toString() : "");
+        tiempoEntrega.setText(producto.getTiempoEntrega() != null ? producto.getTiempoEntrega().getTime() / (1000.0 * 60 * 60) + " horas" : "");
         llenarCalificaciones();
         stock.setText(Integer.toString(producto.getStock()));
 

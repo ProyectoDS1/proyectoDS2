@@ -63,7 +63,7 @@ public class VentanaEditarProductoController implements Initializable, CanGoBack
         descripcion.setText(target.getDescripcion());
         categoria.setText(target.getCategoria());
         precio.setText(Float.toString(target.getPrecio()));
-        tiempoEntrega.setText(target.getTiempoEntrega() != null ? target.getTiempoEntrega().toString() : "");
+        tiempoEntrega.setText(target.getTiempoEntrega() != null ? target.getTiempoEntrega().getTime() / (1000.0 * 60 * 60) + "" : "");
         stock.setText(Integer.toString(target.getStock()));
     }
 
@@ -79,7 +79,10 @@ public class VentanaEditarProductoController implements Initializable, CanGoBack
         target.setDescripcion(descripcion.getText());
         target.setCategoria(categoria.getText());
         target.setPrecio(Float.valueOf(precio.getText()));
-        target.setTiempoEntrega(null);
+        if (tiempoEntrega.getText().endsWith(" horas")) {
+            tiempoEntrega.setText(tiempoEntrega.getText().substring(0, tiempoEntrega.getLength() - 6));
+        }
+        target.setTiempoEntrega(new Date((int) (Float.valueOf(tiempoEntrega.getText()) * 1000 * 60 * 60)));
         target.setStock(Integer.valueOf(stock.getText()));
         ConexionSql.getConexion().endTransaction();
 

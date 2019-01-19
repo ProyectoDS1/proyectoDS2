@@ -71,7 +71,7 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         p.setDescripcion(descripcion.getText());
         p.setCategoria(categoria.getText());
         p.setPrecio(Float.valueOf(precio.getText()));
-        p.setTiempoEntrega(null);
+        p.setTiempoEntrega(new Date((int) (Float.valueOf(tiempoEntrega.getText()) * 1000 * 60 * 60)));
         p.setStock(Integer.valueOf(stock.getText()));
         p.setVendedor((Vendedor) Usuario.getUsuarioActual());
         p.setFechaCreacion(new Date());

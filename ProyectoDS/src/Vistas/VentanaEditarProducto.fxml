@@ -55,7 +55,7 @@
                   <TextField fx:id="nombre" promptText="nombre" GridPane.columnIndex="1" />
                   <TextField fx:id="categoria" promptText="categoría" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="precio" promptText="precio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="tiempoEntrega" promptText="tiempo de entrega" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="tiempoEntrega" promptText="tiempo de entrega (en horas)" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Label text="Descripción" GridPane.rowIndex="1" />
                   <TextArea fx:id="descripcion" prefHeight="200.0" prefWidth="200.0" promptText="descripción..." GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="Stock" GridPane.rowIndex="5" />
