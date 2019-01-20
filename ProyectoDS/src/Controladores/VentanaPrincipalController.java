@@ -88,7 +88,7 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     @FXML
     public void verRecientes(ActionEvent event) {
         System.out.println("Ver productos recientes");
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }
@@ -130,7 +130,7 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
     @FXML
     public void busquedaAvanzada(ActionEvent event
     ) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }

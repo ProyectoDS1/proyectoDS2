@@ -163,7 +163,7 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
         } catch (NumberFormatException ex) {
             // No need to do anything, execution will fall to the error section
         }
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("El número de ítems deseados no está disponible!");
         a.showAndWait();
         return false;

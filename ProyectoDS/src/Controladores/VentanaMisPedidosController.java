@@ -62,7 +62,7 @@ public class VentanaMisPedidosController implements Initializable, CanGoBack {
 
     @FXML
     public void verHistorial(ActionEvent e) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }

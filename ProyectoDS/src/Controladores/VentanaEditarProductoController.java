@@ -128,7 +128,7 @@ public class VentanaEditarProductoController implements Initializable, CanGoBack
         }
 
         if (error) {
-            Alert a = new Alert(Alert.AlertType.ERROR, errorMessage, ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
             a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             a.showAndWait();
         }

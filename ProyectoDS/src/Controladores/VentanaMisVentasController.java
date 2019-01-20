@@ -62,7 +62,7 @@ public class VentanaMisVentasController implements Initializable, CanGoBack {
 
     @FXML
     public void verResumen(ActionEvent e) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }

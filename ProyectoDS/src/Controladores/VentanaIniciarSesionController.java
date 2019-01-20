@@ -96,5 +96,10 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
         }
         ConexionSql.getConexion().endTransaction();
     }
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) email.getScene().getWindow()).close();
+        returnController.show();
+    }
 
 }

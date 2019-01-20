@@ -122,8 +122,8 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
                 Administrador.transferir(target);
                 break;
             default:
-                Alert a = new Alert(Alert.AlertType.ERROR);
-                a.setContentText("ERROR: Categoría inválida!");
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setContentText("WARNING: Categoría inválida!");
                 a.showAndWait();
                 return;
         }

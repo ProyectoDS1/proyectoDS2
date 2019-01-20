@@ -98,12 +98,17 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
                 || email.getText().trim().length() == 0
                 || contrasenia.getText().trim().length() == 0
                 || matricula.getText().trim().length() == 0) {
-            Alert a = new Alert(Alert.AlertType.ERROR, "Al menos el nombre, el email, la contraseña y la matrícula deben contener datos!", ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.WARNING, "Al menos el nombre, el email, la contraseña y la matrícula deben contener datos!", ButtonType.OK);
             a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             a.showAndWait();
             return false;
         }
         return true;
+    }
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) nombre.getScene().getWindow()).close();
+        returnController.show();
     }
 
 }

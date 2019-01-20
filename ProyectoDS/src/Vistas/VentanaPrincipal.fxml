@@ -20,6 +20,6 @@
       </HBox>
    </top>
    <center>
-      <VBox fx:id="buttonContainer" alignment="CENTER" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER" />
+      <VBox fx:id="buttonContainer" alignment="CENTER" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

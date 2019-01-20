@@ -58,7 +58,7 @@ public class VentanaVentasPendientesController implements Initializable, CanGoBa
     @FXML
     public void verMapa(ActionEvent e, Pedido p) {
         System.out.println("Ver mapa de producto");
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }
