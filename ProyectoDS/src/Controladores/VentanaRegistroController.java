@@ -21,6 +21,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -45,7 +46,7 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
     @FXML
     private TextField direccion;
     @FXML
-    private TextField contrasenia;
+    private PasswordField contrasenia;
     @FXML
     private TextField cedula;
     @FXML
