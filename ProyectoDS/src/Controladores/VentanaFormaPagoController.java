@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -107,8 +108,15 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         em.persist(metodoPago);
         em.persist(p);
-        target.setStock(target.getStock() - numItems);
-        p.notificarVendedor();
+        if (metodoPago.confirmar()) {
+            target.setStock(target.getStock() - numItems);
+            p.notificarVendedor();
+        } else {
+            p.setEstado(EstadoPedido.ANULADO);
+            Alert a = new Alert(Alert.AlertType.WARNING);
+            a.setContentText("El pago ha sido rechazado!");
+            a.showAndWait();
+        }
         ((Comprador) Usuario.getUsuarioActual()).mostrarPedidos().add(p);
         ConexionSql.getConexion().endTransaction();
 

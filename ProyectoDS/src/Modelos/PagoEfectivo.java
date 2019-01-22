@@ -24,4 +24,9 @@ public class PagoEfectivo extends MetodoPago {
         this.nombreCliente = nombreCliente;
     }
 
+    @Override
+    public boolean confirmar() {
+        return true;
+    }
+
 }

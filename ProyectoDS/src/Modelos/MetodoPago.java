@@ -37,9 +37,7 @@ public abstract class MetodoPago implements Serializable {
         this.pedido = pedido;
     }
 
-    public boolean confirmar() {
-        return true;
-    }
+    public abstract boolean confirmar();
 
     public Long getId() {
         return id;
