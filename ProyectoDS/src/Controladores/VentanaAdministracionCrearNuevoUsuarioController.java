@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -41,7 +42,7 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
     @FXML
     private TextField direccion;
     @FXML
-    private TextField contrasenia;
+    private PasswordField contrasenia;
     @FXML
     private TextField cedula;
     @FXML
@@ -83,9 +84,7 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
                 u = new Administrador();
                 break;
             default:
-                Alert a = new Alert(Alert.AlertType.WARNING);
-                a.setContentText("WARNING: Categoría inválida!");
-                a.showAndWait();
+                alert();
                 return;
         }
         u.setNombre(nombre.getText());
@@ -102,6 +101,12 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
         ConexionSql.getConexion().endTransaction();
 
         volver(e);
+    }
+    
+    private void alert(){
+        Alert a = new Alert(Alert.AlertType.WARNING);
+        a.setContentText("WARNING: Categoría inválida!");
+        a.showAndWait();
     }
 
     @FXML

@@ -18,7 +18,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -37,7 +39,7 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
     @FXML
     private TextField email;
     @FXML
-    private TextField password;
+    private PasswordField password;
 
     /**
      * Initializes the controller class.
@@ -73,6 +75,21 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
 
     @FXML
     public void iniciarSesion(ActionEvent e) throws IOException {
+        conexion();
+    }
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) email.getScene().getWindow()).close();
+        returnController.show();
+    }
+    @FXML
+    public void inicarSesionButton(KeyEvent e)throws IOException{
+        if(e.getCode().toString().equalsIgnoreCase("enter")){
+            conexion();
+        }
+    }
+    
+    private void conexion()throws IOException{
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         TypedQuery<Usuario> q = em.createQuery("SELECT u FROM Usuario u WHERE u.email=:email AND u.contrasenia=:pass AND u.activo=true", Usuario.class);
         q.setParameter("email", email.getText());
@@ -95,11 +112,6 @@ public class VentanaIniciarSesionController implements Initializable, CanGoBack 
             a.showAndWait();
         }
         ConexionSql.getConexion().endTransaction();
-    }
-    @FXML
-    public void volver(ActionEvent e) {
-        ((Stage) email.getScene().getWindow()).close();
-        returnController.show();
     }
 
 }
