@@ -8,24 +8,21 @@ package Controladores;
 import Modelos.Comprador;
 import Modelos.Usuario;
 import Utils.ConexionSql;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
+
+
 
 /**
  *
@@ -95,17 +92,46 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
     }
 
     private boolean validarDatosMinimos() {
-        if (nombre.getText().trim().length() == 0
-                || email.getText().trim().length() == 0
-                || contrasenia.getText().trim().length() == 0
-                || matricula.getText().trim().length() == 0) {
-            Alert a = new Alert(Alert.AlertType.WARNING, "Al menos el nombre, el email, la contraseña y la matrícula deben contener datos!", ButtonType.OK);
+        int errorCampo = 0;
+        if (nombre.getText().trim().length() == 0){
+            nombre.setStyle("-fx-border-color: red");
+            errorCampo++;
+        }
+        else
+            nombre.setStyle("");
+        if (email.getText().trim().length() == 0){
+            email.setStyle("-fx-border-color: red");
+            errorCampo++;
+        }
+        else
+            email.setStyle("");
+        if (cedula.getText().trim().length() != 10){
+            cedula.setStyle("-fx-border-color: red");
+            errorCampo++;
+        }
+        else
+            cedula.setStyle("");
+        if (matricula.getText().trim().length() != 9){
+            matricula.setStyle("-fx-border-color: red");
+            errorCampo++;
+        }
+        else
+            matricula.setStyle("");
+        if (contrasenia.getText().trim().length() < 4 ){
+            contrasenia.setStyle("-fx-border-color: red");
+            errorCampo++;
+        }
+        else
+            contrasenia.setStyle("");
+        if (errorCampo > 0) {
+            Alert a = new Alert(Alert.AlertType.WARNING, "Por favor, corrija los campos resaltados en rojo.", ButtonType.OK);
             a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             a.showAndWait();
             return false;
         }
         return true;
     }
+  
     @FXML
     public void volver(ActionEvent e) {
         ((Stage) nombre.getScene().getWindow()).close();
