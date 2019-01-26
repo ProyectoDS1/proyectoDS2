@@ -61,8 +61,8 @@
                       <TextField fx:id="telefono" promptText="teléfono" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <CheckBox fx:id="whatsapp" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                       <TextField fx:id="direccion" promptText="dirección" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                      <TextField fx:id="cedula" promptText="cédula" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                      <TextField fx:id="matricula" promptText="matrícula" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                      <TextField fx:id="cedula" promptText="debe ingresar 10 digitos" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                      <TextField fx:id="matricula" promptText="debe ingresar 9 digitos" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                       <Button mnemonicParsing="false" onAction="#registrar" text="Crear" GridPane.rowIndex="9" />
                       <Label text="Nombre" />
                       <Label text="Apellido" GridPane.rowIndex="1" />
@@ -73,7 +73,7 @@
                       <Label text="Dirección" GridPane.rowIndex="6" />
                       <Label text="Cédula" GridPane.rowIndex="7" />
                       <Label text="Matrícula" GridPane.rowIndex="8" />
-                  <PasswordField fx:id="contrasenia" promptText="contraseña" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <PasswordField fx:id="contrasenia" promptText="minimo 4 caracteres" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   </children>
                   <padding>
                       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

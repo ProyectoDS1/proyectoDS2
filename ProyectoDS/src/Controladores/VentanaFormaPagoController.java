@@ -6,6 +6,7 @@
 package Controladores;
 
 import Modelos.Comprador;
+import Modelos.Usuario;
 import Modelos.EstadoPedido;
 import Modelos.MetodoPago;
 import Modelos.PagoEfectivo;
@@ -52,6 +53,7 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
     }
 
@@ -62,6 +64,9 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
 
     @Override
     public void setData(Object... data) {
+        this.nombreEfectivo.setText(Usuario.getUsuarioActual().getNombre());
+        this.nombreDE.setText(Usuario.getUsuarioActual().getNombre());
+        this.telfDE.setText(Usuario.getUsuarioActual().getTelefono());
         target = (Producto) data[0];
         numItems = (Integer) data[1];
 
