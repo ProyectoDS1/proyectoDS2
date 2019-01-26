@@ -27,14 +27,27 @@ public class NotificadorEmail implements Notificador {
 
     @Override
     public void notificarPedido(Pedido pedido) {
-        System.out.println("***EMAIL***");
-        System.out.println("To: " + pedido.getArticulo().getVendedor().getEmail());
-        System.out.println("Asunto: Pedido nuevo!");
-        System.out.println("Contenido: El cliente "
-                + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
-                + " ha pedido " + pedido.getNumeroItems()
-                + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
-        System.out.println("***END EMAIL***");
+        final String email = pedido.getArticulo().getVendedor().getEmail();
+        if (!EmailSender.emailValido(email)) {
+            System.out.println("***EMAIL***");
+            System.out.println("From: notificaciones@poliventas.com");
+            System.out.println("To: " + email);
+            System.out.println("Subject: Pedido nuevo!");
+            System.out.println("Contenido: El cliente "
+                    + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
+                    + " ha pedido " + pedido.getNumeroItems()
+                    + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
+            System.out.println("***END EMAIL***");
+            return;
+        }
+
+        EmailSender.sendEmail("notificaciones@poliventas.com",
+                "Pedido nuevo!",
+                email,
+                "El cliente " + pedido.getComprador().getNombre() + " "
+                + pedido.getComprador().getApellido() + " ha pedido "
+                + pedido.getNumeroItems() + " unidades del producto "
+                + pedido.getArticulo().getNombreArticulo());
     }
 
 }
