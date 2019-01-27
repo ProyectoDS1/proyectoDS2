@@ -2,18 +2,18 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ProyectoDSPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Modelos.Producto</class>
-    <class>Modelos.Comprador</class>
-    <class>Modelos.Usuario</class>
-    <class>Modelos.Vendedor</class>
-    <class>Modelos.Calificacion</class>
-    <class>Modelos.CalificacionProducto</class>
-    <class>Modelos.CalificacionVendedor</class>
-    <class>Modelos.MetodoPago</class>
-    <class>Modelos.PagoEfectivo</class>
-    <class>Modelos.PagoMonedero</class>
-    <class>Modelos.Pedido</class>
-    <class>Modelos.Administrador</class>
+    <class>modelos.MetodoPago</class>
+    <class>modelos.PagoMonedero</class>
+    <class>modelos.Administrador</class>
+    <class>modelos.Vendedor</class>
+    <class>modelos.Pedido</class>
+    <class>modelos.CalificacionProducto</class>
+    <class>modelos.PagoEfectivo</class>
+    <class>modelos.Producto</class>
+    <class>modelos.CalificacionVendedor</class>
+    <class>modelos.Comprador</class>
+    <class>modelos.Usuario</class>
+    <class>modelos.Calificacion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://proyds2-cp9tfg.cq0jvqyd57ap.sa-east-1.rds.amazonaws.com:3306/proyds2_cp9tfg?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="masteruser"/>
