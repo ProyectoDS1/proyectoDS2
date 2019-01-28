@@ -7,21 +7,20 @@ package utils;
 
 import com.sendgrid.*;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
  * @author reyes
  */
 public final class EmailSender {
-       
-    private EmailSender() {
-    }
 
-    public static final void sendEmail(String from, String subject, String to, String content){
+    public static final void sendEmail(String from, String subject, String to, String content) {
+        //Email from = new Email("test@example.com");
+        //String subject = "Sending with SendGrid is Fun";
+        //Email to = new Email("test@example.com");
+        //Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
         Mail mail = new Mail(new Email(from), subject, new Email(to), new Content("text/plain", content));
+
         SendGrid sg = new SendGrid("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");
         Request request = new Request();
         try {
@@ -29,11 +28,11 @@ public final class EmailSender {
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
             Response response = sg.api(request);
-            System.err.println(response.getStatusCode());
-            System.err.println(response.getBody());
-            System.err.println(response.getHeaders());
+            System.out.println(response.getStatusCode());
+            System.out.println(response.getBody());
+            System.out.println(response.getHeaders());
         } catch (IOException ex) {
-            Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 
