@@ -40,12 +40,9 @@ public class PagoMonedero extends MetodoPago {
             con.setRequestMethod("GET");
 
             int status = con.getResponseCode();
-            System.out.println(status);
-            if (status == 200) {
-                return true;
-            } else {
-                return false;
-            }
+            //System.out.println(status);
+            Logger.getLogger(PagoMonedero.class.getName()).log(Level.SEVERE, String.valueOf(status));
+            return status == 200;
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(PagoMonedero.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,5 +51,4 @@ public class PagoMonedero extends MetodoPago {
         }
         return false;
     }
-
 }

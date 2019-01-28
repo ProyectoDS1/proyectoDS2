@@ -5,6 +5,8 @@
  */
 package utils;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Pedido;
 
 /**
@@ -29,15 +31,24 @@ public class NotificadorEmail implements Notificador {
     public void notificarPedido(Pedido pedido) {
         final String email = pedido.getArticulo().getVendedor().getEmail();
         if (!EmailSender.emailValido(email)) {
-            System.out.println("***EMAIL***");
-            System.out.println("From: notificaciones@poliventas.com");
-            System.out.println("To: " + email);
-            System.out.println("Subject: Pedido nuevo!");
+            //System.out.println("***EMAIL***");
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE,"***EMAIL***");
+            //System.out.println("From: notificaciones@poliventas.com");
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE,"From: notificaciones@poliventas.com");
+            //System.out.println("To: " + email);
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE, "To: {0}", email);
+            //System.out.println("Subject: Pedido nuevo!");
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE,"Subject: Pedido nuevo!");
+            /**
             System.out.println("Contenido: El cliente "
                     + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
                     + " ha pedido " + pedido.getNumeroItems()
                     + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
-            System.out.println("***END EMAIL***");
+                    **/
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE, "Contenido: El cliente {0} {1} ha pedido {2} unidades del producto {3}", new Object[]{pedido.getComprador().getNombre(), pedido.getComprador().getApellido(), pedido.getNumeroItems(), pedido.getArticulo().getNombreArticulo()});
+            //System.out.println("***END EMAIL***");
+            Logger.getLogger(NotificadorEmail.class.getName()).log(Level.SEVERE,"***END EMAIL***");
+
             return;
         }
 

@@ -22,8 +22,6 @@ import modelos.Comprador;
 import modelos.Usuario;
 import utils.ConexionSql;
 
-
-
 /**
  *
  * @author User-PC
@@ -71,8 +69,17 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
         if (!validarDatosMinimos()) {
             return;
         }
-
         Usuario u = new Comprador();
+        crearUsuario(u);
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        em.persist(u);
+        ConexionSql.getConexion().endTransaction();
+
+        returnController.show();
+        ((Stage) nombre.getScene().getWindow()).close();
+    }
+
+    private void crearUsuario(Usuario u) {
         u.setNombre(nombre.getText());
         u.setApellido(apellido.getText());
         u.setEmail(email.getText());
@@ -83,47 +90,27 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
         u.setDireccion(direccion.getText());
         u.setWhatsapp(whatsapp.isSelected());
         u.setActivo(true);
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.persist(u);
-        ConexionSql.getConexion().endTransaction();
-
-        returnController.show();
-        ((Stage) nombre.getScene().getWindow()).close();
     }
 
     private boolean validarDatosMinimos() {
         int errorCampo = 0;
-        String colorRed="-fx-border-color: red";
-        if (nombre.getText().trim().length() == 0){
-            nombre.setStyle(colorRed);
-            errorCampo++;
-        }
-        else
-            nombre.setStyle("");
-        if (email.getText().trim().length() == 0){
-            email.setStyle(colorRed);
-            errorCampo++;
-        }
-        else
-            email.setStyle("");
-        if (cedula.getText().trim().length() != 10){
-            cedula.setStyle(colorRed);
-            errorCampo++;
-        }
-        else
-            cedula.setStyle("");
-        if (matricula.getText().trim().length() != 9){
-            matricula.setStyle(colorRed);
-            errorCampo++;
-        }
-        else
-            matricula.setStyle("");
-        if (contrasenia.getText().trim().length() < 4 ){
-            contrasenia.setStyle(colorRed);
-            errorCampo++;
-        }
-        else
-            contrasenia.setStyle("");
+        boolean cond;
+        String colorRed = "-fx-border-color: red";
+        cond=nombre.getText().trim().length() == 0;
+        sombrear(nombre,cond,colorRed,errorCampo);
+        
+        cond=email.getText().trim().length() == 0;
+        sombrear(email,cond,colorRed,errorCampo);
+        
+        cond=cedula.getText().trim().length() != 10;
+        sombrear(cedula,cond,colorRed,errorCampo);
+         
+        cond=matricula.getText().trim().length() != 9;
+        sombrear(matricula,cond,colorRed,errorCampo);
+         
+        cond=contrasenia.getText().trim().length() < 4;
+        sombrear(contrasenia,cond,colorRed,errorCampo);
+        
         if (errorCampo > 0) {
             Alert a = new Alert(Alert.AlertType.WARNING, "Por favor, corrija los campos resaltados en rojo.", ButtonType.OK);
             a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
@@ -132,7 +119,16 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
         }
         return true;
     }
-  
+
+    private void sombrear(TextField textf,boolean con,String color, int err) {
+        if(con){
+            textf.setStyle(color);
+            err++;
+        }else{
+            textf.setStyle("");
+        }
+    }
+
     @FXML
     public void volver(ActionEvent e) {
         ((Stage) nombre.getScene().getWindow()).close();
