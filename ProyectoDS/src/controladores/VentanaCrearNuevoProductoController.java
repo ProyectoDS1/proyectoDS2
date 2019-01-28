@@ -89,6 +89,7 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         ConexionSql.getConexion().endTransaction();
 
         volver(e);
+        
     }
 
     @FXML
