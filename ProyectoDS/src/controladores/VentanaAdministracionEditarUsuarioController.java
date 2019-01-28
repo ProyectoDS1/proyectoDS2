@@ -8,19 +8,11 @@ package controladores;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.fxml.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
-import modelos.Administrador;
-import modelos.Comprador;
-import modelos.Usuario;
-import modelos.Vendedor;
+import modelos.*;
 import utils.ConexionSql;
 
 /**
@@ -53,7 +45,10 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
     private ComboBox categoria;
     @FXML
     private CheckBox activo;
-
+    private final String comprador="Comprador";
+    private final String vendedor="Vendedor";
+    private final String administrador="Administrador";
+      
     /**
      * Initializes the controller class.
      */
@@ -81,15 +76,15 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         cedula.setText(target.getCedula());
         activo.setSelected(target.isActivo());
 
-        categoria.getItems().addAll("Comprador", "Vendedor", "Administrador");
+        categoria.getItems().addAll(comprador, vendedor, administrador);
         if (target instanceof Comprador) {
-            categoria.setValue("Comprador");
+            categoria.setValue(comprador);
         }
         if (target instanceof Vendedor) {
-            categoria.setValue("Vendedor");
+            categoria.setValue(vendedor);
         }
         if (target instanceof Administrador) {
-            categoria.setValue("Administrador");
+            categoria.setValue(administrador);
         }
     }
 
@@ -112,13 +107,13 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         target.setActivo(activo.isSelected());
         ConexionSql.getConexion().endTransaction();
         switch ((String) categoria.getValue()) {
-            case "Comprador":
+            case comprador:
                 Comprador.transferir(target);
                 break;
-            case "Vendedor":
+            case vendedor:
                 Vendedor.transferir(target);
                 break;
-            case "Administrador":
+            case administrador:
                 Administrador.transferir(target);
                 break;
             default:

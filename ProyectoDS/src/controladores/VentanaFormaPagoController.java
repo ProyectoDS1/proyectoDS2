@@ -6,24 +6,13 @@
 package controladores;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.fxml.*;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
-import modelos.Comprador;
-import modelos.EstadoPedido;
-import modelos.MetodoPago;
-import modelos.PagoEfectivo;
-import modelos.PagoMonedero;
-import modelos.Pedido;
-import modelos.Producto;
-import modelos.Usuario;
+import modelos.*;
 import utils.ConexionSql;
 
 /**

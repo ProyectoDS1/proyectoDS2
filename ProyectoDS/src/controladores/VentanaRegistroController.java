@@ -93,32 +93,33 @@ public class VentanaRegistroController implements Initializable, CanGoBack {
 
     private boolean validarDatosMinimos() {
         int errorCampo = 0;
+        String colorRed="-fx-border-color: red";
         if (nombre.getText().trim().length() == 0){
-            nombre.setStyle("-fx-border-color: red");
+            nombre.setStyle(colorRed);
             errorCampo++;
         }
         else
             nombre.setStyle("");
         if (email.getText().trim().length() == 0){
-            email.setStyle("-fx-border-color: red");
+            email.setStyle(colorRed);
             errorCampo++;
         }
         else
             email.setStyle("");
         if (cedula.getText().trim().length() != 10){
-            cedula.setStyle("-fx-border-color: red");
+            cedula.setStyle(colorRed);
             errorCampo++;
         }
         else
             cedula.setStyle("");
         if (matricula.getText().trim().length() != 9){
-            matricula.setStyle("-fx-border-color: red");
+            matricula.setStyle(colorRed);
             errorCampo++;
         }
         else
             matricula.setStyle("");
         if (contrasenia.getText().trim().length() < 4 ){
-            contrasenia.setStyle("-fx-border-color: red");
+            contrasenia.setStyle(colorRed);
             errorCampo++;
         }
         else

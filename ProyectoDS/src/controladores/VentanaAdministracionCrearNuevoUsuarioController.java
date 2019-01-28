@@ -49,14 +49,18 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
     private TextField matricula;
     @FXML
     private ComboBox categoria;
+    private final String comprador="Comprador";
+    private final String vendedor="Vendedor";
+    private final String administrador="Administrador";
+           
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoria.getItems().addAll("Comprador", "Vendedor", "Administrador");
-        categoria.setValue("Comprador");
+        categoria.getItems().addAll(comprador, vendedor, administrador);
+        categoria.setValue(comprador);
     }
 
     @Override
@@ -74,19 +78,27 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
 
         Usuario u;
         switch ((String) categoria.getValue()) {
-            case "Comprador":
+            case comprador:
                 u = new Comprador();
                 break;
-            case "Vendedor":
+            case vendedor:
                 u = new Vendedor();
                 break;
-            case "Administrador":
+            case administrador:
                 u = new Administrador();
                 break;
             default:
                 alert();
                 return;
         }
+        crearUsuario(u);
+        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        em.persist(u);
+        ConexionSql.getConexion().endTransaction();
+
+        volver(e);
+    }
+    private void crearUsuario(Usuario u){
         u.setNombre(nombre.getText());
         u.setApellido(apellido.getText());
         u.setEmail(email.getText());
@@ -96,11 +108,6 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
         u.setContrasenia(contrasenia.getText());
         u.setDireccion(direccion.getText());
         u.setActivo(true);
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.persist(u);
-        ConexionSql.getConexion().endTransaction();
-
-        volver(e);
     }
     
     private void alert(){
