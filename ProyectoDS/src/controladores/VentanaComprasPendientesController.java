@@ -93,7 +93,7 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
 
     @FXML
     public void indicarRecibido(ActionEvent e, Pedido p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         p.setEstado(EstadoPedido.ENTREGADO);
         ConexionSql.getConexion().endTransaction();
 
@@ -102,7 +102,7 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
 
     @FXML
     public void anularPedido(ActionEvent e, Pedido p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         p.setEstado(EstadoPedido.ANULADO);
         p.getArticulo().setStock(p.getArticulo().getStock() + p.getNumeroItems());
         ConexionSql.getConexion().endTransaction();

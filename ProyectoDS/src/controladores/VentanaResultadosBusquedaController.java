@@ -50,7 +50,7 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
     @FXML
     public void productoElegido(ActionEvent e, Producto p) {
         try {
-            System.out.println("Se ha elegido " + p.getNombreArticulo());
+             Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.SEVERE, "Se ha elegido {0}", p.getNombreArticulo());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaDetallesProducto.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));

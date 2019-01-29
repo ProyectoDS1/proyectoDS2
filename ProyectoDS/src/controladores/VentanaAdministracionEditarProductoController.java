@@ -43,7 +43,7 @@ public class VentanaAdministracionEditarProductoController extends TextProducto 
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
@@ -81,6 +81,7 @@ public class VentanaAdministracionEditarProductoController extends TextProducto 
 
     @FXML
     public void guardar(ActionEvent e) {
+        ConexionSql.getConexion().beginTransaction();
         target.setNombreArticulo(nombre.getText());
         target.setDescripcion(descripcion.getText());
         target.setCategoria(categoria.getText());

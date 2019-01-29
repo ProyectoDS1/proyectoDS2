@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.Producto;
 import utils.ConexionSql;
 import utils.TextProducto;

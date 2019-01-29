@@ -55,8 +55,7 @@ public class VentanaAdministracionProductosController implements Initializable, 
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        System.out.println("Crear nuevo producto");
-
+        Logger.getLogger(VentanaAdministracionProductosController.class.getName()).log(Level.SEVERE, "Crear nuevo producto");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaAdministracionCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -90,10 +89,10 @@ public class VentanaAdministracionProductosController implements Initializable, 
 
     @FXML
     public void eliminar(ActionEvent e, Producto p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();
-
+        Logger.getLogger(VentanaAdministracionProductosController.class.getName()).log(Level.SEVERE, "Eliminar producto");
         System.out.println("Eliminar producto");
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setContentText("Producto eliminado!");

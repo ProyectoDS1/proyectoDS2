@@ -7,6 +7,8 @@ package controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -73,7 +75,7 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
     @FXML
     public void calificar(ActionEvent e) {
         int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
-        System.out.println("Calificando vendedor: " + estrellas + " estrellas");
+        Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.SEVERE, "Calificando vendedor:{0}estrellas", estrellas);
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         CalificacionVendedor c = new CalificacionVendedor(target, estrellas, (Comprador) Usuario.getUsuarioActual());
         em.persist(c);

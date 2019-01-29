@@ -48,13 +48,13 @@ public class VentanaProductosMasBuscadosController implements Initializable, Can
         List<Producto> masBuscados = em.createQuery("SELECT p FROM Producto p WHERE p.eliminado=false ORDER BY p.numVistas DESC").setMaxResults(15).getResultList();
         for (Producto p : masBuscados) {
             Hyperlink h = new Hyperlink(p.getNombreArticulo());
-            h.setOnAction(e -> productoElegido(e, p));
+            h.setOnAction(e -> productoElegido(p));
             container.getChildren().add(h);
         }
         ConexionSql.getConexion().endTransaction();
     }
 
-    private void productoElegido(ActionEvent e, Producto p) {
+    private void productoElegido(Producto p) {
         if (Usuario.getUsuarioActual() != null) {
             mostrarVentanaProducto(p);
         } else {

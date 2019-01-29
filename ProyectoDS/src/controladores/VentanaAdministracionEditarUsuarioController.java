@@ -79,6 +79,7 @@ public class VentanaAdministracionEditarUsuarioController extends TextUsuario im
 
     @FXML
     public void guardar(ActionEvent e) {
+        ConexionSql.getConexion().beginTransaction();
         target.setNombre(nombre.getText());
         target.setApellido(apellido.getText());
         target.setEmail(email.getText());

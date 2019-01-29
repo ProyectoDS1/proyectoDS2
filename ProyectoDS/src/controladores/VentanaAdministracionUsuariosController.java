@@ -91,7 +91,7 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
     @FXML
     public void eliminar(ActionEvent e, Usuario u) {
 
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         u.setActivo(false);
         ConexionSql.getConexion().endTransaction();
 

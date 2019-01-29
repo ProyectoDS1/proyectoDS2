@@ -76,8 +76,7 @@ public class VentanaPrincipalController implements Initializable, CanGoBack {
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
 
-            VentanaPrincipalController controller = loader.<VentanaPrincipalController>getController();
-
+            loader.<VentanaPrincipalController>getController();
             stage.show();
             ((Stage) usuarioLabel.getScene().getWindow()).close();
         }
