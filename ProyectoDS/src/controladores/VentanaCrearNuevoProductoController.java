@@ -13,8 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -22,28 +20,17 @@ import modelos.Producto;
 import modelos.Usuario;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.TextProducto;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaCrearNuevoProductoController implements Initializable, CanGoBack {
+public class VentanaCrearNuevoProductoController extends TextProducto implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
-    @FXML
-    private TextField nombre;
-    @FXML
-    private TextArea descripcion;
-    @FXML
-    private TextField categoria;
-    @FXML
-    private TextField precio;
-    @FXML
-    private TextField tiempoEntrega;
-    @FXML
-    private TextField stock;
 
     /**
      * Initializes the controller class.
@@ -65,12 +52,8 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
 
     @FXML
     public void crear(ActionEvent e) {
-        if (!validarDatos()) {
-            return;
-        }
-
+        if (validarDatos()) {
         assert Usuario.getUsuarioActual() instanceof Vendedor;
-
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         Producto p = new Producto();
         p.setNombreArticulo(nombre.getText());
@@ -89,6 +72,7 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         ConexionSql.getConexion().endTransaction();
 
         volver(e);
+        }
     }
 
     @FXML
@@ -96,39 +80,4 @@ public class VentanaCrearNuevoProductoController implements Initializable, CanGo
         ((Stage) nombre.getScene().getWindow()).close();
         returnController.show();
     }
-
-    private boolean validarDatos() {
-        boolean error = false;
-        String errorMessage = "";
-        if (nombre.getText().trim().length() == 0) {
-            error = true;
-            errorMessage = "Debe especificar el nombre del producto!";
-        }
-        try {
-            if (Float.parseFloat(precio.getText()) <= 0) {
-                error = true;
-                errorMessage = "El precio no puede ser negativo";
-            }
-            if (Integer.parseInt(stock.getText()) < 0) {
-                error = true;
-                errorMessage = "El stock no puede ser negativo";
-            }
-            if (Float.parseFloat(tiempoEntrega.getText()) <= 0) {
-                error = true;
-                errorMessage = "El tiempo de entrega debe ser positivo";
-            }
-        } catch (NumberFormatException ex) {
-            error = true;
-            errorMessage = "Debe especificar un precio, stock y tiempo de entrega!";
-        }
-
-        if (error) {
-            Alert a = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
-            a.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-            a.showAndWait();
-        }
-
-        return !error;
-    }
-
 }

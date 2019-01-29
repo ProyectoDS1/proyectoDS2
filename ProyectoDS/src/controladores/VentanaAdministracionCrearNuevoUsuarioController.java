@@ -12,8 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.Administrador;
@@ -21,37 +19,23 @@ import modelos.Comprador;
 import modelos.Usuario;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.TextUsuario;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaAdministracionCrearNuevoUsuarioController implements Initializable, CanGoBack {
+public class VentanaAdministracionCrearNuevoUsuarioController extends TextUsuario implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
     @FXML
-    private TextField nombre;
-    @FXML
-    private TextField apellido;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField telefono;
-    @FXML
-    private TextField direccion;
-    @FXML
-    private PasswordField contrasenia;
-    @FXML
-    private TextField cedula;
-    @FXML
-    private TextField matricula;
-    @FXML
     private ComboBox categoria;
-    private final String comprador="Comprador";
-    private final String vendedor="Vendedor";
-    private final String administrador="Administrador";
+    
+    private final String comprador1="Comprador";
+    private final String vendedor1="Vendedor";
+    private final String administrador1="Administrador";
            
 
     /**
@@ -59,8 +43,8 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoria.getItems().addAll(comprador, vendedor, administrador);
-        categoria.setValue(comprador);
+        categoria.getItems().addAll(comprador1, vendedor1, administrador1);
+        categoria.setValue(comprador1);
     }
 
     @Override
@@ -78,13 +62,13 @@ public class VentanaAdministracionCrearNuevoUsuarioController implements Initial
 
         Usuario u;
         switch ((String) categoria.getValue()) {
-            case comprador:
+            case comprador1:
                 u = new Comprador();
                 break;
-            case vendedor:
+            case vendedor1:
                 u = new Vendedor();
                 break;
-            case administrador:
+            case administrador1:
                 u = new Administrador();
                 break;
             default:

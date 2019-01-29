@@ -11,44 +11,28 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.*;
 import utils.ConexionSql;
+import utils.TextUsuario;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaAdministracionEditarUsuarioController implements Initializable, CanGoBack, CanGetData {
+public class VentanaAdministracionEditarUsuarioController extends TextUsuario implements Initializable, CanGoBack, CanGetData {
 
     private CanGoBack returnController;
     private Usuario target;
 
     @FXML
-    private TextField nombre;
-    @FXML
-    private TextField apellido;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField telefono;
-    @FXML
-    private TextField direccion;
-    @FXML
-    private PasswordField contrasenia;
-    @FXML
-    private TextField cedula;
-    @FXML
-    private TextField matricula;
-    @FXML
     private ComboBox categoria;
     @FXML
     private CheckBox activo;
-    private final String comprador="Comprador";
-    private final String vendedor="Vendedor";
-    private final String administrador="Administrador";
-      
+    private final String comprador1="Comprador";
+    private final String vendedor1="Vendedor";
+    private final String administrador1="Administrador";
+     
     /**
      * Initializes the controller class.
      */
@@ -76,15 +60,15 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         cedula.setText(target.getCedula());
         activo.setSelected(target.isActivo());
 
-        categoria.getItems().addAll(comprador, vendedor, administrador);
+        categoria.getItems().addAll(comprador1, vendedor1, administrador1);
         if (target instanceof Comprador) {
-            categoria.setValue(comprador);
+            categoria.setValue(comprador1);
         }
         if (target instanceof Vendedor) {
-            categoria.setValue(vendedor);
+            categoria.setValue(vendedor1);
         }
         if (target instanceof Administrador) {
-            categoria.setValue(administrador);
+            categoria.setValue(administrador1);
         }
     }
 
@@ -95,7 +79,6 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
 
     @FXML
     public void guardar(ActionEvent e) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
         target.setNombre(nombre.getText());
         target.setApellido(apellido.getText());
         target.setEmail(email.getText());
@@ -107,13 +90,13 @@ public class VentanaAdministracionEditarUsuarioController implements Initializab
         target.setActivo(activo.isSelected());
         ConexionSql.getConexion().endTransaction();
         switch ((String) categoria.getValue()) {
-            case comprador:
+            case comprador1:
                 Comprador.transferir(target);
                 break;
-            case vendedor:
+            case vendedor1:
                 Vendedor.transferir(target);
                 break;
-            case administrador:
+            case administrador1:
                 Administrador.transferir(target);
                 break;
             default:

@@ -13,14 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.Comprador;
 import modelos.Usuario;
 import utils.ConexionSql;
+import utils.TextUsuario;
 
 
 
@@ -28,26 +27,10 @@ import utils.ConexionSql;
  *
  * @author User-PC
  */
-public class VentanaRegistroController implements Initializable, CanGoBack {
+public class VentanaRegistroController extends TextUsuario implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
-    @FXML
-    private TextField nombre;
-    @FXML
-    private TextField apellido;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField telefono;
-    @FXML
-    private TextField direccion;
-    @FXML
-    private PasswordField contrasenia;
-    @FXML
-    private TextField cedula;
-    @FXML
-    private TextField matricula;
     @FXML
     private CheckBox whatsapp;
 

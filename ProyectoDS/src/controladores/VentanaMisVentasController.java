@@ -6,46 +6,20 @@
 package controladores;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import utils.PedidosController;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaMisVentasController implements Initializable, CanGoBack {
-
-    private CanGoBack returnController;
-
-    @FXML
-    private Label titulo;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
-    }
-
-    @Override
-    public void show() {
-        ((Stage) titulo.getScene().getWindow()).show();
-    }
+public class VentanaMisVentasController extends PedidosController{
 
     @FXML
     public void verPendientes(ActionEvent e) throws IOException {

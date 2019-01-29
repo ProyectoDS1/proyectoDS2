@@ -37,6 +37,8 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -63,8 +65,6 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
     @Override
     public void show() {
         resumenCompra.setText("Comprando " + numItems + " unidades del producto " + target.getNombreArticulo() + ". Precio total $" + target.getPrecio() * numItems);
-
-        //((Stage) nombreDE.getScene().getWindow()).show();
     }
 
     @FXML

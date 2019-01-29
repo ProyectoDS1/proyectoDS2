@@ -13,35 +13,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.Producto;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.TextProducto;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaAdministracionCrearNuevoProductoController implements Initializable, CanGoBack {
+public class VentanaAdministracionCrearNuevoProductoController extends TextProducto implements Initializable, CanGoBack {
 
     private CanGoBack returnController;
 
-    @FXML
-    private TextField nombre;
-    @FXML
-    private TextArea descripcion;
-    @FXML
-    private TextField categoria;
-    @FXML
-    private TextField precio;
-    @FXML
-    private TextField tiempoEntrega;
-    @FXML
-    private TextField stock;
     @FXML
     private ComboBox vendedor;
 

@@ -6,47 +6,22 @@
 package controladores;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import utils.PedidosController;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaMisPedidosController implements Initializable, CanGoBack {
+public class VentanaMisPedidosController extends PedidosController {
 
-    private CanGoBack returnController;
-
-    @FXML
-    private Label titulo;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // Not required yet
-    }
-
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
-    }
-
-    @Override
-    public void show() {
-        ((Stage) titulo.getScene().getWindow()).show();
-    }
-
+    
     @FXML
     public void verPendientes(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaComprasPendientes.fxml"));

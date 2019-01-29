@@ -8,13 +8,13 @@ package controladores;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -23,37 +23,25 @@ import modelos.Pedido;
 import modelos.Usuario;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.VentasPendientesController;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaVentasPendientesController implements Initializable, CanGoBack {
+public class VentanaVentasPendientesController extends VentasPendientesController{
 
-    private CanGoBack returnController;
-
-    @FXML
-    private Label titulo;
-    @FXML
-    private GridPane container;
-
-    /**
-     * Initializes the controller class.
-     */
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         llenarLista();
-    }
-
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
     }
 
     @FXML
     public void verMapa(ActionEvent e, Pedido p) {
         System.out.println("Ver mapa de producto");
+        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE,"Ver mapa de producto");
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
@@ -61,7 +49,7 @@ public class VentanaVentasPendientesController implements Initializable, CanGoBa
 
     @FXML
     public void anularPedido(ActionEvent e, Pedido p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        //EntityManager em = ConexionSql.getConexion().beginTransaction();
         p.setEstado(EstadoPedido.ANULADO);
         p.getArticulo().setStock(p.getArticulo().getStock() + p.getNumeroItems());
         ConexionSql.getConexion().endTransaction();
@@ -126,4 +114,5 @@ public class VentanaVentasPendientesController implements Initializable, CanGoBa
         anular.setOnAction(e -> anularPedido(e, p));
         container.add(anular, 4, i);
     }
+
 }

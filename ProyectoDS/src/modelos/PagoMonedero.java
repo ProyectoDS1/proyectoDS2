@@ -35,21 +35,19 @@ public class PagoMonedero extends MetodoPago {
     @Override
     public boolean confirmar() {
         try {
-            URL url = new URL("https://proveedords.herokuapp.com/check?phone=" + this.celular + "&value=" + String.format("%.2f", this.pedido.getNumeroItems() * this.pedido.getArticulo().getPrecio()));
+            URL url = new URL("https://proveedords.herokuapp.com/check?phone=" + 
+                    this.celular + "&value=" + String.format("%.2f", this.pedido.getNumeroItems() * this.pedido.getArticulo().getPrecio()));
             HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
             int status = con.getResponseCode();
-            System.out.println(status);
-            return status == 200;
-                
-            
+            //System.out.println(status);
+            Logger.getLogger(PagoMonedero.class.getName()).log(Level.SEVERE,String.valueOf(status));
 
-        } catch (MalformedURLException ex) {
+            return status == 200;
+        } catch (IOException ex) { 
             Logger.getLogger(PagoMonedero.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(PagoMonedero.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return false;
     }
 

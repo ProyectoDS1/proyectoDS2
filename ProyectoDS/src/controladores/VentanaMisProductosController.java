@@ -13,31 +13,23 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.Producto;
 import modelos.Usuario;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.VentasPendientesController;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaMisProductosController implements Initializable, CanGoBack {
-
-    private CanGoBack returnController;
-
-    @FXML
-    private Label titulo;
-    @FXML
-    private GridPane container;
+public class VentanaMisProductosController  extends VentasPendientesController{
 
     /**
      * Initializes the controller class.
@@ -45,11 +37,6 @@ public class VentanaMisProductosController implements Initializable, CanGoBack {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         llenarLista();
-    }
-
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
     }
 
     @FXML

@@ -13,36 +13,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.Producto;
 import modelos.Vendedor;
 import utils.ConexionSql;
+import utils.TextProducto;
 
 /**
  * FXML Controller class
  *
  * @author reyes
  */
-public class VentanaAdministracionEditarProductoController implements Initializable, CanGoBack, CanGetData {
+public class VentanaAdministracionEditarProductoController extends TextProducto implements Initializable, CanGoBack, CanGetData {
 
     private CanGoBack returnController;
     private Producto target;
 
-    @FXML
-    private TextField nombre;
-    @FXML
-    private TextArea descripcion;
-    @FXML
-    private TextField categoria;
-    @FXML
-    private TextField precio;
-    @FXML
-    private TextField tiempoEntrega;
-    @FXML
-    private TextField stock;
     @FXML
     private ComboBox vendedor;
     @FXML
@@ -54,8 +42,8 @@ public class VentanaAdministracionEditarProductoController implements Initializa
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
+    public void initialize(URL location, ResourceBundle resources) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -93,7 +81,6 @@ public class VentanaAdministracionEditarProductoController implements Initializa
 
     @FXML
     public void guardar(ActionEvent e) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
         target.setNombreArticulo(nombre.getText());
         target.setDescripcion(descripcion.getText());
         target.setCategoria(categoria.getText());
@@ -114,5 +101,7 @@ public class VentanaAdministracionEditarProductoController implements Initializa
         ((Stage) nombre.getScene().getWindow()).close();
         returnController.show();
     }
+
+    
 
 }
