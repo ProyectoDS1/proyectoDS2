@@ -95,20 +95,22 @@ public class VentanaProductosMasBuscadosController implements Initializable, Can
         }
     }
 
+    @Override
+    public void setReturnController(CanGoBack c) {
+        returnController = c;
+    }
+    
+    
+    @Override
+    public void show() {
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+    
     @FXML
     public void volver(ActionEvent e) {
         ((Stage) titulo.getScene().getWindow()).close();
         returnController.show();
     }
-
-    @Override
-    public void setReturnController(CanGoBack c) {
-        returnController = c;
-    }
-
-    @Override
-    public void show() {
-        ((Stage) titulo.getScene().getWindow()).show();
-    }
+   
 
 }

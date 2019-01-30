@@ -81,7 +81,7 @@ public class VentanaAdministracionController implements Initializable, CanGoBack
 
     @FXML
     public void verCompras(ActionEvent e) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
     }

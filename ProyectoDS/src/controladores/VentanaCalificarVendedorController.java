@@ -33,19 +33,11 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
     private Vendedor target;
 
     @FXML
-    private Label titulo;
+    private Label calificacion;
     @FXML
     private Label nombre;
     @FXML
-    private Label calificacion;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
+    private Label titulo;
 
     @Override
     public void setReturnController(CanGoBack c) {
@@ -57,6 +49,14 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
         target = (Vendedor) data[0];
 
         show();
+    }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }
 
     @Override
@@ -76,15 +76,13 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
     public void calificar(ActionEvent e) {
         int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
         Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.SEVERE, "Calificando vendedor:{0}estrellas", estrellas);
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
-        CalificacionVendedor c = new CalificacionVendedor(target, estrellas, (Comprador) Usuario.getUsuarioActual());
-        em.persist(c);
-        target.getCalificaciones().add(c);
-        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(c);
+        EntityManager entityManager = ConexionSql.getConexion().beginTransaction();
+        CalificacionVendedor calificacionVend = new CalificacionVendedor(target, estrellas, (Comprador) Usuario.getUsuarioActual());
+        entityManager.persist(calificacionVend);
+        target.getCalificaciones().add(calificacionVend);
+        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(calificacionVend);
         ConexionSql.getConexion().endTransaction();
-
         ((VentanaComprasPendientesController) returnController).show();
-
         ((Stage) titulo.getScene().getWindow()).close();
     }
 

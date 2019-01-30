@@ -49,7 +49,7 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
 
     @FXML
     public void anularPedido(ActionEvent e, Pedido p) {
-        //EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         p.setEstado(EstadoPedido.ANULADO);
         p.getArticulo().setStock(p.getArticulo().getStock() + p.getNumeroItems());
         ConexionSql.getConexion().endTransaction();

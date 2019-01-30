@@ -19,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.Comprador;
 import modelos.EstadoPedido;
 import modelos.Pedido;
