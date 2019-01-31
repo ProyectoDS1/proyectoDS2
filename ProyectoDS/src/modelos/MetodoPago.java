@@ -47,4 +47,12 @@ public abstract class MetodoPago implements Serializable {
         this.id = id;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
 }

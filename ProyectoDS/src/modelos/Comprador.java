@@ -5,6 +5,7 @@
  */
 package modelos;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,8 +25,19 @@ public class Comprador extends Usuario {
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     protected List<Calificacion> misCalificaciones;
 
-    public Pedido comprar(Producto articulo) {
-        return null;
+    public Pedido comprar(Producto articulo, int numItems, MetodoPago mp) {
+        Pedido p = new Pedido();
+        p.setArticulo(articulo);
+        p.setComprador((Comprador) Usuario.getUsuarioActual());
+        p.setEstado(EstadoPedido.PENDIENTE);
+        p.setFechaDePedido(new Date());
+        p.setNumeroItems(numItems);
+        p.setMetpago(mp);
+
+        this.misPedidos.add(p);
+        mp.setPedido(p);
+        
+        return p;
     }
 
     public List<Pedido> mostrarPedidos() {

@@ -37,12 +37,13 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // Not required yet
     }
 
@@ -69,34 +70,21 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
 
     @FXML
     public void comprarEfect(ActionEvent e) {
-        Pedido p = crearPedido();
-        MetodoPago metodoPago = new PagoEfectivo(nombreEfectivo.getText(), p);
-        p.setMetpago(metodoPago);
+        MetodoPago metodoPago = new PagoEfectivo(nombreEfectivo.getText(), null);
 
-        comprar(metodoPago, p, e);
+        comprar(metodoPago, e);
     }
 
     @FXML
     public void comprarDE(ActionEvent e) {
-        Pedido p = crearPedido();
-        MetodoPago metodoPago = new PagoMonedero(nombreDE.getText(), telfDE.getText(), p);
-        p.setMetpago(metodoPago);
+        MetodoPago metodoPago = new PagoMonedero(nombreDE.getText(), telfDE.getText(), null);
 
-        comprar(metodoPago, p, e);
+        comprar(metodoPago, e);
     }
 
-    private Pedido crearPedido() {
-        Pedido p = new Pedido();
-        p.setArticulo(target);
-        p.setComprador((Comprador) Usuario.getUsuarioActual());
-        p.setEstado(EstadoPedido.PENDIENTE);
-        p.setFechaDePedido(new Date());
-        p.setNumeroItems(numItems);
+    private void comprar(MetodoPago metodoPago, ActionEvent e) {
+        Pedido p = ((Comprador) Usuario.getUsuarioActual()).comprar(target, numItems, metodoPago);
 
-        return p;
-    }
-
-    private void comprar(MetodoPago metodoPago, Pedido p, ActionEvent e) {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         em.persist(metodoPago);
         em.persist(p);
@@ -109,7 +97,6 @@ public class VentanaFormaPagoController implements Initializable, CanGoBack, Can
             a.setContentText("El pago ha sido rechazado!");
             a.showAndWait();
         }
-        ((Comprador) Usuario.getUsuarioActual()).mostrarPedidos().add(p);
         ConexionSql.getConexion().endTransaction();
 
         volver(e);
