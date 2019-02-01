@@ -75,7 +75,7 @@ public class VentanaCalificarVendedorController implements Initializable, CanGoB
     @FXML
     public void calificar(ActionEvent e) {
         int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
-        Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.SEVERE, "Calificando vendedor:{0}estrellas", estrellas);
+        Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.FINE, "Calificando vendedor:{0}estrellas", estrellas);
         EntityManager entityManager = ConexionSql.getConexion().beginTransaction();
         CalificacionVendedor calificacionVend = new CalificacionVendedor(target, estrellas, (Comprador) Usuario.getUsuarioActual());
         entityManager.persist(calificacionVend);

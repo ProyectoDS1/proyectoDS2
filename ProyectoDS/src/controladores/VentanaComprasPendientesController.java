@@ -46,7 +46,7 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        llenarLista();
+        llenarListaComprasPendientes();
     }
 
     @Override
@@ -96,33 +96,35 @@ public class VentanaComprasPendientesController implements Initializable, CanGoB
         p.setEstado(EstadoPedido.ENTREGADO);
         ConexionSql.getConexion().endTransaction();
 
-        llenarLista();
+        llenarListaComprasPendientes();
     }
 
     @FXML
-    public void anularPedido(ActionEvent e, Pedido p) {
+    public void anularPedido(ActionEvent e, Pedido pedidoCompras) {
         ConexionSql.getConexion().beginTransaction();
-        p.setEstado(EstadoPedido.ANULADO);
-        p.getArticulo().setStock(p.getArticulo().getStock() + p.getNumeroItems());
+        pedidoCompras.setEstado(EstadoPedido.ANULADO);
+        pedidoCompras.getArticulo().setStock(pedidoCompras.getArticulo().getStock() + pedidoCompras.getNumeroItems());
         ConexionSql.getConexion().endTransaction();
 
-        llenarLista();
+        llenarListaComprasPendientes();
     }
-
-    @FXML
-    public void volver(ActionEvent e) {
-        ((Stage) titulo.getScene().getWindow()).close();
-        returnController.show();
-    }
-
+    
     @Override
     public void show() {
-        llenarLista();
+        llenarListaComprasPendientes();
 
         ((Stage) titulo.getScene().getWindow()).show();
     }
 
-    private void llenarLista() {
+    @FXML
+    public void volver(ActionEvent evento) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
+
+    
+
+    private void llenarListaComprasPendientes() {
         assert Usuario.getUsuarioActual() instanceof Comprador;
         Comprador comprador = (Comprador) Usuario.getUsuarioActual();
 

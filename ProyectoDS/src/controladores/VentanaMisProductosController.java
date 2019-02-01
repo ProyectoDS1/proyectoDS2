@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.Producto;
 import modelos.Usuario;
 import modelos.Vendedor;
@@ -76,26 +75,13 @@ public class VentanaMisProductosController  extends VentasPendientesController{
 
     @FXML
     public void eliminar(ActionEvent e, Producto p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
+        ConexionSql.getConexion().beginTransaction();
         p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();
 
         llenarLista();
     }
-
-    @FXML
-    public void volver(ActionEvent e) {
-        ((Stage) titulo.getScene().getWindow()).close();
-        returnController.show();
-    }
-
-    @Override
-    public void show() {
-        llenarLista();
-
-        ((Stage) titulo.getScene().getWindow()).show();
-    }
-
+    
     private void llenarLista() {
         assert Usuario.getUsuarioActual() instanceof Vendedor;
         Vendedor vendedor = (Vendedor) Usuario.getUsuarioActual();
@@ -118,6 +104,21 @@ public class VentanaMisProductosController  extends VentasPendientesController{
             }
         }
     }
+
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
+
+    @Override
+    public void show() {
+        llenarLista();
+
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
+    
 
     private void agregarBotonEditar(Producto p, int i) {
         Button editar = new Button("Editar");

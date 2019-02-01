@@ -50,48 +50,45 @@ public class Vendedor extends Comprador {
         return nombre + " " + apellido + " (Vendedor)";
     }
 
-    public static Vendedor transferir(Usuario u) {
-        if (u instanceof Vendedor) {
-            // Usuario ya es vendedor
-            return (Vendedor) u;
+    public static Vendedor transferir(Usuario usuario) {
+        if (usuario instanceof Vendedor) {
+            return (Vendedor) usuario;
         }
 
-        // Si no, no era un Vendedor
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.remove(u); // Eliminar de la base de datos
+        em.remove(usuario);
         ConexionSql.getConexion().endTransaction();
 
-        // Crear nuevo vendedor y pasarle todos los datos del usuario eliminado
-        Vendedor nuevo = new Vendedor();
-        nuevo.setNombre(u.getNombre());
-        nuevo.setApellido(u.getApellido());
-        nuevo.setEmail(u.getEmail());
-        nuevo.setCedula(u.getCedula());
-        nuevo.setMatricula(u.getMatricula());
-        nuevo.setTelefono(u.getTelefono());
-        nuevo.setContrasenia(u.getContrasenia());
-        nuevo.setDireccion(u.getDireccion());
-        nuevo.setActivo(u.isActivo());
+        Vendedor nuevoVendedor = new Vendedor();
+        nuevoVendedor.setNombre(usuario.getNombre());
+        nuevoVendedor.setApellido(usuario.getApellido());
+        nuevoVendedor.setEmail(usuario.getEmail());
+        nuevoVendedor.setCedula(usuario.getCedula());
+        nuevoVendedor.setMatricula(usuario.getMatricula());
+        nuevoVendedor.setTelefono(usuario.getTelefono());
+        nuevoVendedor.setContrasenia(usuario.getContrasenia());
+        nuevoVendedor.setDireccion(usuario.getDireccion());
+        nuevoVendedor.setActivo(usuario.isActivo());
 
         em = ConexionSql.getConexion().beginTransaction();
-        if ((u instanceof Comprador) && !(u instanceof Vendedor)) { // Si el antiguo era un comprador no vendedor, preservar sus pedidos y sus calificaciones
-            nuevo.setMisCalificaciones(((Comprador) u).getCalificaciones());
-            for (Calificacion c : nuevo.getCalificaciones()) {
-                c.setAutor(nuevo);
+        if ((usuario instanceof Comprador) && !(usuario instanceof Vendedor)) { 
+            nuevoVendedor.setMisCalificaciones(((Comprador) usuario).getCalificaciones());
+            for (Calificacion c : nuevoVendedor.getCalificaciones()) {
+                c.setAutor(nuevoVendedor);
                 em.persist(c);
             }
-            nuevo.setPedidos(((Comprador) u).mostrarPedidos());
-            System.out.println(nuevo.mostrarPedidos());
-            for (Pedido p : nuevo.mostrarPedidos()) {
-                p.setComprador(nuevo);
+            nuevoVendedor.setPedidos(((Comprador) usuario).mostrarPedidos());
+            System.out.println(nuevoVendedor.mostrarPedidos());
+            for (Pedido p : nuevoVendedor.mostrarPedidos()) {
+                p.setComprador(nuevoVendedor);
                 em.persist(p);
             }
         }
 
-        em.persist(nuevo);
+        em.persist(nuevoVendedor);
         ConexionSql.getConexion().endTransaction();
 
-        return nuevo;
+        return nuevoVendedor;
     }
 
 }

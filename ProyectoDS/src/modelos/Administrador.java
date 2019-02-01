@@ -5,7 +5,6 @@
  */
 package modelos;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -69,33 +68,31 @@ public class Administrador extends Usuario {
         return nombre + " " + apellido + " (Administrador)";
     }
 
-    public static Administrador transferir(Usuario u) {
-        if (u instanceof Administrador) {
-            // Usuario ya es administrador, retornarlo directamente
-            return (Administrador) u;
+    public static Administrador transferir(Usuario usuario) {
+        if (usuario instanceof Administrador) {
+            return (Administrador) usuario;
         }
 
-        // Si no, no era un Administrador
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.remove(u); // Eliminar de la base de datos
+        em.remove(usuario); 
         ConexionSql.getConexion().endTransaction();
 
-        // Crear nuevo administrador y pasarle todos los datos del ya eliminado
-        Administrador nuevo = new Administrador();
-        nuevo.setNombre(u.getNombre());
-        nuevo.setApellido(u.getApellido());
-        nuevo.setEmail(u.getEmail());
-        nuevo.setCedula(u.getCedula());
-        nuevo.setMatricula(u.getMatricula());
-        nuevo.setTelefono(u.getTelefono());
-        nuevo.setContrasenia(u.getContrasenia());
-        nuevo.setDireccion(u.getDireccion());
-        nuevo.setActivo(u.isActivo());
+
+        Administrador nuevoAdministrador = new Administrador();
+        nuevoAdministrador.setNombre(usuario.getNombre());
+        nuevoAdministrador.setApellido(usuario.getApellido());
+        nuevoAdministrador.setEmail(usuario.getEmail());
+        nuevoAdministrador.setCedula(usuario.getCedula());
+        nuevoAdministrador.setMatricula(usuario.getMatricula());
+        nuevoAdministrador.setTelefono(usuario.getTelefono());
+        nuevoAdministrador.setContrasenia(usuario.getContrasenia());
+        nuevoAdministrador.setDireccion(usuario.getDireccion());
+        nuevoAdministrador.setActivo(usuario.isActivo());
         em = ConexionSql.getConexion().beginTransaction();
-        em.persist(nuevo);
+        em.persist(nuevoAdministrador);
         ConexionSql.getConexion().endTransaction();
 
-        return nuevo;
+        return nuevoAdministrador;
     }
 
 }
