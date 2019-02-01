@@ -29,16 +29,14 @@ public class VentanaAdministracionEditarUsuarioController extends TextUsuario im
     private ComboBox categoria;
     @FXML
     private CheckBox activo;
-    private final String comprador1="Comprador";
-    private final String vendedor1="Vendedor";
-    private final String administrador1="Administrador";
      
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override

@@ -37,6 +37,7 @@ public abstract class Usuario implements Serializable {
     protected boolean activo;
     private static Usuario usuarioActual;
 
+    
     public void iniciarSesion() {
 
     }

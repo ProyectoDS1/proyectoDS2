@@ -5,7 +5,10 @@
  */
 package modelos;
 
+import controladores.VentanaAdministracionController;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -69,7 +72,6 @@ public class Vendedor extends Comprador {
         nuevoVendedor.setContrasenia(usuario.getContrasenia());
         nuevoVendedor.setDireccion(usuario.getDireccion());
         nuevoVendedor.setActivo(usuario.isActivo());
-
         em = ConexionSql.getConexion().beginTransaction();
         if ((usuario instanceof Comprador) && !(usuario instanceof Vendedor)) { 
             nuevoVendedor.setMisCalificaciones(((Comprador) usuario).getCalificaciones());
@@ -77,6 +79,7 @@ public class Vendedor extends Comprador {
                 c.setAutor(nuevoVendedor);
                 em.persist(c);
             }
+
             nuevoVendedor.setPedidos(((Comprador) usuario).mostrarPedidos());
             System.out.println(nuevoVendedor.mostrarPedidos());
             for (Pedido p : nuevoVendedor.mostrarPedidos()) {

@@ -8,10 +8,12 @@ package utils;
 import controladores.CanGoBack;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 /**
  *
@@ -34,4 +36,12 @@ public abstract class VentasPendientesController implements Initializable, CanGo
     public void setReturnController(CanGoBack c) {
         returnController = c;
     }
+    
+    
+    @FXML
+    public void volver(ActionEvent e) {
+        ((Stage) titulo.getScene().getWindow()).close();
+        returnController.show();
+    }
 }
+

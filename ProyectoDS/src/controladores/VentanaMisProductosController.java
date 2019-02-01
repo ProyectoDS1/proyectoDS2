@@ -28,7 +28,7 @@ import utils.VentasPendientesController;
  *
  * @author reyes
  */
-public class VentanaMisProductosController  extends VentasPendientesController{
+public class VentanaMisProductosController extends VentasPendientesController {
 
     /**
      * Initializes the controller class.
@@ -40,14 +40,11 @@ public class VentanaMisProductosController  extends VentasPendientesController{
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        System.out.println("Crear nuevo producto");
-
+        Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Crear nuevo producto");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
-
         VentanaCrearNuevoProductoController controller = loader.<VentanaCrearNuevoProductoController>getController();
-
         controller.setReturnController(this);
         stage.show();
         titulo.getScene().getWindow().hide();
@@ -56,8 +53,7 @@ public class VentanaMisProductosController  extends VentasPendientesController{
     @FXML
     public void editar(ActionEvent e, Producto p) {
         try {
-            System.out.println("Editar producto");
-
+            Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Editar producto");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaEditarProducto.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
@@ -78,10 +74,17 @@ public class VentanaMisProductosController  extends VentasPendientesController{
         ConexionSql.getConexion().beginTransaction();
         p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();
-
         llenarLista();
     }
-    
+
+
+
+    @Override
+    public void show() {
+        llenarLista();
+        ((Stage) titulo.getScene().getWindow()).show();
+    }
+
     private void llenarLista() {
         assert Usuario.getUsuarioActual() instanceof Vendedor;
         Vendedor vendedor = (Vendedor) Usuario.getUsuarioActual();
@@ -111,14 +114,6 @@ public class VentanaMisProductosController  extends VentasPendientesController{
         returnController.show();
     }
 
-    @Override
-    public void show() {
-        llenarLista();
-
-        ((Stage) titulo.getScene().getWindow()).show();
-    }
-
-    
 
     private void agregarBotonEditar(Producto p, int i) {
         Button editar = new Button("Editar");
