@@ -17,6 +17,7 @@ public class TextUsuario {
     protected final String comprador1="Comprador";
     protected final String vendedor1="Vendedor";
     protected final String administrador1="Administrador";
+    
    
     @FXML
     protected TextField nombre;
