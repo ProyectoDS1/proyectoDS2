@@ -20,7 +20,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.Producto;
 import utils.ConexionSql;
 
@@ -43,8 +42,8 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL location, ResourceBundle resources) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @FXML
@@ -89,7 +88,6 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
         ((Stage) titulo.getScene().getWindow()).show();
 
         container.getChildren().clear();
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
         for (Producto p : productos) {
             p.setNumVistas(p.getNumVistas() + 1);
             Hyperlink h = new Hyperlink(p.getNombreArticulo());
@@ -98,5 +96,7 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
         }
         ConexionSql.getConexion().endTransaction();
     }
+
+    
 
 }

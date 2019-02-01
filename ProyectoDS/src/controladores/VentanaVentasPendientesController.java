@@ -30,9 +30,8 @@ import utils.VentasPendientesController;
  *
  * @author reyes
  */
-public class VentanaVentasPendientesController extends VentasPendientesController{
+public class VentanaVentasPendientesController extends VentasPendientesController {
 
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         llenarLista();
@@ -40,8 +39,8 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
 
     @FXML
     public void verMapa(ActionEvent e, Pedido p) {
-        System.out.println("Ver mapa de producto");
-        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE,"Ver mapa de producto");
+        //System.out.println("Ver mapa de producto");
+        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Ver mapa de producto");
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
@@ -57,16 +56,9 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
         llenarLista();
     }
 
-    @FXML
-    public void volver(ActionEvent e) {
-        ((Stage) titulo.getScene().getWindow()).close();
-        returnController.show();
-    }
-
     @Override
     public void show() {
         llenarLista();
-
         ((Stage) titulo.getScene().getWindow()).show();
     }
 

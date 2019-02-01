@@ -17,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
 import modelos.Producto;
 import modelos.Usuario;
 import modelos.Vendedor;
@@ -29,19 +28,20 @@ import utils.VentasPendientesController;
  *
  * @author reyes
  */
-public class VentanaMisProductosController  extends VentasPendientesController{
+public class VentanaMisProductosController extends VentasPendientesController {
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        llenarLista();
+        llenarLista1();
     }
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        System.out.println("Crear nuevo producto");
+        //System.out.println("Crear nuevo producto");
+        Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Crear nuevo producto");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
@@ -57,7 +57,8 @@ public class VentanaMisProductosController  extends VentasPendientesController{
     @FXML
     public void editar(ActionEvent e, Producto p) {
         try {
-            System.out.println("Editar producto");
+            //System.out.println("Editar producto");
+            Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Editar producto");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaEditarProducto.fxml"));
             Stage stage = new Stage();
@@ -76,27 +77,18 @@ public class VentanaMisProductosController  extends VentasPendientesController{
 
     @FXML
     public void eliminar(ActionEvent e, Producto p) {
-        EntityManager em = ConexionSql.getConexion().beginTransaction();
         p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();
-
-        llenarLista();
-    }
-
-    @FXML
-    public void volver(ActionEvent e) {
-        ((Stage) titulo.getScene().getWindow()).close();
-        returnController.show();
+        llenarLista1();
     }
 
     @Override
     public void show() {
-        llenarLista();
-
+        llenarLista1();
         ((Stage) titulo.getScene().getWindow()).show();
     }
 
-    private void llenarLista() {
+    private void llenarLista1() {
         assert Usuario.getUsuarioActual() instanceof Vendedor;
         Vendedor vendedor = (Vendedor) Usuario.getUsuarioActual();
 

@@ -81,7 +81,9 @@ public class Administrador extends Usuario {
         ConexionSql.getConexion().endTransaction();
 
         // Crear nuevo administrador y pasarle todos los datos del ya eliminado
-        Administrador nuevo = new Administrador();
+        Administrador nuevo = (Administrador)u;
+        /*
+                new Administrador();
         nuevo.setNombre(u.getNombre());
         nuevo.setApellido(u.getApellido());
         nuevo.setEmail(u.getEmail());
@@ -91,6 +93,7 @@ public class Administrador extends Usuario {
         nuevo.setContrasenia(u.getContrasenia());
         nuevo.setDireccion(u.getDireccion());
         nuevo.setActivo(u.isActivo());
+        */
         em = ConexionSql.getConexion().beginTransaction();
         em.persist(nuevo);
         ConexionSql.getConexion().endTransaction();

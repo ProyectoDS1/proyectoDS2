@@ -7,6 +7,8 @@ package controladores;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,9 +42,10 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
     /**
      * Initializes the controller class.
      */
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL location, ResourceBundle resources) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -73,7 +76,9 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
     @FXML
     public void calificar(ActionEvent e) {
         int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
-        System.out.println("Calificando producto: " + estrellas + " estrellas");
+        //System.out.println("Calificando producto: " + estrellas + " estrellas");
+        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Calificando producto: " + estrellas + " estrellas");
+
         EntityManager em = ConexionSql.getConexion().beginTransaction();
         CalificacionProducto c = new CalificacionProducto(target, estrellas, (Comprador) Usuario.getUsuarioActual());
         em.persist(c);
@@ -91,5 +96,6 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
         ((Stage) titulo.getScene().getWindow()).close();
         returnController.show();
     }
+
 
 }

@@ -5,7 +5,10 @@
  */
 package modelos;
 
+import controladores.VentanaAdministracionController;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -62,7 +65,9 @@ public class Vendedor extends Comprador {
         ConexionSql.getConexion().endTransaction();
 
         // Crear nuevo vendedor y pasarle todos los datos del usuario eliminado
-        Vendedor nuevo = new Vendedor();
+        Vendedor nuevo = (Vendedor)u;
+        /*
+                new Vendedor();
         nuevo.setNombre(u.getNombre());
         nuevo.setApellido(u.getApellido());
         nuevo.setEmail(u.getEmail());
@@ -72,7 +77,7 @@ public class Vendedor extends Comprador {
         nuevo.setContrasenia(u.getContrasenia());
         nuevo.setDireccion(u.getDireccion());
         nuevo.setActivo(u.isActivo());
-
+        */
         em = ConexionSql.getConexion().beginTransaction();
         if ((u instanceof Comprador) && !(u instanceof Vendedor)) { // Si el antiguo era un comprador no vendedor, preservar sus pedidos y sus calificaciones
             nuevo.setMisCalificaciones(((Comprador) u).getCalificaciones());
@@ -81,7 +86,9 @@ public class Vendedor extends Comprador {
                 em.persist(c);
             }
             nuevo.setPedidos(((Comprador) u).mostrarPedidos());
-            System.out.println(nuevo.mostrarPedidos());
+            //System.out.println(nuevo.mostrarPedidos());
+            Logger.getLogger(VentanaAdministracionController.class.getName()).log(Level.SEVERE,nuevo.mostrarPedidos().toString());
+
             for (Pedido p : nuevo.mostrarPedidos()) {
                 p.setComprador(nuevo);
                 em.persist(p);

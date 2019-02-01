@@ -32,12 +32,6 @@ public class VentanaAdministracionCrearNuevoUsuarioController extends TextUsuari
 
     @FXML
     private ComboBox categoria;
-    
-    private final String comprador1="Comprador";
-    private final String vendedor1="Vendedor";
-    private final String administrador1="Administrador";
-           
-
     /**
      * Initializes the controller class.
      */

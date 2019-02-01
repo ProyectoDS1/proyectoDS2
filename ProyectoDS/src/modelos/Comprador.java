@@ -107,7 +107,9 @@ public class Comprador extends Usuario {
         ConexionSql.getConexion().endTransaction();
 
         // Crear nuevo comprador y pasarle todos los datos del usuario eliminado
-        Comprador nuevo = new Comprador();
+        Comprador nuevo = (Comprador)u;
+        /*
+                new Comprador();
         nuevo.setNombre(u.getNombre());
         nuevo.setApellido(u.getApellido());
         nuevo.setEmail(u.getEmail());
@@ -117,6 +119,7 @@ public class Comprador extends Usuario {
         nuevo.setContrasenia(u.getContrasenia());
         nuevo.setDireccion(u.getDireccion());
         nuevo.setActivo(u.isActivo());
+        */
         em = ConexionSql.getConexion().beginTransaction();
         if (u instanceof Vendedor) { // Si el antiguo era un vendedor, preservar sus pedidos y sus calificaciones
             nuevo.setMisCalificaciones(((Vendedor) u).getCalificaciones());

@@ -36,7 +36,8 @@ public class VentanaAdministracionController implements Initializable, CanGoBack
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     @Override
