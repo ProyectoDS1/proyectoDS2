@@ -115,7 +115,7 @@ public class Comprador extends Usuario {
         nuevoComprador.setDireccion(usuario.getDireccion());
         nuevoComprador.setActivo(usuario.isActivo());
         em = ConexionSql.getConexion().beginTransaction();
-        if (usuario instanceof Vendedor) { // Si el antiguo era un vendedor, preservar sus pedidos y sus calificaciones
+        if (usuario instanceof Vendedor) { 
             nuevoComprador.setMisCalificaciones(((Vendedor) usuario).getCalificaciones());
             for (Calificacion c : nuevoComprador.getCalificaciones()) {
                 c.setAutor(nuevoComprador);

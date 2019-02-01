@@ -77,7 +77,6 @@ public class Administrador extends Usuario {
         em.remove(usuario); 
         ConexionSql.getConexion().endTransaction();
 
-
         Administrador nuevoAdministrador = new Administrador();
         nuevoAdministrador.setNombre(usuario.getNombre());
         nuevoAdministrador.setApellido(usuario.getApellido());

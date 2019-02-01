@@ -6,7 +6,6 @@
 package modelos;
 
 import java.util.LinkedList;
-import java.util.List;
 import org.junit.AfterClass;
 import org.junit.After;
 import org.junit.Before;
