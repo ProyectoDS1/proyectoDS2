@@ -43,7 +43,7 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Not required yet
     }
 
     @FXML

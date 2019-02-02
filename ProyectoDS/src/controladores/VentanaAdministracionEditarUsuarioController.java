@@ -35,7 +35,7 @@ public class VentanaAdministracionEditarUsuarioController extends TextUsuario im
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // Not required yet
 
     }
 
