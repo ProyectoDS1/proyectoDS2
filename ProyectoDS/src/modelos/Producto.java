@@ -175,4 +175,20 @@ public class Producto implements Serializable {
         return promedio / this.calificaciones.size();
     }
 
+    public void buscado() {
+        numVistas++;
+    }
+
+    public String getTiempoEntregaTexto() {
+        return tiempoEntrega != null ? tiempoEntrega.getTime() / (1000.0 * 60 * 60) + " horas" : "";
+    }
+
+    public String getPromedioCalificacionesTexto() {
+        float califProducto = getPromedioCalificaciones();
+        if (califProducto == -1) {
+            return "Este producto no tiene calificaciones";
+        }
+        return califProducto + "/5";
+    }
+
 }

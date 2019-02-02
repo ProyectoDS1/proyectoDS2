@@ -49,7 +49,7 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
     @FXML
     public void productoElegido(ActionEvent e, Producto p) {
         try {
-             Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.INFO, "Se ha elegido {0}", p.getNombreArticulo());
+            Logger.getLogger(VentanaCalificarVendedorController.class.getName()).log(Level.INFO, "Se ha elegido {0}", p.getNombreArticulo());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaDetallesProducto.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
@@ -87,16 +87,15 @@ public class VentanaResultadosBusquedaController implements Initializable, CanGo
     public void show() {
         ((Stage) titulo.getScene().getWindow()).show();
 
+        ConexionSql.getConexion().beginTransaction();
         container.getChildren().clear();
         for (Producto p : productos) {
-            p.setNumVistas(p.getNumVistas() + 1);
+            p.buscado();
             Hyperlink h = new Hyperlink(p.getNombreArticulo());
             h.setOnAction(e -> productoElegido(e, p));
             container.getChildren().add(h);
         }
         ConexionSql.getConexion().endTransaction();
     }
-
-    
 
 }

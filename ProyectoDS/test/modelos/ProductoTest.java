@@ -19,45 +19,31 @@ import static org.junit.Assert.*;
  * @author Jeremy GS
  */
 public class ProductoTest {
-    
+
     public ProductoTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
 
     /**
-     * Test of getNombreArticulo method, of class Producto.
+     * Test of nombreArticulo methods, of class Producto.
      */
     @Test
-    public void testGetNombreArticulo() {
-        System.out.println("getNombreArticulo");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.getNombreArticulo();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setNombreArticulo method, of class Producto.
-     */
-    @Test
-    public void testSetNombreArticulo() {
+    public void testNombreArticulo() {
         System.out.println("setNombreArticulo");
         String nombreArticulo = "";
         Producto instance = new Producto();
@@ -67,24 +53,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getDescripcion method, of class Producto.
+     * Test of descripcion methods, of class Producto.
      */
     @Test
-    public void testGetDescripcion() {
-        System.out.println("getDescripcion");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.getDescripcion();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDescripcion method, of class Producto.
-     */
-    @Test
-    public void testSetDescripcion() {
+    public void testDescripcion() {
         System.out.println("setDescripcion");
         String descripcion = "";
         Producto instance = new Producto();
@@ -94,24 +66,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getCategoria method, of class Producto.
+     * Test of categoria methods, of class Producto.
      */
     @Test
-    public void testGetCategoria() {
-        System.out.println("getCategoria");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.getCategoria();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setCategoria method, of class Producto.
-     */
-    @Test
-    public void testSetCategoria() {
+    public void testCategoria() {
         System.out.println("setCategoria");
         String categoria = "";
         Producto instance = new Producto();
@@ -121,24 +79,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getPrecio method, of class Producto.
+     * Test of precio methods, of class Producto.
      */
     @Test
-    public void testGetPrecio() {
-        System.out.println("getPrecio");
-        Producto instance = new Producto();
-        float expResult = 0.0F;
-        float result = instance.getPrecio();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setPrecio method, of class Producto.
-     */
-    @Test
-    public void testSetPrecio() {
+    public void testPrecio() {
         System.out.println("setPrecio");
         float precio = 0.0F;
         Producto instance = new Producto();
@@ -148,24 +92,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getTiempoEntrega method, of class Producto.
+     * Test of tiempoEntrega methods, of class Producto.
      */
     @Test
-    public void testGetTiempoEntrega() {
-        System.out.println("getTiempoEntrega");
-        Producto instance = new Producto();
-        Date expResult = null;
-        Date result = instance.getTiempoEntrega();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setTiempoEntrega method, of class Producto.
-     */
-    @Test
-    public void testSetTiempoEntrega() {
+    public void testTiempoEntrega() {
         System.out.println("setTiempoEntrega");
         Date tiempoEntrega = null;
         Producto instance = new Producto();
@@ -175,24 +105,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getCalificaciones method, of class Producto.
+     * Test of calificaciones methods, of class Producto.
      */
     @Test
-    public void testGetCalificaciones() {
-        System.out.println("getCalificaciones");
-        Producto instance = new Producto();
-        List<CalificacionProducto> expResult = null;
-        List<CalificacionProducto> result = instance.getCalificaciones();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setCalificaciones method, of class Producto.
-     */
-    @Test
-    public void testSetCalificaciones() {
+    public void testCalificaciones() {
         System.out.println("setCalificaciones");
         List<CalificacionProducto> calificaciones = null;
         Producto instance = new Producto();
@@ -202,24 +118,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of isDisponible method, of class Producto.
+     * Test of disponible methods, of class Producto.
      */
     @Test
-    public void testIsDisponible() {
-        System.out.println("isDisponible");
-        Producto instance = new Producto();
-        boolean expResult = false;
-        boolean result = instance.isDisponible();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setDisponible method, of class Producto.
-     */
-    @Test
-    public void testSetDisponible() {
+    public void testDisponible() {
         System.out.println("setDisponible");
         boolean disponible = false;
         Producto instance = new Producto();
@@ -229,24 +131,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of isEliminado method, of class Producto.
+     * Test of eliminado methods, of class Producto.
      */
     @Test
-    public void testIsEliminado() {
-        System.out.println("isEliminado");
-        Producto instance = new Producto();
-        boolean expResult = false;
-        boolean result = instance.isEliminado();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setEliminado method, of class Producto.
-     */
-    @Test
-    public void testSetEliminado() {
+    public void testEliminado() {
         System.out.println("setEliminado");
         boolean eliminado = false;
         Producto instance = new Producto();
@@ -256,24 +144,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getVendedor method, of class Producto.
+     * Test of vendedor methods, of class Producto.
      */
     @Test
-    public void testGetVendedor() {
-        System.out.println("getVendedor");
-        Producto instance = new Producto();
-        Vendedor expResult = null;
-        Vendedor result = instance.getVendedor();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setVendedor method, of class Producto.
-     */
-    @Test
-    public void testSetVendedor() {
+    public void testVendedor() {
         System.out.println("setVendedor");
         Vendedor vendedor = null;
         Producto instance = new Producto();
@@ -283,10 +157,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of getNumVistas method, of class Producto.
+     * Test of numVistas methods, of class Producto.
      */
     @Test
-    public void testGetNumVistas() {
+    public void testNumVistas() {
         System.out.println("getNumVistas");
         Producto instance = new Producto();
         int expResult = 0;
@@ -297,23 +171,10 @@ public class ProductoTest {
     }
 
     /**
-     * Test of setNumVistas method, of class Producto.
+     * Test of fechaCreacion methods, of class Producto.
      */
     @Test
-    public void testSetNumVistas() {
-        System.out.println("setNumVistas");
-        int numVistas = 0;
-        Producto instance = new Producto();
-        instance.setNumVistas(numVistas);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getFechaCreacion method, of class Producto.
-     */
-    @Test
-    public void testGetFechaCreacion() {
+    public void testFechaCreacion() {
         System.out.println("getFechaCreacion");
         Producto instance = new Producto();
         Date expResult = null;
@@ -324,81 +185,14 @@ public class ProductoTest {
     }
 
     /**
-     * Test of setFechaCreacion method, of class Producto.
+     * Test of stock methods, of class Producto.
      */
     @Test
-    public void testSetFechaCreacion() {
-        System.out.println("setFechaCreacion");
-        Date fechaCreacion = null;
-        Producto instance = new Producto();
-        instance.setFechaCreacion(fechaCreacion);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getStock method, of class Producto.
-     */
-    @Test
-    public void testGetStock() {
+    public void testStock() {
         System.out.println("getStock");
         Producto instance = new Producto();
         int expResult = 0;
         int result = instance.getStock();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setStock method, of class Producto.
-     */
-    @Test
-    public void testSetStock() {
-        System.out.println("setStock");
-        int stock = 0;
-        Producto instance = new Producto();
-        instance.setStock(stock);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getId method, of class Producto.
-     */
-    @Test
-    public void testGetId() {
-        System.out.println("getId");
-        Producto instance = new Producto();
-        Long expResult = null;
-        Long result = instance.getId();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of setId method, of class Producto.
-     */
-    @Test
-    public void testSetId() {
-        System.out.println("setId");
-        Long id = null;
-        Producto instance = new Producto();
-        instance.setId(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of toString method, of class Producto.
-     */
-    @Test
-    public void testToString() {
-        System.out.println("toString");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.toString();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -417,5 +211,45 @@ public class ProductoTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
+    /**
+     * Test of buscado method, of class Producto.
+     */
+    @Test
+    public void testBuscado() {
+        System.out.println("buscado");
+        Producto instance = new Producto();
+        instance.buscado();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getTiempoEntregaTexto method, of class Producto.
+     */
+    @Test
+    public void testGetTiempoEntregaTexto() {
+        System.out.println("getTiempoEntregaTexto");
+        Producto instance = new Producto();
+        String expResult = "";
+        String result = instance.getTiempoEntregaTexto();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getPromedioCalificacionesTexto method, of class Producto.
+     */
+    @Test
+    public void testGetPromedioCalificacionesTexto() {
+        System.out.println("getPromedioCalificacionesTexto");
+        Producto instance = new Producto();
+        String expResult = "";
+        String result = instance.getPromedioCalificacionesTexto();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }

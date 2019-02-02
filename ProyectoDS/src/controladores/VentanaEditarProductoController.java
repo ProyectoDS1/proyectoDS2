@@ -61,6 +61,7 @@ public class VentanaEditarProductoController extends TextProducto implements Ini
 
     @FXML
     public void guardar(ActionEvent e) {
+        ConexionSql.getConexion().beginTransaction();
         if (validarDatos()) {
         target.setNombreArticulo(nombre.getText());
         target.setDescripcion(descripcion.getText());

@@ -31,10 +31,10 @@ import modelos.Usuario;
  * @author reyes
  */
 public class VentanaDetallesProductoController implements Initializable, CanGoBack, CanGetData {
-
+    
     private CanGoBack returnController;
     private Producto producto;
-
+    
     @FXML
     private Label titulo;
     @FXML
@@ -69,29 +69,29 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
             }
         });
     }
-
+    
     @Override
     public void setReturnController(CanGoBack c) {
         returnController = c;
     }
-
+    
     @Override
     public void setData(Object... data) {
         producto = (Producto) data[0];
-
+        
         show();
     }
-
+    
     @Override
     public void show() {
         titulo.setText(producto.getNombreArticulo());
         vendedor.setText(producto.getVendedor().getNombre() + " " + producto.getVendedor().getApellido());
         precio.setText("$" + Float.toString(producto.getPrecio()));
         categoria.setText(producto.getCategoria());
-        tiempoEntrega.setText(producto.getTiempoEntrega() != null ? producto.getTiempoEntrega().getTime() / (1000.0 * 60 * 60) + " horas" : "");
+        tiempoEntrega.setText(producto.getTiempoEntregaTexto());
         llenarCalificaciones();
         stock.setText(Integer.toString(producto.getStock()));
-
+        
         if (Usuario.getUsuarioActual() == null) {
             btnComprar.setDisable(true);
             btnComprarWrapper.setTooltip(new Tooltip("Los usuarios anónimos no pueden comprar!"));
@@ -100,17 +100,12 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
             btnComprar.setDisable(true);
             btnComprarWrapper.setTooltip(new Tooltip("Los administradores no pueden comprar!"));
         }
-
+        
         ((Stage) titulo.getScene().getWindow()).show();
     }
-
+    
     private void llenarCalificaciones() {
-        float califProducto = producto.getPromedioCalificaciones();
-        if (califProducto == -1) {
-            calificacionProducto.setText("Este producto no tiene calificaciones");
-        } else {
-            calificacionProducto.setText(califProducto + "/5");
-        }
+        calificacionProducto.setText(producto.getPromedioCalificacionesTexto());
         float califVendedor = producto.getVendedor().getPromedioCalificaciones();
         if (califVendedor == -1) {
             calificacionVendedor.setText("Este vendedor no tiene calificaciones");
@@ -118,21 +113,21 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
             calificacionVendedor.setText(califVendedor + "/5");
         }
     }
-
+    
     @FXML
     public void comprarProducto(ActionEvent e
     ) {
         if (!validarNumItems()) {
             return;
         }
-
+        
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaFormaPago.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
-
+            
             VentanaFormaPagoController controller = loader.<VentanaFormaPagoController>getController();
-
+            
             controller.setReturnController(this);
             controller.setData(producto, Integer.valueOf(numItems.getText()));
             stage.show();
@@ -141,14 +136,14 @@ public class VentanaDetallesProductoController implements Initializable, CanGoBa
             Logger.getLogger(VentanaDetallesProductoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     @FXML
     public void volver(ActionEvent e
     ) {
         ((Stage) titulo.getScene().getWindow()).close();
         returnController.show();
     }
-
+    
     private boolean validarNumItems() {
         try {
             int numItemsDeseados = Integer.valueOf(numItems.getText());
