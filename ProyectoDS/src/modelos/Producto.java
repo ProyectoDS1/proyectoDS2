@@ -145,8 +145,12 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-    private void agregarRating(int rate) {
-        // TODO Not implemented yet
+    public CalificacionProducto agregarRating(int rate) {
+        CalificacionProducto c = new CalificacionProducto(this, rate, (Comprador) Usuario.getUsuarioActual());
+        this.getCalificaciones().add(c);
+        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(c);
+
+        return c;
     }
 
     public Long getId() {

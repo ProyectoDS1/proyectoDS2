@@ -31,8 +31,11 @@ public class Vendedor extends Comprador {
         return this.misArticulos;
     }
 
-    public void agregarRating(int rate) {
-        // TODO Not implemented yet
+    public CalificacionVendedor agregarRating(int rate) {
+        CalificacionVendedor calificacionVend = new CalificacionVendedor(this, rate, (Comprador) Usuario.getUsuarioActual());
+        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(calificacionVend);
+        this.getCalificacionesV().add(calificacionVend);
+        return calificacionVend;
     }
 
     public List<Pedido> getMisPedidos() {
@@ -42,12 +45,12 @@ public class Vendedor extends Comprador {
     public void setMisPedidos(List<Pedido> misPedidos) {
         this.misPedidos = misPedidos;
     }
-	
-    public int totalProductosPendientes(){
-        int cont=0;
-        for(int i=0;i<this.misPedidos.size();i++){
-            boolean cond=this.misPedidos.get(i).estado.equals(EstadoPedido.PENDIENTE);
-            if(cond){
+
+    public int totalProductosPendientes() {
+        int cont = 0;
+        for (int i = 0; i < this.misPedidos.size(); i++) {
+            boolean cond = this.misPedidos.get(i).estado.equals(EstadoPedido.PENDIENTE);
+            if (cond) {
                 cont++;
             }
         }
@@ -100,10 +103,9 @@ public class Vendedor extends Comprador {
         ConexionSql.getConexion().endTransaction();
 
         // Crear nuevo vendedor y pasarle todos los datos del usuario eliminado
-        
-        Vendedor nuevo =  new Vendedor();
+        Vendedor nuevo = new Vendedor();
         nuevo.copiarAtributos(u);
-        
+
         em = ConexionSql.getConexion().beginTransaction();
         if ((u instanceof Comprador) && !(u instanceof Vendedor)) { // Si el antiguo era un comprador no vendedor, preservar sus pedidos y sus calificaciones
             nuevo.setMisCalificaciones(((Comprador) u).getCalificaciones());
@@ -112,8 +114,7 @@ public class Vendedor extends Comprador {
                 em.persist(c);
             }
             nuevo.setPedidos(((Comprador) u).mostrarPedidos());
-            //System.out.println(nuevo.mostrarPedidos());
-            Logger.getLogger(VentanaAdministracionController.class.getName()).log(Level.SEVERE,nuevo.mostrarPedidos().toString());
+            Logger.getLogger(VentanaAdministracionController.class.getName()).log(Level.SEVERE, nuevo.mostrarPedidos().toString());
 
             for (Pedido p : nuevo.mostrarPedidos()) {
                 p.setComprador(nuevo);

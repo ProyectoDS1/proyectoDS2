@@ -34,7 +34,7 @@ public class VentanaCrearNuevoProductoController extends TextProducto implements
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // Not required yet
     }
 
     @Override

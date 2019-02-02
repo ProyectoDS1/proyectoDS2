@@ -17,9 +17,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import modelos.CalificacionProducto;
-import modelos.Comprador;
 import modelos.Producto;
-import modelos.Usuario;
 import utils.ConexionSql;
 
 /**
@@ -42,7 +40,6 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
     /**
      * Initializes the controller class.
      */
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Not required yet
@@ -76,19 +73,14 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
     @FXML
     public void calificar(ActionEvent e) {
         int estrellas = Integer.valueOf(((Button) e.getSource()).getText());
-        //System.out.println("Calificando producto: " + estrellas + " estrellas");
-        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Calificando producto: " + estrellas + " estrellas");
+        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Calificando producto: {0} estrellas", estrellas);
 
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        CalificacionProducto c = new CalificacionProducto(target, estrellas, (Comprador) Usuario.getUsuarioActual());
+        CalificacionProducto c = target.agregarRating(estrellas);
         em.persist(c);
-        target.getCalificaciones().add(c);
-        ((Comprador) Usuario.getUsuarioActual()).getCalificaciones().add(c);
         ConexionSql.getConexion().endTransaction();
 
-        ((VentanaComprasPendientesController) returnController).show();
-
-        ((Stage) titulo.getScene().getWindow()).close();
+        volver(e);
     }
 
     @FXML
@@ -96,6 +88,5 @@ public class VentanaCalificarProductoController implements Initializable, CanGoB
         ((Stage) titulo.getScene().getWindow()).close();
         returnController.show();
     }
-
 
 }

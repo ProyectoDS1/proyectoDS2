@@ -14,11 +14,11 @@ import javafx.scene.control.TextField;
  * @author leone
  */
 public class TextUsuario {
-    protected final String comprador1="Comprador";
-    protected final String vendedor1="Vendedor";
-    protected final String administrador1="Administrador";
-    
-   
+
+    protected static final String COMPRADOR = "Comprador";
+    protected static final String VENDEDOR = "Vendedor";
+    protected static final String ADMINISTRADOR = "Administrador";
+
     @FXML
     protected TextField nombre;
     @FXML
@@ -99,6 +99,5 @@ public class TextUsuario {
     public void setMatricula(TextField matricula) {
         this.matricula = matricula;
     }
-    
-    
+
 }

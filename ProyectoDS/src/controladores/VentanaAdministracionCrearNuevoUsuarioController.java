@@ -37,8 +37,8 @@ public class VentanaAdministracionCrearNuevoUsuarioController extends TextUsuari
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoria.getItems().addAll(comprador1, vendedor1, administrador1);
-        categoria.setValue(comprador1);
+        categoria.getItems().addAll(COMPRADOR, VENDEDOR, ADMINISTRADOR);
+        categoria.setValue(COMPRADOR);
     }
 
     @Override
@@ -56,13 +56,13 @@ public class VentanaAdministracionCrearNuevoUsuarioController extends TextUsuari
 
         Usuario u;
         switch ((String) categoria.getValue()) {
-            case comprador1:
+            case COMPRADOR:
                 u = new Comprador();
                 break;
-            case vendedor1:
+            case VENDEDOR:
                 u = new Vendedor();
                 break;
-            case administrador1:
+            case ADMINISTRADOR:
                 u = new Administrador();
                 break;
             default:
