@@ -95,42 +95,37 @@ public class Comprador extends Usuario {
         return nombre + " " + apellido + " (Comprador)";
     }
 
-    public static Comprador transferir(Usuario usuario) {
-        if (usuario instanceof Comprador && !(usuario instanceof Vendedor)) {
-            return (Comprador) usuario;
+    public static Comprador transferir(Usuario u) {
+        if (u instanceof Comprador && !(u instanceof Vendedor)) {
+            // Usuario ya es comprador y no es vendedor, retornarlo directamente
+            return (Comprador) u;
         }
 
+        // Si no, no era un Comprador
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.remove(usuario); 
+        em.remove(u); // Eliminar de la base de datos
         ConexionSql.getConexion().endTransaction();
 
-        Comprador nuevoComprador = new Comprador();
-        nuevoComprador.setNombre(usuario.getNombre());
-        nuevoComprador.setApellido(usuario.getApellido());
-        nuevoComprador.setEmail(usuario.getEmail());
-        nuevoComprador.setCedula(usuario.getCedula());
-        nuevoComprador.setMatricula(usuario.getMatricula());
-        nuevoComprador.setTelefono(usuario.getTelefono());
-        nuevoComprador.setContrasenia(usuario.getContrasenia());
-        nuevoComprador.setDireccion(usuario.getDireccion());
-        nuevoComprador.setActivo(usuario.isActivo());
+        // Crear nuevo comprador y pasarle todos los datos del usuario eliminado
+        Comprador nuevo =  new Comprador();
+        nuevo.copiarAtributos(u);
         em = ConexionSql.getConexion().beginTransaction();
-        if (usuario instanceof Vendedor) { 
-            nuevoComprador.setMisCalificaciones(((Vendedor) usuario).getCalificaciones());
-            for (Calificacion c : nuevoComprador.getCalificaciones()) {
-                c.setAutor(nuevoComprador);
+        if (u instanceof Vendedor) { // Si el antiguo era un vendedor, preservar sus pedidos y sus calificaciones
+            nuevo.setMisCalificaciones(((Vendedor) u).getCalificaciones());
+            for (Calificacion c : nuevo.getCalificaciones()) {
+                c.setAutor(nuevo);
                 em.persist(c);
             }
-            nuevoComprador.setPedidos(((Vendedor) usuario).mostrarPedidos());
-            for (Pedido p : nuevoComprador.mostrarPedidos()) {
-                p.setComprador(nuevoComprador);
+            nuevo.setPedidos(((Vendedor) u).mostrarPedidos());
+            for (Pedido p : nuevo.mostrarPedidos()) {
+                p.setComprador(nuevo);
                 em.persist(p);
             }
         }
 
-        em.persist(nuevoComprador);
+        em.persist(nuevo);
         ConexionSql.getConexion().endTransaction();
 
-        return nuevoComprador;
+        return nuevo;
     }
 }

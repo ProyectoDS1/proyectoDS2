@@ -5,8 +5,10 @@
  */
 package modelos;
 
-
+import controladores.VentanaAdministracionController;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -33,6 +35,25 @@ public class Vendedor extends Comprador {
         // TODO Not implemented yet
     }
 
+    public List<Pedido> getMisPedidos() {
+        return misPedidos;
+    }
+
+    public void setMisPedidos(List<Pedido> misPedidos) {
+        this.misPedidos = misPedidos;
+    }
+	
+    public int totalProductosPendientes(){
+        int cont=0;
+        for(int i=0;i<this.misPedidos.size();i++){
+            boolean cond=this.misPedidos.get(i).estado.equals(EstadoPedido.PENDIENTE);
+            if(cond){
+                cont++;
+            }
+        }
+        return cont;
+    }
+
     public float getPromedioCalificaciones() {
         if (calificaciones.isEmpty()) {
             return -1;
@@ -46,50 +67,64 @@ public class Vendedor extends Comprador {
         return promedio / this.calificaciones.size();
     }
 
+    public List<Producto> getMisArticulos() {
+        return misArticulos;
+    }
+
+    public void setMisArticulos(List<Producto> misArticulos) {
+        this.misArticulos = misArticulos;
+    }
+
+    public List<CalificacionVendedor> getCalificacionesV() {
+        return calificaciones;
+    }
+
+    public void setCalificaciones(List<CalificacionVendedor> calificaciones) {
+        this.calificaciones = calificaciones;
+    }
+
     @Override
     public String toString() {
         return nombre + " " + apellido + " (Vendedor)";
     }
 
-    public static Vendedor transferir(Usuario usuario) {
-        if (usuario instanceof Vendedor) {
-            return (Vendedor) usuario;
+    public static Vendedor transferir(Usuario u) {
+        if (u instanceof Vendedor) {
+            // Usuario ya es vendedor
+            return (Vendedor) u;
         }
 
+        // Si no, no era un Vendedor
         EntityManager em = ConexionSql.getConexion().beginTransaction();
-        em.remove(usuario);
+        em.remove(u); // Eliminar de la base de datos
         ConexionSql.getConexion().endTransaction();
 
-        Vendedor nuevoVendedor = new Vendedor();
-        nuevoVendedor.setNombre(usuario.getNombre());
-        nuevoVendedor.setApellido(usuario.getApellido());
-        nuevoVendedor.setEmail(usuario.getEmail());
-        nuevoVendedor.setCedula(usuario.getCedula());
-        nuevoVendedor.setMatricula(usuario.getMatricula());
-        nuevoVendedor.setTelefono(usuario.getTelefono());
-        nuevoVendedor.setContrasenia(usuario.getContrasenia());
-        nuevoVendedor.setDireccion(usuario.getDireccion());
-        nuevoVendedor.setActivo(usuario.isActivo());
+        // Crear nuevo vendedor y pasarle todos los datos del usuario eliminado
+        
+        Vendedor nuevo =  new Vendedor();
+        nuevo.copiarAtributos(u);
+        
         em = ConexionSql.getConexion().beginTransaction();
-        if ((usuario instanceof Comprador) && !(usuario instanceof Vendedor)) { 
-            nuevoVendedor.setMisCalificaciones(((Comprador) usuario).getCalificaciones());
-            for (Calificacion c : nuevoVendedor.getCalificaciones()) {
-                c.setAutor(nuevoVendedor);
+        if ((u instanceof Comprador) && !(u instanceof Vendedor)) { // Si el antiguo era un comprador no vendedor, preservar sus pedidos y sus calificaciones
+            nuevo.setMisCalificaciones(((Comprador) u).getCalificaciones());
+            for (Calificacion c : nuevo.getCalificaciones()) {
+                c.setAutor(nuevo);
                 em.persist(c);
             }
+            nuevo.setPedidos(((Comprador) u).mostrarPedidos());
+            //System.out.println(nuevo.mostrarPedidos());
+            Logger.getLogger(VentanaAdministracionController.class.getName()).log(Level.SEVERE,nuevo.mostrarPedidos().toString());
 
-            nuevoVendedor.setPedidos(((Comprador) usuario).mostrarPedidos());
-            System.out.println(nuevoVendedor.mostrarPedidos());
-            for (Pedido p : nuevoVendedor.mostrarPedidos()) {
-                p.setComprador(nuevoVendedor);
+            for (Pedido p : nuevo.mostrarPedidos()) {
+                p.setComprador(nuevo);
                 em.persist(p);
             }
         }
 
-        em.persist(nuevoVendedor);
+        em.persist(nuevo);
         ConexionSql.getConexion().endTransaction();
 
-        return nuevoVendedor;
+        return nuevo;
     }
 
 }

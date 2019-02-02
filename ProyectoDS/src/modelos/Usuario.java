@@ -41,7 +41,19 @@ public abstract class Usuario implements Serializable {
     public void iniciarSesion() {
 
     }
-
+    
+    public void copiarAtributos(Usuario u){
+        this.setNombre(u.getNombre());
+        this.setApellido(u.getApellido());
+        this.setEmail(u.getEmail());
+        this.setCedula(u.getCedula());
+        this.setMatricula(u.getMatricula());
+        this.setTelefono(u.getTelefono());
+        this.setContrasenia(u.getContrasenia());
+        this.setDireccion(u.getDireccion());
+        this.setActivo(u.isActivo());
+    }
+    
     public void cerrarSesion() {
 
     }
@@ -142,4 +154,10 @@ public abstract class Usuario implements Serializable {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "nombre=" + nombre + ", apellido=" + apellido 
+                + ", telefono=" + telefono + ", whatsapp=" + whatsapp + ", direccion=" 
+                + direccion + ", cedula=" + cedula + ", matricula=" + matricula + '}';
+    }
 }
