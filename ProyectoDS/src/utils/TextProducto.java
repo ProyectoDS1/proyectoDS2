@@ -17,7 +17,7 @@ import javafx.scene.layout.Region;
  * @author leone
  */
 public class TextProducto {
-    
+
     @FXML
     protected TextField nombre;
     @FXML
@@ -30,7 +30,7 @@ public class TextProducto {
     protected TextField tiempoEntrega;
     @FXML
     protected TextField stock;
-    
+
     protected boolean validarDatos() {
         boolean error = false;
         String errorMessage = "";
@@ -112,6 +112,5 @@ public class TextProducto {
     public void setStock(TextField stock) {
         this.stock = stock;
     }
-    
-    
+
 }

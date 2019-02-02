@@ -39,7 +39,6 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
 
     @FXML
     public void verMapa(ActionEvent e, Pedido p) {
-        //System.out.println("Ver mapa de producto");
         Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Ver mapa de producto");
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");

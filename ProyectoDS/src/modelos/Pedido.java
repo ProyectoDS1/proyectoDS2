@@ -50,7 +50,7 @@ public class Pedido implements Serializable {
     protected MetodoPago metpago;
 
     public void anular() {
-        // TODO Not implemented yet
+        this.estado = EstadoPedido.ANULADO;
     }
 
     public void notificarVendedor() {
@@ -67,7 +67,7 @@ public class Pedido implements Serializable {
     }
 
     public void elegirTipoPago(MetodoPago metp) {
-        // TODO Not implemented yet
+        this.metpago = metp;
     }
 
     public EstadoPedido getEstado() {

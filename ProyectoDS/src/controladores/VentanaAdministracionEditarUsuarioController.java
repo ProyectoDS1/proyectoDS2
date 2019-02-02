@@ -58,15 +58,15 @@ public class VentanaAdministracionEditarUsuarioController extends TextUsuario im
         cedula.setText(target.getCedula());
         activo.setSelected(target.isActivo());
 
-        categoria.getItems().addAll(comprador1, vendedor1, administrador1);
+        categoria.getItems().addAll(COMPRADOR, VENDEDOR, ADMINISTRADOR);
         if (target instanceof Comprador) {
-            categoria.setValue(comprador1);
+            categoria.setValue(COMPRADOR);
         }
         if (target instanceof Vendedor) {
-            categoria.setValue(vendedor1);
+            categoria.setValue(VENDEDOR);
         }
         if (target instanceof Administrador) {
-            categoria.setValue(administrador1);
+            categoria.setValue(ADMINISTRADOR);
         }
     }
 
@@ -89,13 +89,13 @@ public class VentanaAdministracionEditarUsuarioController extends TextUsuario im
         target.setActivo(activo.isSelected());
         ConexionSql.getConexion().endTransaction();
         switch ((String) categoria.getValue()) {
-            case comprador1:
+            case COMPRADOR:
                 Comprador.transferir(target);
                 break;
-            case vendedor1:
+            case VENDEDOR:
                 Vendedor.transferir(target);
                 break;
-            case administrador1:
+            case ADMINISTRADOR:
                 Administrador.transferir(target);
                 break;
             default:

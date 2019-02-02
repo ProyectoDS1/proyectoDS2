@@ -30,11 +30,8 @@ public final class EmailSender {
             request.setBody(mail.build());
             Response response = sg.api(request);
             
-            //System.out.println(response.getStatusCode());
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE,String.valueOf(response.getStatusCode()));
-            //System.out.println(response.getBody());
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE,response.getBody());
-            //System.out.println(response.getHeaders());
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE,response.getHeaders().toString());
         } catch (IOException ex) {
             Logger.getLogger(EmailSender.class.getName()).log(Level.SEVERE, null, ex);
