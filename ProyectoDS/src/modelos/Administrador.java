@@ -25,12 +25,15 @@ public class Administrador extends Usuario {
     public void administrarProducto(Producto articulo) {
         // Not required yet
     }
-
+    String qSelect = "SELECT p FROM Pedido p WHERE p.estado=:estado";
+    String setEstado = "estado";
+    
     public List<Pedido> verComprasPendientes() {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
+        
 
-        TypedQuery<Pedido> q = em.createQuery("SELECT p FROM Pedido p WHERE p.estado=:estado", Pedido.class);
-        q.setParameter("estado", EstadoPedido.PENDIENTE);
+        TypedQuery<Pedido> q = em.createQuery(qSelect, Pedido.class);
+        q.setParameter(setEstado, EstadoPedido.PENDIENTE);
         List<Pedido> pedidos = q.getResultList();
 
         ConexionSql.getConexion().endTransaction();
@@ -42,8 +45,8 @@ public class Administrador extends Usuario {
     public List<Pedido> verComprasCompletadas() {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
 
-        TypedQuery<Pedido> q = em.createQuery("SELECT p FROM Pedido p WHERE p.estado=:estado", Pedido.class);
-        q.setParameter("estado", EstadoPedido.ENTREGADO);
+        TypedQuery<Pedido> q = em.createQuery(qSelect, Pedido.class);
+        q.setParameter(setEstado, EstadoPedido.ENTREGADO);
         List<Pedido> pedidos = q.getResultList();
 
         ConexionSql.getConexion().endTransaction();
@@ -54,8 +57,8 @@ public class Administrador extends Usuario {
     public List<Pedido> verComprasAnuladas() {
         EntityManager em = ConexionSql.getConexion().beginTransaction();
 
-        TypedQuery<Pedido> q = em.createQuery("SELECT p FROM Pedido p WHERE p.estado=:estado", Pedido.class);
-        q.setParameter("estado", EstadoPedido.ANULADO);
+        TypedQuery<Pedido> q = em.createQuery(qSelect, Pedido.class);
+        q.setParameter(setEstado, EstadoPedido.ANULADO);
         List<Pedido> pedidos = q.getResultList();
 
         ConexionSql.getConexion().endTransaction();
