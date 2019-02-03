@@ -5,8 +5,8 @@
  */
 package modelos;
 
-import java.util.Date;
-import java.util.List;
+
+import java.util.LinkedList;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -19,7 +19,9 @@ import org.junit.Test;
  * @author Jeremy GS
  */
 public class ProductoTest {
-
+    
+    private Producto producto; 
+    
     public ProductoTest() {
     }
 
@@ -33,6 +35,8 @@ public class ProductoTest {
 
     @Before
     public void setUp() {
+        producto=new Producto();
+        producto.calificaciones=new LinkedList<>();
     }
 
     @After
@@ -44,25 +48,8 @@ public class ProductoTest {
      */
     @Test
     public void testNombreArticulo() {
-        System.out.println("setNombreArticulo");
-        String nombreArticulo = "";
-        Producto instance = new Producto();
-        instance.setNombreArticulo(nombreArticulo);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of descripcion methods, of class Producto.
-     */
-    @Test
-    public void testDescripcion() {
-        System.out.println("setDescripcion");
-        String descripcion = "";
-        Producto instance = new Producto();
-        instance.setDescripcion(descripcion);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       producto.setNombreArticulo("Mica");
+       assertSame(producto.getNombreArticulo(),"Mica");
     }
 
     /**
@@ -70,12 +57,8 @@ public class ProductoTest {
      */
     @Test
     public void testCategoria() {
-        System.out.println("setCategoria");
-        String categoria = "";
-        Producto instance = new Producto();
-        instance.setCategoria(categoria);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        producto.setCategoria("Accesorios celulares");
+        assertSame(producto.getCategoria(),"Accesorios celulares");
     }
 
     /**
@@ -83,38 +66,8 @@ public class ProductoTest {
      */
     @Test
     public void testPrecio() {
-        System.out.println("setPrecio");
-        float precio = 0.0F;
-        Producto instance = new Producto();
-        instance.setPrecio(precio);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of tiempoEntrega methods, of class Producto.
-     */
-    @Test
-    public void testTiempoEntrega() {
-        System.out.println("setTiempoEntrega");
-        Date tiempoEntrega = null;
-        Producto instance = new Producto();
-        instance.setTiempoEntrega(tiempoEntrega);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of calificaciones methods, of class Producto.
-     */
-    @Test
-    public void testCalificaciones() {
-        System.out.println("setCalificaciones");
-        List<CalificacionProducto> calificaciones = null;
-        Producto instance = new Producto();
-        instance.setCalificaciones(calificaciones);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        producto.setPrecio(15);
+        assertEquals(producto.getPrecio(),(float) 15.0f,0.00);
     }
 
     /**
@@ -122,12 +75,9 @@ public class ProductoTest {
      */
     @Test
     public void testDisponible() {
-        System.out.println("setDisponible");
-        boolean disponible = false;
-        Producto instance = new Producto();
-        instance.setDisponible(disponible);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(producto.isDisponible());
+        producto.setDisponible(true);
+        assertTrue(producto.isDisponible());
     }
 
     /**
@@ -135,12 +85,9 @@ public class ProductoTest {
      */
     @Test
     public void testEliminado() {
-        System.out.println("setEliminado");
-        boolean eliminado = false;
-        Producto instance = new Producto();
-        instance.setEliminado(eliminado);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertFalse(producto.isEliminado());
+        producto.setEliminado(true);
+        assertTrue(producto.isEliminado());
     }
 
     /**
@@ -148,54 +95,10 @@ public class ProductoTest {
      */
     @Test
     public void testVendedor() {
-        System.out.println("setVendedor");
-        Vendedor vendedor = null;
-        Producto instance = new Producto();
-        instance.setVendedor(vendedor);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of numVistas methods, of class Producto.
-     */
-    @Test
-    public void testNumVistas() {
-        System.out.println("getNumVistas");
-        Producto instance = new Producto();
-        int expResult = 0;
-        int result = instance.getNumVistas();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of fechaCreacion methods, of class Producto.
-     */
-    @Test
-    public void testFechaCreacion() {
-        System.out.println("getFechaCreacion");
-        Producto instance = new Producto();
-        Date expResult = null;
-        Date result = instance.getFechaCreacion();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of stock methods, of class Producto.
-     */
-    @Test
-    public void testStock() {
-        System.out.println("getStock");
-        Producto instance = new Producto();
-        int expResult = 0;
-        int result = instance.getStock();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertNull(producto.getVendedor());
+        Vendedor vendedor1=new Vendedor();
+        producto.setVendedor(vendedor1);
+        assertNotNull(producto.getVendedor());
     }
 
     /**
@@ -203,13 +106,15 @@ public class ProductoTest {
      */
     @Test
     public void testGetPromedioCalificaciones() {
-        System.out.println("getPromedioCalificaciones");
-        Producto instance = new Producto();
-        float expResult = 0.0F;
-        float result = instance.getPromedioCalificaciones();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertTrue(producto.getCalificaciones().isEmpty());
+        Comprador comprador=new Comprador();
+        Comprador comprador2=new Comprador();
+        CalificacionProducto calificacion1=new CalificacionProducto(producto,4,comprador);
+        CalificacionProducto calificacion2=new CalificacionProducto(producto,5,comprador2);
+        producto.getCalificaciones().add(calificacion1);
+        producto.getCalificaciones().add(calificacion2);
+        assertFalse(producto.getCalificaciones().isEmpty());
+        assertEquals(producto.getPromedioCalificaciones(),4.5f,0.00);
     }
 
     /**
@@ -217,39 +122,25 @@ public class ProductoTest {
      */
     @Test
     public void testBuscado() {
-        System.out.println("buscado");
-        Producto instance = new Producto();
-        instance.buscado();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTiempoEntregaTexto method, of class Producto.
-     */
-    @Test
-    public void testGetTiempoEntregaTexto() {
-        System.out.println("getTiempoEntregaTexto");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.getTiempoEntregaTexto();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(producto.getNumVistas(),0);
+        producto.buscado();
+        assertNotEquals(producto.getNumVistas(),0);
+        assertEquals(producto.getNumVistas(),1);
     }
 
     /**
      * Test of getPromedioCalificacionesTexto method, of class Producto.
      */
     @Test
-    public void testGetPromedioCalificacionesTexto() {
-        System.out.println("getPromedioCalificacionesTexto");
-        Producto instance = new Producto();
-        String expResult = "";
-        String result = instance.getPromedioCalificacionesTexto();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetPromedioCalificacionesTexto() {      
+        assertSame(producto.getPromedioCalificacionesTexto(),"Este producto no tiene calificaciones");
+        Comprador comprador=new Comprador();
+        Comprador comprador2=new Comprador();
+        CalificacionProducto calificacion1=new CalificacionProducto(producto,3,comprador);
+        CalificacionProducto calificacion2=new CalificacionProducto(producto,4,comprador2);
+        producto.getCalificaciones().add(calificacion1);
+        producto.getCalificaciones().add(calificacion2);
+        assertEquals(producto.getPromedioCalificacionesTexto(),"3.5/5");
     }
 
 }
