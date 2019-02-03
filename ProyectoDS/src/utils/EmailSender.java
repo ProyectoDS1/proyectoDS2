@@ -39,6 +39,7 @@ public final class EmailSender {
     }
 
     public static final boolean emailValido(String email) {
-        return false; // SendGrid ha desactivado la cuenta, no se puede enviar ningún email real
+            return false;
+          // SendGrid ha desactivado la cuenta, no se puede enviar ningún email real
     }
 }

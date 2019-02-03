@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     protected Date tiempoEntrega;
     @OneToMany(mappedBy = "producto")
-    protected List<CalificacionProducto> calificaciones;
+    private List<CalificacionProducto> calificaciones;
     protected boolean disponible;
     protected boolean eliminado;
     @ManyToOne

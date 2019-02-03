@@ -21,9 +21,9 @@ import utils.ConexionSql;
 public class Comprador extends Usuario {
 
     @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
-    protected List<Pedido> misPedidos;
+    transient List<Pedido> misPedidos;
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    protected List<Calificacion> misCalificaciones;
+    private List<Calificacion> misCalificaciones;
 
     public Pedido comprar(Producto articulo, int numItems, MetodoPago mp) {
         Pedido p = new Pedido();
