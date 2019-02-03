@@ -39,6 +39,6 @@ public final class EmailSender {
     }
 
     public static final boolean emailValido(String email) {
-        return email.contains("@") && !email.contains("@example.com");
+        return false; // SendGrid ha desactivado la cuenta, no se puede enviar ningún email real
     }
 }
