@@ -38,7 +38,7 @@ public class Producto implements Serializable {
     @Temporal(value = TemporalType.TIMESTAMP)
     protected Date tiempoEntrega;
     @OneToMany(mappedBy = "producto")
-    transient List<CalificacionProducto> calificaciones;
+    protected List<CalificacionProducto> calificaciones; // NOSONAR la lista no puede ser transient porque JPA necesita serializarla
     protected boolean disponible;
     protected boolean eliminado;
     @ManyToOne

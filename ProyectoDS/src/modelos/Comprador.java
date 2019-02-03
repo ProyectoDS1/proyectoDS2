@@ -21,9 +21,9 @@ import utils.ConexionSql;
 public class Comprador extends Usuario {
 
     @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
-    transient List<Pedido> misPedidos;
+    protected List<Pedido> misPedidos; // NOSONAR la lista no puede ser transient porque JPA necesita serializarla
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    transient List<Calificacion> misCalificaciones;
+    protected List<Calificacion> misCalificaciones; // NOSONAR la lista no puede ser transient porque JPA necesita serializarla
 
     public Pedido comprar(Producto articulo, int numItems, MetodoPago mp) {
         Pedido p = new Pedido();
@@ -36,7 +36,7 @@ public class Comprador extends Usuario {
 
         this.misPedidos.add(p);
         mp.setPedido(p);
-        
+
         return p;
     }
 
@@ -107,7 +107,7 @@ public class Comprador extends Usuario {
         ConexionSql.getConexion().endTransaction();
 
         // Crear nuevo comprador y pasarle todos los datos del usuario eliminado
-        Comprador nuevo =  new Comprador();
+        Comprador nuevo = new Comprador();
         nuevo.copiarAtributos(u);
         em = ConexionSql.getConexion().beginTransaction();
         if (u instanceof Vendedor) { // Si el antiguo era un vendedor, preservar sus pedidos y sus calificaciones

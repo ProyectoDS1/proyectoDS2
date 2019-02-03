@@ -23,9 +23,9 @@ import utils.ConexionSql;
 public class Vendedor extends Comprador {
 
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
-    transient List<Producto> misArticulos;
+    protected List<Producto> misArticulos; // NOSONAR la lista no puede ser transient porque JPA necesita serializarla
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
-    transient List<CalificacionVendedor> calificaciones;
+    protected List<CalificacionVendedor> calificaciones; // NOSONAR la lista no puede ser transient porque JPA necesita serializarla
 
     public List<Producto> mostrarArticulos() {
         return this.misArticulos;
