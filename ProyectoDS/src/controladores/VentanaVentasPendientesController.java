@@ -39,7 +39,7 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
 
     @FXML
     public void verMapa(ActionEvent e, Pedido p) {
-        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.SEVERE, "Ver mapa de producto");
+        Logger.getLogger(VentanaVentasPendientesController.class.getName()).log(Level.INFO, "Ver mapa de producto");
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setContentText("No implementado!");
         a.showAndWait();
@@ -51,7 +51,6 @@ public class VentanaVentasPendientesController extends VentasPendientesControlle
         p.setEstado(EstadoPedido.ANULADO);
         p.getArticulo().setStock(p.getArticulo().getStock() + p.getNumeroItems());
         ConexionSql.getConexion().endTransaction();
-
         llenarLista();
     }
 

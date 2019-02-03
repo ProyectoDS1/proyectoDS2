@@ -23,7 +23,7 @@ public class Comprador extends Usuario {
     @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL)
     transient List<Pedido> misPedidos;
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    private List<Calificacion> misCalificaciones;
+    transient List<Calificacion> misCalificaciones;
 
     public Pedido comprar(Producto articulo, int numItems, MetodoPago mp) {
         Pedido p = new Pedido();

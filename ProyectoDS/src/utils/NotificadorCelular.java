@@ -5,6 +5,8 @@
  */
 package utils;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelos.Pedido;
 
 /**
@@ -27,13 +29,10 @@ public class NotificadorCelular implements Notificador {
 
     @Override
     public void notificarPedido(Pedido pedido) {
-        System.out.println("***SMS***");
-        System.out.println("To: " + pedido.getArticulo().getVendedor().getTelefono());
-        System.out.println("Contenido: El cliente "
-                + pedido.getComprador().getNombre() + " " + pedido.getComprador().getApellido()
-                + " ha pedido " + pedido.getNumeroItems()
-                + " unidades del producto " + pedido.getArticulo().getNombreArticulo());
-        System.out.println("***END SMS***");
+        Logger.getLogger(NotificadorCelular.class.getName()).log(Level.INFO, "***SMS***");
+        Logger.getLogger(NotificadorCelular.class.getName()).log(Level.INFO, "To: {0}", pedido.getArticulo().getVendedor().getTelefono());
+        Logger.getLogger(NotificadorCelular.class.getName()).log(Level.INFO, "Contenido: El cliente {0} {1} ha pedido {2} unidades del producto {3}", new Object[]{pedido.getComprador().getNombre(), pedido.getComprador().getApellido(), pedido.getNumeroItems(), pedido.getArticulo().getNombreArticulo()});
+        Logger.getLogger(NotificadorCelular.class.getName()).log(Level.INFO, "*** END SMS***");
     }
 
 }

@@ -55,8 +55,7 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        System.out.println("Crear nuevo usuario");
-
+        Logger.getLogger(VentanaAdministracionUsuariosController.class.getName()).log(Level.INFO, "Crear nuevo usuario");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaAdministracionCrearNuevoUsuario.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -71,7 +70,7 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
     @FXML
     public void editar(ActionEvent e, Usuario u) {
         try {
-            System.out.println("Editar usuario");
+            Logger.getLogger(VentanaAdministracionUsuariosController.class.getName()).log(Level.INFO, "Editar usuario");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaAdministracionEditarUsuario.fxml"));
             Stage stage = new Stage();
@@ -95,11 +94,10 @@ public class VentanaAdministracionUsuariosController implements Initializable, C
         u.setActivo(false);
         ConexionSql.getConexion().endTransaction();
 
-        System.out.println("Eliminar usuario");
+        Logger.getLogger(VentanaAdministracionUsuariosController.class.getName()).log(Level.INFO, "Eliminar usuario");
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setContentText("Usuario eliminado!");
         a.showAndWait();
-
         refreshUserList();
     }
 

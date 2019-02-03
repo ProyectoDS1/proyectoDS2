@@ -40,7 +40,7 @@ public class VentanaMisProductosController extends VentasPendientesController {
 
     @FXML
     public void crear(ActionEvent e) throws IOException {
-        Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Crear nuevo producto");
+        Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.INFO, "Crear nuevo producto");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaCrearNuevoProducto.fxml"));
         Stage stage = new Stage();
         stage.setScene(new Scene(loader.load()));
@@ -53,7 +53,7 @@ public class VentanaMisProductosController extends VentasPendientesController {
     @FXML
     public void editar(ActionEvent e, Producto p) {
         try {
-            Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.SEVERE, "Editar producto");
+            Logger.getLogger(VentanaMisProductosController.class.getName()).log(Level.INFO, "Editar producto");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/VentanaEditarProducto.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.load()));
@@ -71,6 +71,7 @@ public class VentanaMisProductosController extends VentasPendientesController {
 
     @FXML
     public void eliminar(ActionEvent e, Producto p) {
+        
         ConexionSql.getConexion().beginTransaction();
         p.setEliminado(true);
         ConexionSql.getConexion().endTransaction();

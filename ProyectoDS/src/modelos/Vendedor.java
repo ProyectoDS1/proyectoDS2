@@ -23,9 +23,9 @@ import utils.ConexionSql;
 public class Vendedor extends Comprador {
 
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
-    private List<Producto> misArticulos;
+    transient List<Producto> misArticulos;
     @OneToMany(mappedBy = "vendedor", cascade = CascadeType.ALL)
-    private List<CalificacionVendedor> calificaciones;
+    transient List<CalificacionVendedor> calificaciones;
 
     public List<Producto> mostrarArticulos() {
         return this.misArticulos;
