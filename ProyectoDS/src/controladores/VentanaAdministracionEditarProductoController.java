@@ -43,7 +43,7 @@ public class VentanaAdministracionEditarProductoController extends TextProducto 
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        //Not supported yet 
     }
 
     @Override
